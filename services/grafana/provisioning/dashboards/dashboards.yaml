@@ -1,0 +1,39 @@
+apiVersion: 1
+
+providers:
+  - name: 'Otel Collector'
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/otel-collector
+  - name: 'BigIP - Device'
+    orgId: 1
+    folder: 'BigIP - Device'
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/bigip/device
+  - name: 'BigIP - Device Profiles'
+    orgId: 1
+    folder: 'BigIP - Device/Profiles'
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/bigip/profile
+  - name: 'BigIP - Fleet'
+    orgId: 1
+    folder: 'BigIP - Fleet'
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/bigip/fleet

@@ -1,0 +1,39 @@
+receivers:
+  # Receive incoming jaeger spans via thrift_compact with default settings.
+  otlp:
+    protocols:
+      grpc:
+  prometheus/collector:
+    config:
+      scrape_configs:
+        - job_name: 'opentelemetry-collector'
+          static_configs:
+            - targets: ['localhost:8888']
+  {% for device in devices %}
+  {{ device.name }}:
+    collection_interval: {{ device.collection_interval }}s
+    endpoint: "{{ device.endpoint }}"
+    username: {{ device.username }}
+    password: "${ {{-device.password_env_ref-}} }" 
+    tls:
+      insecure_skip_verify: {{ device.tls_insecure_skip_verify|lower }}
+      ca_file: {{ device.ca_file }}
+  {% endfor  %}
+
+processors:
+  batch:
+
+exporters:
+  otlphttp/metrics:
+    endpoint: http://prometheus:9090/api/v1/otlp
+  logging/metrics-debug:
+    verbosity: detailed
+  logging/metrics:
+
+
+service:
+  pipelines:
+    metrics/prometheus:
+      receivers: [otlp,prometheus/collector{% for device in devices %}, {{ device.name }} {% endfor %}]
+      processors: [batch]
+      exporters: [otlphttp/metrics, logging/metrics]

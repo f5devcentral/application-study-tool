@@ -1,0 +1,293 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 15,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "color-text"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #A"
+              },
+              "properties": [
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "dark-blue",
+                        "value": null
+                      },
+                      {
+                        "color": "semi-dark-blue",
+                        "value": 1
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "applyToRow": true,
+                    "mode": "basic",
+                    "type": "color-background"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 30,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 0,
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "f5_profile_http_name"
+            }
+          ]
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "{dataType=\"$data_type\", __name__=~\".*_info\", job=\"$device_1\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "{dataType=\"$data_type\", __name__=~\".*_info\", job=\"$device_2\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "title": "Object Comparison Table",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value #A": false,
+                "Value #B": true,
+                "dataType": true,
+                "instance": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Time": 0,
+                "Value #A": 10,
+                "Value #B": 5,
+                "__name__": 4,
+                "dataType": 3,
+                "f5_pool_name": 6,
+                "f5_virtual_server_destination": 7,
+                "f5_virtual_server_name": 8,
+                "f5_virtual_server_protocol": 9,
+                "instance": 2,
+                "job": 1
+              },
+              "renameByName": {
+                "Value #A": "IsDevice1",
+                "__name__": "Metric",
+                "dataType": "",
+                "instance": "",
+                "job": "Device"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "profile-http-data",
+            "value": "profile-http-data"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "definition": "query_result({__name__=~\"f5.*_info\"})",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Data Type",
+          "multi": false,
+          "name": "data_type",
+          "options": [],
+          "query": {
+            "qryType": 3,
+            "query": "query_result({__name__=~\"f5.*_info\"})",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/.*dataType=\"(?<dataType>[^\"]*)\"/",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "bigip/Edge1.f5kc.local",
+            "value": "bigip/Edge1.f5kc.local"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "definition": "label_values(f5_system_info,job)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Device 1",
+          "multi": false,
+          "name": "device_1",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(f5_system_info,job)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "bigip/Edge2.f5kc.local",
+            "value": "bigip/Edge2.f5kc.local"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "definition": "label_values(f5_system_info,job)",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "device_2",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(f5_system_info,job)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timeRangeUpdatedDuringEditOrView": false,
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Comparison Tables",
+    "uid": "adu0ws4xanjeob",
+    "version": 4,
+    "weekStart": ""
+  }

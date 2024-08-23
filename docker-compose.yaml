@@ -1,0 +1,73 @@
+version: '3'
+
+volumes:
+  prometheus:
+  otel_collector:
+  grafana:
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    stop_grace_period: 5m
+    volumes:
+      - ./services/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+      - '--enable-feature=otlp-write-receiver'
+      - '--storage.tsdb.retention.time=1y'
+    ports:
+      - 9090:9090
+    networks:
+      - 7lc_network
+
+  otel-init:
+    image: python:3.12.4-slim
+    env_file:
+      - ".env"
+    volumes:
+      - otel_collector:/app/otel-collector-config
+      - ./config/big-ips.json:/app/config.json
+      - ./slc/bin/generate_otel_config.py:/app/generate_otel_config.py
+      - ./slc/bin/init_entrypoint.sh:/app/init_entrypoint.sh
+      - ./requirements.txt:/app/requirements.txt
+      - ./slc/data/templates:/app/templates
+    command: ["/bin/sh", "/app/init_entrypoint.sh"]
+
+  otel-collector:
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.1.1
+    restart: unless-stopped
+    volumes:
+      - otel_collector:/etc/otel-collector-config
+    command: ["--config=/etc/otel-collector-config/config.yaml"]
+    env_file:
+      - ".env"
+      - ".env.device-secrets"
+    networks:
+      - 7lc_network
+    depends_on:
+        otel-init:
+            condition: service_completed_successfully
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+      - 4317:4317
+    volumes:
+      - grafana:/var/lib/grafana
+      - ./services/grafana/provisioning/:/etc/grafana/provisioning
+    env_file: ".env"
+    networks:
+      - 7lc_network
+
+networks:
+  7lc_network:
