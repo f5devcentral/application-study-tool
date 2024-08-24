@@ -1,0 +1,32 @@
+name: Push Image to ghcr.io
+run-name: ${{ github.actor }} is running this workflow
+on: [push]
+jobs:
+  Pull-From_Gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to GitLab
+        uses: docker/login-action@v3
+        with:
+          registry: registry.gitlab.com
+          username: ${{ secrets.GITLAB_USERNAME }}
+          password: ${{ secrets.GITLAB_PASSWORD }}
+      - name: Pull Gitlab Image
+        run: docker pull registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set variables
+        run: |
+          VER=$(cat VERSION)
+          echo "VERSION=$VER" >> $GITHUB_ENV
+      - name: Push to Github
+        run:
+          |
+            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:${{ env.VERSION }}
+            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:latest
+            docker push ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:${{ env.VERSION }}
+            docker push ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:latest
