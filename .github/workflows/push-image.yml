@@ -1,6 +1,9 @@
 name: Push Image to ghcr.io
 run-name: ${{ github.actor }} is running this workflow
-on: [push]
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   Pull-From_Gitlab:
     runs-on: ubuntu-latest
@@ -11,6 +14,10 @@ jobs:
           registry: registry.gitlab.com
           username: ${{ secrets.GITLAB_USERNAME }}
           password: ${{ secrets.GITLAB_PASSWORD }}
+      - name: Set variables
+        run: |
+          VER=$(cat VERSION)
+          echo "VERSION=$VER" >> $GITHUB_ENV
       - name: Pull Gitlab Image
         run: docker pull registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }}
       - name: Login to GitHub Container Registry
@@ -19,10 +26,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set variables
-        run: |
-          VER=$(cat VERSION)
-          echo "VERSION=$VER" >> $GITHUB_ENV
       - name: Push to Github
         run:
           |
