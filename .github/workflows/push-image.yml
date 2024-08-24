@@ -8,6 +8,8 @@ jobs:
   Pull-From_Gitlab:
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v1"
       - name: Login to GitLab
         uses: docker/login-action@v3
         with:
