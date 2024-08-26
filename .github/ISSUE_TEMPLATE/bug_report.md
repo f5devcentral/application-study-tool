@@ -37,3 +37,8 @@ If the issue is in regards to missing data in dashboards, please also run the fo
 ```
 curl 'localhost:9090/federate?match[]=%7B__name__%3D~"f5.%2A"%7D'
 ```
+
+Logs for the collector can be gathered with:
+```
+docker logs application-study-tool-otel-collector-1 --tail 1000
+```

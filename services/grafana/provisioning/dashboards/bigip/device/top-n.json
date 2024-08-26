@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 16,
+  "id": 9,
   "links": [],
   "panels": [
     {
@@ -252,6 +252,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "This panel requires data retrieved from a bash command. If the BigIP account used to scrape the device lacks this permission, it is expected to be blank.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -355,6 +356,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "This panel requires data retrieved from a bash command. If the BigIP account used to scrape the device lacks this permission, it is expected to be blank.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -623,32 +625,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Pool: /Common/pool-1 Member: /Common/172.29.67.197:80"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1322,6 +1299,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "This panel requires data retrieved from a bash command. If the BigIP account used to scrape the device lacks this permission, it is expected to be blank.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2065,9 +2043,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "bigip/Edge1.f5kc.local",
-          "value": "bigip/Edge1.f5kc.local"
+          "selected": true,
+          "text": "bigip/Edge2.f5kc.local",
+          "value": "bigip/Edge2.f5kc.local"
         },
         "datasource": {
           "type": "prometheus",
@@ -2118,11 +2096,10 @@
     "from": "now-1h",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
   "title": "Top N",
   "uid": "edrjqc81ub85cc",
-  "version": 5,
+  "version": 3,
   "weekStart": ""
 }

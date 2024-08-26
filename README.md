@@ -25,11 +25,20 @@ docker (or compatible) - [Installation Instructions](https://docs.docker.com/eng
 Clone the repo or download source tarball from the [release](https://github.com/f5devcentral/application-study-tool/releases) section.
 
 ```shell
+# Clone the repo
 git clone https://github.com/f5devcentral/application-study-tool.git
 cd application-study-tool
+# Edit the following file with Grafana variables as required
+cp .env-example .env
+# Edit the following file with device secrets as required (see "Configure Device Secrets" below)
+cp .env.device-secrets-example .env.device-secrets
+# Edit the config file with device / connection info (see "Configure Devices To Scrape" below)
+vi ./config/big-ips.json
+# Start the tool
+docker-compose up
 ```
 
-#### Configure Devices To Scrape
+### Configure Devices To Scrape
 Application Study Tool includes an init container which builds an OpenTelemetry
 Collector Configuration file based on a provided list of BIG-IPs in JSON format.
 
@@ -58,7 +67,7 @@ Edit config/big-ips.json to reflect your list of BIG-IPs and their access creden
 ]
 ```
 
-#### Configure Device Secrets
+### Configure Device Secrets
 The application study tool default configuration relies on environment variables
 which contain device access credentials. There are a number of ways to manage and
 inject secrets into a container environment (modifications to the docker-compose file
@@ -75,7 +84,37 @@ BIGIP_PASSWORD_2=bar-foo123!
 The variable name (the part on the left of the equal sign) must match the configured
 value for the devices that use this password in config/big-ips.json.
 
-#### Configure CA File
+#### Account Permissions
+The vast majority of telemetry data can be collected with read-only access to the BigIP. Some
+granular stats are only available as output to a iControl Rest 'bash' shell command, and these require
+read-write access. If a read-only account is used, the following metrics are unavailable:
+
+```
+f5_virtual_server_profile_client_ssl_connection_count{}
+f5_virtual_server_profile_client_ssl_bytes_out_total{}
+f5_virtual_server_profile_http_responses_total{}
+f5_virtual_server_profile_http_requests_total{}
+f5_virtual_server_profile_client_ssl_records_out_total{}
+f5_plane_cpu_count{}
+f5_virtual_server_profile_client_ssl_insecure_handshake_rejects_total{}
+f5_virtual_server_profile_client_ssl_premature_disconnects_total{}
+f5_virtual_server_profile_client_ssl_renegotiations_total{}
+f5_virtual_server_profile_client_ssl_connection_max{}
+f5_virtual_server_profile_client_ssl_insecure_handshake_accepts_total{}
+f5_virtual_server_profile_client_ssl_bytes_in_total{}
+f5_virtual_server_profile_client_ssl_handshake_count{}
+f5_virtual_server_profile_client_ssl_records_in_total{}
+f5_virtual_server_profile_client_ssl_connection_total{}
+f5_policy_ip_intelligence_feed_list_count{}
+f5_policy_ip_intelligence_info{}
+f5_virtual_server_profile_client_ssl_secure_handshakes_total{}
+f5_policy_ip_intelligence_generation{}
+f5_plane_cpu_utilization_5s{}
+```
+
+This will impact data output in several dashboards/panels (denoted with description fields indicating as such).
+
+### Configure CA File
 AST expects a valid TLS cert bundle unless `tls_insecure_skip_verify` is
 set to true for each device. In order to mount and use your CA file, you must
 configure the docker-compose.yaml file in this directory, and set the `ca_file` parameter to the resulting path. Example:
@@ -110,7 +149,7 @@ The configuration paramteter `tls_insecure_skip_verify` defaults to false. Insta
  that the connection between the OTEL collector and the BIG-IP does not have secure
  TLS termination.
 
-#### Configure Grafana
+### Configure Grafana
 The Grafana instance can be configured via environment variable using their standard
 [options](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#override-configuration-with-environment-variables).
 
@@ -122,7 +161,9 @@ cp .env-example .env
 <edit .env with desired admin password and any other variables>
 ```
 
-#### Run Application Study Tool
+### Run Application Study Tool
+Once the above configurations have been made, the tool can be started with:
+
 ```
 docker compose up
 ```
