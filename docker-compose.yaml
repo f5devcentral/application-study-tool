@@ -7,7 +7,7 @@ volumes:
 
 services:
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.54.1
     container_name: prometheus
     restart: unless-stopped
     stop_grace_period: 5m
@@ -41,7 +41,7 @@ services:
     command: ["/bin/sh", "/app/init_entrypoint.sh"]
 
   otel-collector:
-    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.3.0
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.3.1
     restart: unless-stopped
     volumes:
       - otel_collector:/etc/otel-collector-config
@@ -56,7 +56,7 @@ services:
             condition: service_completed_successfully
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:11.2.0
     container_name: grafana
     restart: unless-stopped
     ports:

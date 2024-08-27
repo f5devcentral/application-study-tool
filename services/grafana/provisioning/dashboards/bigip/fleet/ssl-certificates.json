@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
+  "id": 12,
   "links": [],
   "panels": [
     {
@@ -54,7 +54,7 @@
         "content": "# SSL Certificate Status\n\nThis dashboard displays information about SSL Certificates associated with a BigIP Device.\nData collected includes (only) the following:\n\n* Certificate Name\n* Certificate Expiration Time\n* Certificate Key Type\n* Whether the certificate is part of a bundle",
         "mode": "markdown"
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "type": "text"
     },
     {
@@ -175,7 +175,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -246,7 +246,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -317,7 +317,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -422,7 +422,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -485,11 +485,10 @@
     "from": "now-6h",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
   "title": "SSL Certificate Status",
   "uid": "fdq2gvt19pkaoc",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

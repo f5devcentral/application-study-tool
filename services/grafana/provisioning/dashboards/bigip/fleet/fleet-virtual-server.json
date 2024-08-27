@@ -1,988 +1,991 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "grafana",
-            "uid": "-- Grafana --"
-          },
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "id": 17,
-    "links": [],
-    "panels": [
+  "annotations": {
+    "list": [
       {
+        "builtIn": 1,
         "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "type": "grafana",
+          "uid": "-- Grafana --"
         },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "fixedColor": "blue",
-              "mode": "fixed"
-            },
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "color-text"
-              },
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "percentunit"
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 17,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
           },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Available"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "green",
-                    "mode": "thresholds"
-                  }
-                },
-                {
-                  "id": "custom.width",
-                  "value": 100
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "#7e7e7e",
-                        "value": null
-                      },
-                      {
-                        "color": "green",
-                        "value": 1
-                      }
-                    ]
-                  }
-                }
-              ]
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-text"
             },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Offline"
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
               },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "red",
-                    "mode": "thresholds"
-                  }
-                },
-                {
-                  "id": "custom.width",
-                  "value": 100
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "#808080",
-                        "value": null
-                      },
-                      {
-                        "color": "red",
-                        "value": 0.00001
-                      }
-                    ]
-                  }
-                }
-              ]
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Available"
             },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Unknown"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "orange",
-                    "mode": "thresholds"
-                  }
-                },
-                {
-                  "id": "custom.width",
-                  "value": 100
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "#808080",
-                        "value": null
-                      },
-                      {
-                        "color": "orange",
-                        "value": 0.00001
-                      }
-                    ]
-                  }
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "thresholds"
                 }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Enabled"
               },
-              "properties": [
-                {
-                  "id": "custom.width",
-                  "value": 100
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "#7e7e7e",
-                        "value": null
-                      },
-                      {
-                        "color": "green",
-                        "value": 0.00001
-                      }
-                    ]
-                  }
-                },
-                {
-                  "id": "color"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Virtual Server"
+              {
+                "id": "custom.width",
+                "value": 100
               },
-              "properties": [
-                {
-                  "id": "links",
-                  "value": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
                     {
-                      "title": "Device VS Dashboard",
-                      "url": "/d/ddq2jbj2v588wa/device-virtual-servers?orgId=1&${device_name:queryparam}&var-virtual_server=${__data.fields[\"Virtual Server\"]}"
+                      "color": "#7e7e7e",
+                      "value": null
                     },
                     {
-                      "title": "Filter This Dashboard",
-                      "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-virtual_server=${__data.fields[\"Virtual Server\"]}&${device_name:queryparam}"
+                      "color": "green",
+                      "value": 1
                     }
                   ]
                 }
-              ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Offline"
             },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Device"
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "thresholds"
+                }
               },
-              "properties": [
-                {
-                  "id": "links",
-                  "value": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
                     {
-                      "title": "Device Overview Dashboard",
-                      "url": "/d/adpz4tutl28e8f/device-overview?orgId=1&${device_name:queryparam}"
+                      "color": "#808080",
+                      "value": null
                     },
                     {
-                      "title": "Filter This Dashobard",
-                      "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
+                      "color": "red",
+                      "value": 0.00001
                     }
                   ]
                 }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "id": 5,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "showHeader": true,
-          "sortBy": []
-        },
-        "pluginVersion": "11.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", availability_state=\"available\", f5_virtual_server_name=~\"$virtual_server\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"available\"}[24h])",
-            "format": "table",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "A",
-            "useBackend": false
+              }
+            ]
           },
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+            "matcher": {
+              "id": "byName",
+              "options": "Unknown"
             },
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"offline\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"offline\"}[24h])",
-            "format": "table",
-            "fullMetaSearch": false,
-            "hide": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "B",
-            "useBackend": false
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#808080",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              }
+            ]
           },
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+            "matcher": {
+              "id": "byName",
+              "options": "Enabled"
             },
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"unknown\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"unknown\"}[24h])",
-            "format": "table",
-            "fullMetaSearch": false,
-            "hide": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "C",
-            "useBackend": false
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#7e7e7e",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color"
+              }
+            ]
           },
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+            "matcher": {
+              "id": "byName",
+              "options": "Virtual Server"
             },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "sum_over_time(f5_virtual_server_enabled_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[24h]) / count_over_time(f5_virtual_server_enabled_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[24h])",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "D"
-          }
-        ],
-        "title": "Virtual Server Availability [24h]",
-        "transformations": [
-          {
-            "id": "filterFieldsByName",
-            "options": {
-              "include": {
-                "names": [
-                  "f5_virtual_server_name",
-                  "job",
-                  "Value #A",
-                  "Value #B",
-                  "Value #C",
-                  "Value #D"
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Device VS Dashboard",
+                    "url": "/d/ddq2jbj2v588wa/device-virtual-servers?orgId=1&${device_name:queryparam}&var-virtual_server=${__data.fields[\"Virtual Server\"]}"
+                  },
+                  {
+                    "title": "Filter This Dashboard",
+                    "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-virtual_server=${__data.fields[\"Virtual Server\"]}&${device_name:queryparam}"
+                  }
                 ]
               }
-            }
-          },
-          {
-            "id": "merge",
-            "options": {}
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time 1": true,
-                "Time 2": true,
-                "Time 3": true,
-                "Time 4": true,
-                "availability_state": false,
-                "availability_state 1": true,
-                "availability_state 2": true,
-                "availability_state 3": true,
-                "dataType 1": true,
-                "dataType 2": true,
-                "dataType 3": true,
-                "dataType 4": true,
-                "instance 1": true,
-                "instance 2": true,
-                "instance 3": true,
-                "instance 4": true,
-                "job 1": false,
-                "job 2": true,
-                "job 3": true,
-                "job 4": true
-              },
-              "includeByName": {},
-              "indexByName": {
-                "Value #A": 3,
-                "Value #B": 4,
-                "Value #C": 5,
-                "Value #D": 2,
-                "f5_virtual_server_name": 0,
-                "job": 1
-              },
-              "renameByName": {
-                "Time 1": "",
-                "Value #A": "Available",
-                "Value #B": "Offline",
-                "Value #C": "Unknown",
-                "Value #D": "Enabled",
-                "f5_virtual_server_name": "Virtual Server",
-                "job": "Device",
-                "job 1": "Device"
-              }
-            }
-          }
-        ],
-        "type": "table"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 12,
-          "y": 0
-        },
-        "id": 4,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"available\"}",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "{{job}} {{ f5_virtual_server_name }}",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "VS isAvailable",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 0,
-          "y": 7
-        },
-        "id": 2,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "rate(f5_virtual_server_clientside_connection_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "{{job}} {{f5_virtual_server_name}}",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "VS Connection Rate",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 12,
-          "y": 7
-        },
-        "id": 3,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "rate(f5_virtual_server_clientside_bytes_in_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "{{job}} {{f5_virtual_server_name}} - In",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "-1 * rate(f5_virtual_server_clientside_bytes_out_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
-            "fullMetaSearch": false,
-            "hide": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "{{job}} {{f5_virtual_server_name}} - Out",
-            "range": true,
-            "refId": "B",
-            "useBackend": false
-          }
-        ],
-        "title": "VS Data Rate",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "f5_virtual_server_name"
-              },
-              "properties": [
-                {
-                  "id": "links",
-                  "value": [
-                    {
-                      "title": "Device VS Dashboard",
-                      "url": "/d/ddq2jbj2v588wa/device-virtual-servers?orgId=1&${device_name:queryparam}&var-virtual_server=${__data.fields[\"Virtual Server\"]}"
-                    },
-                    {
-                      "title": "Filter This Dashboard",
-                      "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "job"
-              },
-              "properties": [
-                {
-                  "id": "links",
-                  "value": [
-                    {
-                      "title": "Device Overview Dashboard",
-                      "url": "/d/adpz4tutl28e8f/device-overview?orgId=1&${device_name:queryparam}"
-                    },
-                    {
-                      "title": "Filter This Dashboard",
-                      "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 26,
-          "w": 24,
-          "x": 0,
-          "y": 14
-        },
-        "id": 1,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "showHeader": true,
-          "sortBy": [
-            {
-              "desc": false,
-              "displayName": "Virtual Server"
-            }
-          ]
-        },
-        "pluginVersion": "11.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "exemplar": false,
-            "expr": "f5_virtual_server_info{f5_virtual_server_name=~\"$virtual_server\"}",
-            "format": "table",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "A",
-            "useBackend": false
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "exemplar": false,
-            "expr": "changes(f5_virtual_server_generation{f5_virtual_server_name=~\"$virtual_server\", job=~\"$device_name\"}[24h])",
-            "format": "table",
-            "fullMetaSearch": false,
-            "hide": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "B",
-            "useBackend": false
-          }
-        ],
-        "title": "Fleet Virtual Server Details",
-        "transformations": [
-          {
-            "id": "merge",
-            "options": {}
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time": true,
-                "Value": true,
-                "Value #A": true,
-                "__name__": true,
-                "dataType": true,
-                "instance": true
-              },
-              "includeByName": {},
-              "indexByName": {
-                "Time": 0,
-                "Value": 6,
-                "__name__": 7,
-                "dataType": 8,
-                "f5_pool_name": 5,
-                "f5_virtual_server_destination": 3,
-                "f5_virtual_server_name": 1,
-                "f5_virtual_server_protocol": 4,
-                "instance": 9,
-                "job": 2
-              },
-              "renameByName": {
-                "Value": "",
-                "Value #A": "",
-                "Value #B": "Gen. Changes [24h]",
-                "f5_pool_name": "Pool",
-                "f5_virtual_server_destination": "Destination",
-                "f5_virtual_server_name": "Virtual Server",
-                "f5_virtual_server_protocol": "Protocol",
-                "job": "Device"
-              }
-            }
-          }
-        ],
-        "type": "table"
-      }
-    ],
-    "schemaVersion": 39,
-    "tags": [],
-    "templating": {
-      "list": [
-        {
-          "allValue": ".*",
-          "current": {
-            "selected": true,
-            "text": [
-              "All"
-            ],
-            "value": [
-              "$__all"
             ]
           },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Device Overview Dashboard",
+                    "url": "/d/adpz4tutl28e8f/device-overview?orgId=1&${device_name:queryparam}"
+                  },
+                  {
+                    "title": "Filter This Dashobard",
+                    "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(f5_virtual_server_info,f5_virtual_server_name)",
-          "hide": 0,
-          "includeAll": true,
-          "label": "Virtual Server",
-          "multi": true,
-          "name": "virtual_server",
-          "options": [],
-          "query": {
-            "qryType": 1,
-            "query": "label_values(f5_virtual_server_info,f5_virtual_server_name)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
-          },
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", availability_state=\"available\", f5_virtual_server_name=~\"$virtual_server\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"available\"}[24h])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
         },
         {
-          "allValue": ".*",
-          "current": {
-            "selected": true,
-            "text": [
-              "All"
-            ],
-            "value": [
-              "$__all"
-            ]
-          },
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(f5_virtual_server_info,job)",
-          "hide": 0,
-          "includeAll": true,
-          "label": "Device",
-          "multi": true,
-          "name": "device_name",
-          "options": [],
-          "query": {
-            "qryType": 1,
-            "query": "label_values(f5_virtual_server_info,job)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"offline\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"offline\"}[24h])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"unknown\"}[24h]) / count_over_time(f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"unknown\"}[24h])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(f5_virtual_server_enabled_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[24h]) / count_over_time(f5_virtual_server_enabled_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[24h])",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "D"
         }
-      ]
+      ],
+      "title": "Virtual Server Availability [24h]",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "f5_virtual_server_name",
+                "job",
+                "Value #A",
+                "Value #B",
+                "Value #C",
+                "Value #D"
+              ]
+            }
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Time 4": true,
+              "availability_state": false,
+              "availability_state 1": true,
+              "availability_state 2": true,
+              "availability_state 3": true,
+              "dataType 1": true,
+              "dataType 2": true,
+              "dataType 3": true,
+              "dataType 4": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "instance 4": true,
+              "job 1": false,
+              "job 2": true,
+              "job 3": true,
+              "job 4": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Value #A": 3,
+              "Value #B": 4,
+              "Value #C": 5,
+              "Value #D": 2,
+              "f5_virtual_server_name": 0,
+              "job": 1
+            },
+            "renameByName": {
+              "Time 1": "",
+              "Value #A": "Available",
+              "Value #B": "Offline",
+              "Value #C": "Unknown",
+              "Value #D": "Enabled",
+              "f5_virtual_server_name": "Virtual Server",
+              "job": "Device",
+              "job 1": "Device"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
-    "time": {
-      "from": "now-1h",
-      "to": "now"
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "f5_virtual_server_availability_ratio{job=~\"$device_name\", f5_virtual_server_name=~\"$virtual_server\", availability_state=\"available\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{job}} {{ f5_virtual_server_name }}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "VS isAvailable",
+      "type": "timeseries"
     },
-    "timepicker": {},
-    "timezone": "browser",
-    "title": "Virtual Servers",
-    "uid": "bdubjp6117lz4f",
-    "version": 16,
-    "weekStart": ""
-  }
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "rate(f5_virtual_server_clientside_connection_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{job}} {{f5_virtual_server_name}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "VS Connection Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(f5_virtual_server_clientside_bytes_in_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{job}} {{f5_virtual_server_name}} - In",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "-1 * rate(f5_virtual_server_clientside_bytes_out_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{job}} {{f5_virtual_server_name}} - Out",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "VS Data Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "f5_virtual_server_name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Device VS Dashboard",
+                    "url": "/d/ddq2jbj2v588wa/device-virtual-servers?orgId=1&${device_name:queryparam}&var-virtual_server=${__data.fields[\"Virtual Server\"]}"
+                  },
+                  {
+                    "title": "Filter This Dashboard",
+                    "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "job"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Device Overview Dashboard",
+                    "url": "/d/adpz4tutl28e8f/device-overview?orgId=1&${device_name:queryparam}"
+                  },
+                  {
+                    "title": "Filter This Dashboard",
+                    "url": "/d/bdubjp6117lz4f/virtual-servers?orgId=1&var-device_name=${__data.fields[\"Device\"]}&${virtual_server:queryparam}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 26,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Virtual Server"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "f5_virtual_server_info{f5_virtual_server_name=~\"$virtual_server\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "changes(f5_virtual_server_generation{f5_virtual_server_name=~\"$virtual_server\", job=~\"$device_name\"}[24h])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Fleet Virtual Server Details",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "Value #A": true,
+              "__name__": true,
+              "dataType": true,
+              "instance": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value": 6,
+              "__name__": 7,
+              "dataType": 8,
+              "f5_pool_name": 5,
+              "f5_virtual_server_destination": 3,
+              "f5_virtual_server_name": 1,
+              "f5_virtual_server_protocol": 4,
+              "instance": 9,
+              "job": 2
+            },
+            "renameByName": {
+              "Value": "",
+              "Value #A": "",
+              "Value #B": "Gen. Changes [24h]",
+              "f5_pool_name": "Pool",
+              "f5_virtual_server_destination": "Destination",
+              "f5_virtual_server_name": "Virtual Server",
+              "f5_virtual_server_protocol": "Protocol",
+              "job": "Device"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "label_values(f5_virtual_server_info,f5_virtual_server_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Virtual Server",
+        "multi": true,
+        "name": "virtual_server",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(f5_virtual_server_info,f5_virtual_server_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "label_values(f5_virtual_server_info,job)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Device",
+        "multi": true,
+        "name": "device_name",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(f5_virtual_server_info,job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Virtual Servers",
+  "uid": "bdubjp6117lz4f",
+  "version": 2,
+  "weekStart": ""
+}
