@@ -3,7 +3,7 @@
 ## Overview
 
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
-open source telemetry tools. The full installation inculdes:
+open source telemetry tools. The full installation includes:
 
 * Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest).
 * Prometheus timeseries database for storing and querying collected data.
@@ -11,8 +11,8 @@ open source telemetry tools. The full installation inculdes:
 
 The Application Study Tool has everything needed to quickly get up and running with application insights at less than
 production levels of reliability. For production/operational use cases, you can build on the included components,
-accounting for things like high availability, enhanced security via e.g. grafana OIDC integrationm, and similar. Alternatively,
-the openetlemetry collector can be configured to send data to existing production ops monitoring tools as desired.
+accounting for things like high availability, enhanced security via e.g. Grafana OIDC integration, and similar. Alternatively,
+the Openetlemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
 
 ## Getting Started
 
@@ -143,14 +143,14 @@ big-ips.json:
 ]
 ```
 
-The configuration paramteter `tls_insecure_skip_verify` defaults to false. Installers
+The configuration parameter `tls_insecure_skip_verify` defaults to false. Installers
  that would like to opt-in to run in an insecure TLS mode must set
  `tls_insecure_skip_verify: true` for each BIG-IP in the config array and understand
  that the connection between the OTEL collector and the BIG-IP does not have secure
  TLS termination.
 
 ### Configure Grafana
-The Grafana instance can be configured via environment variable using their standard
+The Grafana instance can be configured via environment variables using their standard
 [options](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#override-configuration-with-environment-variables).
 
 The included .env-example can be copied over and modified to set the initial admin
@@ -169,7 +169,7 @@ docker compose up
 ```
 
 #### View The Dashboards
-The default grafana user/pass is `admin/admin`, and can be accessed at
+The default Grafana user/pass is `admin/admin`, and can be accessed at
 `http://<hostname>:3000`.
 
 
