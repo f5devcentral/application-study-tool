@@ -26,9 +26,10 @@ processors:
 exporters:
   otlphttp/metrics:
     endpoint: http://prometheus:9090/api/v1/otlp
-  logging/metrics-debug:
-    verbosity: detailed
-  logging/metrics:
+  debug:
+    verbosity: normal
+    sampling_initial: 5
+    sampling_thereafter: 200
 
 
 service:
@@ -36,4 +37,4 @@ service:
     metrics/prometheus:
       receivers: [otlp,prometheus/collector{% for device in devices %}, {{ device.name }} {% endfor %}]
       processors: [batch]
-      exporters: [otlphttp/metrics, logging/metrics]
+      exporters: [otlphttp/metrics, debug]

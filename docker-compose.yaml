@@ -41,7 +41,7 @@ services:
     command: ["/bin/sh", "/app/init_entrypoint.sh"]
 
   otel-collector:
-    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.3.1
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.4.0
     restart: unless-stopped
     volumes:
       - otel_collector:/etc/otel-collector-config
