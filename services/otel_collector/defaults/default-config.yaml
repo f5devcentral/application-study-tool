@@ -1,0 +1,37 @@
+# This file contains default / non-BigIP specific settings that allow
+# The otel collector to monitor itself. Most people won't need to configure
+# anything in this file.
+receivers:
+  prometheus/collector:
+    config:
+      scrape_configs:
+        - job_name: 'opentelemetry-collector'
+          static_configs:
+            - targets: ['localhost:8888']
+  
+processors:
+  batch:
+  interval/xcdf-interval:
+    interval: 300s
+  attributes/xcdf-datatype:
+    actions:
+      - key: dataType
+        action: upsert
+        value: bigip-ast-metric
+
+exporters:
+  otlphttp/prometheus-default:
+    endpoint: http://prometheus:9090/api/v1/otlp
+  # Support sending downsampled metrics to F5 Data Fabric if enabled.
+
+  debug/default:
+    verbosity: basic
+    sampling_initial: 5
+    sampling_thereafter: 200
+
+service:
+  pipelines:
+    metrics/prometheus:
+      receivers: [prometheus/collector]
+      processors: [batch]
+      exporters: [otlphttp/prometheus-default, debug/default]

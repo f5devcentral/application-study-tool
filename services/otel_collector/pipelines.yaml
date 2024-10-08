@@ -1,0 +1,8 @@
+metrics/bigip:
+  exporters:
+  - otlphttp/metrics-bigip
+  - debug/bigip
+  processors:
+  - batch
+  receivers:
+  - bigip/1

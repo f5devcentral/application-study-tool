@@ -1,0 +1,57 @@
+# These configs are applied to each entry in the bigip_receivers file
+# where they don't contain an equivalent / overriding entry.
+bigip_receiver_defaults:
+  # The time to wait between metric collection runs
+  collection_interval: 60s
+  # The username to login to the device with
+  username: admin
+  # The password (not recommended) or a reference to an env variable (recommended, shown)
+  # Below tells the collector to look for an environment variable named BIGIP_PASSWORD_1
+  password: "${env:BIGIP_PASSWORD_1}"
+  # The data_types that should be enabled or disabled. DNS and GTM users can enable those modules
+  # by setting the below to true. These will apply to all devices and may be better specified on the
+  # per-reciever settings file below.
+  data_types:
+    f5.dns:
+      enabled: false
+    f5.gtm:
+      enabled: false
+  # The TLS settings to use. Either a CA file must be specified or insecure_skip_verify
+  # set to true (not recommended)
+  tls:
+    insecure_skip_verify: false
+    ca_file: ""
+
+# Set to true to enable periodic metric export to F5 DataFabric.
+# Requires adding your Sensor ID and secret token to the container environment (see .env-example).
+# Contact your F5 sales rep to obtain the ID / secret token.
+f5_data_export: false
+
+
+# Most people should not need to modify settings below this line
+
+
+# The default local pipeline to use if one isn't specified in the per-device configs.
+pipeline_default: metrics/local
+# The default pipeline to use if metric export to F5 is enabled (if f5_data_export.sensor_id field above is set)
+f5_pipeline_default: metrics/f5-datafabric
+
+pipelines:
+
+  # These pipeline configs are written to the OTEL config after having the configured receivers
+  # added to the dictionary in accordance with the "pipeline_default" field above and "pipeline"
+  # field on the per-receiver config file. Otel Collector documentation explains the syntax in more
+  # detail.
+  metrics/local:
+    #receivers list are generated via the config helper script
+    processors: [batch]
+    exporters: [otlphttp/metrics-local, debug/bigip]
+
+  # These pipeline configs are written to the OTEL config after having the configured receivers
+  # added to the dictionary in accordance with the "f5_pipeline_default" field above and "f5_pipeline"
+  # field on the per-receiver config file. Otel Collector documentation explains the syntax in more
+  # detail.
+  metrics/f5-datafabric:
+    #receivers list are generated via the config helper script
+    processors: [batch, interval/f5-datafabric, attributes/f5-datafabric]
+    exporters: [otlp/f5-datafabric, debug/bigip]

@@ -1,0 +1,33 @@
+receivers: ${file:/etc/otel-collector-config/receivers.yaml}
+
+processors:
+  batch:
+  # Only export data to f5 (if enabled) every 300s
+  interval/f5-datafabric:
+    interval: 300s
+  # Apply the folowing transformations to metrics bound for F5 Datafabric
+  attributes/f5-datafabric:
+    actions:
+      - key: dataType
+        action: upsert
+        value: bigip-ast-metric
+
+exporters:
+  otlphttp/metrics-local:
+    endpoint: http://prometheus:9090/api/v1/otlp
+  otlp/f5-datafabric:
+    endpoint: us.edge.df.f5.com:443
+    headers:
+      # Requires Sensor ID and Token to authenticate.
+      Authorization: "kovacs ${env:SENSOR_ID} ${env:SENSOR_SECRET_TOKEN}"
+      X-F5-OTEL: "GRPC"
+    tls:
+      insecure: false
+      ca_file: /etc/ssl/certs/ca-certificates.pem
+  debug/bigip:
+    verbosity: basic
+    sampling_initial: 5
+    sampling_thereafter: 200
+
+service:
+  pipelines: ${file:/etc/otel-collector-config/pipelines.yaml}

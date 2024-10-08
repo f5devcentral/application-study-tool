@@ -1,0 +1,13 @@
+bigip/1:
+  collection_interval: 60s
+  data_types:
+    f5.dns:
+      enabled: false
+    f5.gtm:
+      enabled: false
+  endpoint: https://10.0.0.1
+  password: ${env:BIGIP_PASSWORD_1}
+  tls:
+    ca_file: ''
+    insecure_skip_verify: false
+  username: admin

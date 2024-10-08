@@ -1,25 +1,4 @@
-# Application Study Tool
-
-> 🚨🚨**Notice**🚨🚨
-> 
-> Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [docs/config_migration.md](docs/config_migration.md).
-
-## Overview
-
-The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
-open source telemetry tools. The full installation includes:
-
-* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](docs/receiver_metrics.md).
-* Prometheus timeseries database for storing and querying collected data.
-* Grafana Instance with pre-configured dashboards for quick insights at the device and "fleet" levels.
-
-The Application Study Tool has everything needed to quickly get up and running with application insights at less than
-production levels of reliability. For production/operational use cases, you can build on the included components,
-accounting for things like high availability, enhanced security via e.g. Grafana OIDC integration, and similar. Alternatively,
-the Openetlemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
-
-![](./diagrams/ui.gif)
+# Quick Start
 
 ## Getting Started
 
@@ -44,28 +23,12 @@ cp .env.device-secrets-example .env.device-secrets
 vi ./config/ast_defaults.yaml
 # Edit the config file with device / connection info
 # (see "Configure Devices To Scrape" below)
-vi ./config/bigip_receivers.yaml
+vi ./config/big_receivers.yaml
 # Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 # Start the tool
 docker-compose up
 ```
-
-## Configuration
-
-For additional configuration management background, see
-[docs/config-management.md](docs/config-management.md).
-The below assumes you're using the config_helper script for assisted management.
-
-
-Application Study Tool config management relies on default configs in
-[/configs/ast_defaults.yaml](/configs/ast_defaults.yaml) and device specific information in
-[/configs/bigip_receivers.yaml](/configs/bigip_receivers.yaml).
-
-Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
-
-To update a legacy (pre v0.6.0) configuration, to the new scheme see
-[docs/config_migration.md](docs/config_migration.md)
 
 ## Configure Default Device Settings
 
@@ -178,29 +141,6 @@ bigip/2:
 
 ```
 
-
-## Configure Periodic Metric Data Export To F5
-The application study tool can be configured to periodically (every 5 minutes) export a snapshot of your
-BigIP metrics to F5. Contact your F5 Sales Representative for a "Sensor ID" (a unique string used to associate
-your metrics with your Organization) and a "Sensor Secret Token" (used to authenticate to the F5 Datafabric as
-an authorized data sender for your Org).
-
-This functionality is enabled as follows:
-
-1. Enable the flag in [config/ast_defaults.yaml](config/ast_defaults.yaml) file as follows:
-
-```yaml
-# Set this true to enable periodic metric export to F5 DataFabric.
-# Requires adding your sensor ID and secret token to the container environment (see .env-example).
-# Contact your F5 sales rep to obtain the ID / secret token.
-f5_data_export: true
-```
-
-2. Add the Sensor ID and Secret Token to the .env file, or otherwise attach it to the Opentelemetry Collector container
-as SENSOR_ID and SENSOR_SECRET_TOKEN (see [.env-example](./.env-example) for example).
-
-3. Run the configuration helper script (see below).
-
 ## Run The Configuration Helper
 The config helper script can be run natively or via docker to merge the default and device
 level configs into the final OTEL Collector config as follows:
@@ -213,39 +153,7 @@ This will write 2 new files in the services/otel_collector directory:
 
 * `receivers.yaml` - The final list of scraper configs and their settings.
 * `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
-(prometheus, and optionally F5).
-
-## Account Permissions
-The vast majority of telemetry data can be collected with read-only access to the BigIP. Some
-granular stats are only available as output to a iControl Rest 'bash' shell command, and
-these require read-write access.
-
-If a read-only account is used, the following metrics are unavailable:
-
-```
-f5_virtual_server_profile_client_ssl_connection_count{}
-f5_virtual_server_profile_client_ssl_bytes_out_total{}
-f5_virtual_server_profile_http_responses_total{}
-f5_virtual_server_profile_http_requests_total{}
-f5_virtual_server_profile_client_ssl_records_out_total{}
-f5_plane_cpu_count{}
-f5_virtual_server_profile_client_ssl_insecure_handshake_rejects_total{}
-f5_virtual_server_profile_client_ssl_premature_disconnects_total{}
-f5_virtual_server_profile_client_ssl_renegotiations_total{}
-f5_virtual_server_profile_client_ssl_connection_max{}
-f5_virtual_server_profile_client_ssl_insecure_handshake_accepts_total{}
-f5_virtual_server_profile_client_ssl_bytes_in_total{}
-f5_virtual_server_profile_client_ssl_handshake_count{}
-f5_virtual_server_profile_client_ssl_records_in_total{}
-f5_virtual_server_profile_client_ssl_connection_total{}
-f5_policy_ip_intelligence_feed_list_count{}
-f5_policy_ip_intelligence_info{}
-f5_virtual_server_profile_client_ssl_secure_handshakes_total{}
-f5_policy_ip_intelligence_generation{}
-f5_plane_cpu_utilization_5s{}
-```
-
-This will impact data output in several dashboards/panels (denoted with description fields indicating as such).
+(prometheus).
 
 ### Configure CA File
 AST expects a valid TLS cert bundle unless `tls.insecure_skip_verify` is
@@ -300,32 +208,3 @@ docker compose up
 #### View The Dashboards
 The default Grafana user/pass is `admin/admin`, and can be accessed at
 `http://<hostname>:3000`.
-
-
-## Support
-
-For support, please open a GitHub issue.  Note, the code in this repository is community supported and is not supported by F5 Networks.  For a complete list of supported projects please reference [SUPPORT.md](SUPPORT.md).
-
-## Community Code of Conduct
-
-Please refer to the [F5 DevCentral Community Code of Conduct](code_of_conduct.md).
-
-## License
-
-[Apache License 2.0](LICENSE)
-
-## Copyright
-
-Copyright 2014-2024 F5 Networks Inc.
-
-### F5 Networks Contributor License Agreement
-
-Before you start contributing to any project sponsored by F5 Networks, Inc. (F5) on GitHub, you will need to sign a Contributor License Agreement (CLA).
-
-If you are signing as an individual, we recommend that you talk to your employer (if applicable) before signing the CLA since some employment agreements may have restrictions on your contributions to other projects.
-Otherwise by submitting a CLA you represent that you are legally entitled to grant the licenses recited therein.
-
-If your employer has rights to intellectual property that you create, such as your contributions, you represent that you have received permission to make contributions on behalf of that employer, that your employer has waived such rights for your contributions, or that your employer has executed a separate CLA with F5.
-
-If you are signing on behalf of a company, you represent that you are legally entitled to grant the license recited therein.
-You represent further that each employee of the entity that submits contributions is authorized to submit such contributions on behalf of the entity pursuant to the CLA.

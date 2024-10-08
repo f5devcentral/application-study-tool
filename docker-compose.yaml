@@ -2,7 +2,6 @@ version: '3'
 
 volumes:
   prometheus:
-  otel_collector:
   grafana:
 
 services:
@@ -27,33 +26,19 @@ services:
     networks:
       - 7lc_network
 
-  otel-init:
-    image: python:3.12.4-slim
-    env_file:
-      - ".env"
-    volumes:
-      - otel_collector:/app/otel-collector-config
-      - ./config/big-ips.json:/app/config.json
-      - ./slc/bin/generate_otel_config.py:/app/generate_otel_config.py
-      - ./slc/bin/init_entrypoint.sh:/app/init_entrypoint.sh
-      - ./requirements.txt:/app/requirements.txt
-      - ./slc/data/templates:/app/templates
-    command: ["/bin/sh", "/app/init_entrypoint.sh"]
-
   otel-collector:
-    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.5.0
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.6.0
     restart: unless-stopped
     volumes:
-      - otel_collector:/etc/otel-collector-config
-    command: ["--config=/etc/otel-collector-config/config.yaml"]
+      - ./services/otel_collector:/etc/otel-collector-config
+    command: 
+      - "--config=/etc/otel-collector-config/defaults/default-config.yaml"
+      - "--config=/etc/otel-collector-config/defaults/bigip-scraper-config.yaml"
     env_file:
       - ".env"
       - ".env.device-secrets"
     networks:
       - 7lc_network
-    depends_on:
-        otel-init:
-            condition: service_completed_successfully
 
   grafana:
     image: grafana/grafana:11.2.0
@@ -61,7 +46,6 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
-      - 4317:4317
     volumes:
       - grafana:/var/lib/grafana
       - ./services/grafana/provisioning/:/etc/grafana/provisioning

@@ -737,7 +737,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -776,7 +777,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_virtual_server_profile_http_requests_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
+          "expr": "rate(f5_virtual_server_profile_http_requests_by_method_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -838,7 +839,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -877,7 +879,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_virtual_server_profile_http_responses_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
+          "expr": "rate(f5_virtual_server_profile_http_responses_by_status_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -959,13 +961,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "LTM - HTTP Profile",
   "uid": "cdu8euqz7w0zkc",
-  "version": 6,
+  "version": 8,
   "weekStart": ""
 }

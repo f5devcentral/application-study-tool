@@ -1,0 +1,23 @@
+# Your bigip targets
+# Values not explicitly configured here inherit values in
+# the ast_defaults.yaml bigip_receiver_defaults section.
+# Each entry must have a unique name, starting with bigip/
+# (e.g. bigip/1, bigip/2)
+bigip/1:
+  # Endpoint must be specified for each device
+  # Set this to the management IP for the device. This must be
+  # reachable from the Application Study Tool host.
+  endpoint: https://10.0.0.1
+  ## Uncommenting any of the following lines will override the defaults in
+  ## ast_defaults.yaml bigip_receiver_defaults section.
+  # username: SOME_OVERRIDE_ACCOUNT_NAME
+  # password: "${SOME_OTHER_ENV_VAR_WITH_ANOTHER_PASSWORD}"
+  # collection_interval: 30s
+  # data_types:
+  #   f5.dns:
+  #     enabled: false
+  #   f5.gtm:
+  #     enabled: false
+  # tls:
+  #   insecure_skip_verify: true
+  #   ca_file:
