@@ -2950,7 +2950,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(f5_system_state_up_ratio,job)",
+        "definition": "label_values(f5_profile_dns_info,job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -2958,7 +2958,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_system_state_up_ratio,job)",
+          "query": "label_values(f5_profile_dns_info,job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3001,6 +3001,6 @@
   "timezone": "browser",
   "title": "LTM - DNS Profile",
   "uid": "cdyemmjm65d6of",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

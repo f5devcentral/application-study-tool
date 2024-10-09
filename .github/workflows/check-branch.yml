@@ -1,0 +1,18 @@
+name: Main Branch Protection
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch
+        run: |
+          if [[ ${GITHUB_HEAD_REF} != development ]] && ! [[ ${GITHUB_HEAD_REF} =~ ^hotfix/ ]]; 
+          then
+            echo "Error: Pull request must come from 'development' or 'hotfix/' branch"
+            exit 1
+          fi

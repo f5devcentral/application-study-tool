@@ -92,7 +92,6 @@
     },
     {
       "datasource": {
-        "name": "${DS_PROMETHEUS}",
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
@@ -384,7 +383,6 @@
     },
     {
       "datasource": {
-        "name": "${DS_PROMETHEUS}",
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
@@ -509,7 +507,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(f5_system_state_up_ratio,job)",
+        "definition": "label_values(f5_gtm_wideip_enabled_count,job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -517,7 +515,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_system_state_up_ratio,job)",
+          "query": "label_values(f5_gtm_wideip_enabled_count,job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
