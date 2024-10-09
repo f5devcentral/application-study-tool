@@ -4,7 +4,7 @@
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
 
-* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](/docs/receiver_metrics.md).
+* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Receiver Metrics Info](./receiver_metrics.md).
 * Prometheus timeseries database for storing and querying collected data.
 * Grafana Instance with pre-configured dashboards for quick insights at the device and "fleet" levels.
 
@@ -18,3 +18,8 @@ the Openetlemetry Collector can be configured to send data to existing productio
 ### Table of Contents
 
 - [Quick Start](./quickstart.md)
+- [Config Management Overview](./config_management.md)
+- [Config Migration (From v0.5.0 and Earlier)](./config_migration.md)
+- [Receiver Metrics Info](./receiver_metrics.md)
+- [Receiver Readme](./receiver_readme.md)
+- [Metric Obfuscation](./metric_obfuscation.md)
