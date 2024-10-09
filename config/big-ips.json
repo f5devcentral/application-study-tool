@@ -1,9 +1,0 @@
-[
-  {
-    "endpoint": "https://10.0.0.1",
-    "username": "admin",
-    "password_env_ref": "BIGIP_PASSWORD_1",
-    "ca_file": "",
-    "tls_insecure_skip_verify": false
-  }
-]
