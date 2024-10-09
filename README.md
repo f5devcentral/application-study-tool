@@ -3,14 +3,14 @@
 > 🚨🚨**Notice**🚨🚨
 > 
 > Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [docs/config_migration.md](docs/config_migration.md).
+update a legacy configuration, see [pages/config_migration.md](pages/config_migration.md).
 
 ## Overview
 
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
 
-* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](docs/receiver_metrics.md).
+* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](pages/receiver_metrics.md).
 * Prometheus timeseries database for storing and querying collected data.
 * Grafana Instance with pre-configured dashboards for quick insights at the device and "fleet" levels.
 
@@ -54,7 +54,7 @@ docker-compose up
 ## Configuration
 
 For additional configuration management background, see
-[docs/config-management.md](docs/config-management.md).
+[pages/config-management.md](pages/config-management.md).
 The below assumes you're using the config_helper script for assisted management.
 
 
@@ -65,7 +65,7 @@ Application Study Tool config management relies on default configs in
 Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
 
 To update a legacy (pre v0.6.0) configuration, to the new scheme see
-[docs/config_migration.md](docs/config_migration.md)
+[pages/config_migration.md](pages/config_migration.md)
 
 ## Configure Default Device Settings
 
@@ -85,7 +85,7 @@ bigip_receiver_defaults:
   # The data_types that should be enabled or disabled.
   # DNS and GTM are disabled by default and users can enable those modules
   # on all devices by setting the below to true.
-  # A full list of data_types is in /docs/receiver_readme.md.
+  # A full list of data_types is in pages/receiver_readme.md.
   data_types:
     f5.dns:
       enabled: false
@@ -203,9 +203,9 @@ as SENSOR_ID and SENSOR_SECRET_TOKEN (see [.env-example](./.env-example) for exa
 
 ## Run The Configuration Helper
 The config helper script can be run natively or via docker to merge the default and device
-level configs into the final OTEL Collector config as follows:
+level configs into the final OTEL Collector config from the project root directory as follows:
 ```shell
-# Run the configuration generator
+# Run the configuration generator from the project root directory
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 ```
 

@@ -11,7 +11,7 @@ where users were unable to view and modify the files to tune parameters for thei
 In the new process, the raw otel configs are exposed in the /services/otel_collector directory where
 they can be managed manually, or through continued use of a refactored config_helper script.
 
-For additional detail on configuration management options in the post v0.6.0 scheme, please see [/docs/config_management.md](/docs/config_management.md)
+For additional detail on configuration management options in the post v0.6.0 scheme, please see [Config Management](./config_management.md)
 
 ## Migrating From pre v0.6.0 Configs
 There's a python script in /src/config_helper.py which will convert the original big-ips.json schema

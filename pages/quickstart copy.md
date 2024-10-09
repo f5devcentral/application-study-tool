@@ -142,10 +142,10 @@ bigip/2:
 ```
 
 ## Run The Configuration Helper
-The config helper script can be run natively or via docker from the project root directory
-to merge the default and device level configs into the final OTEL Collector config as follows:
+The config helper script can be run natively or via docker to merge the default and device
+level configs into the final OTEL Collector config as follows:
 ```shell
-# Run the configuration generator from the project root directory
+# Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 ```
 
