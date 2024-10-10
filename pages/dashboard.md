@@ -1,4 +1,3 @@
-<!-- Provide a glance at what dashboards can provide to the user -->
 # Dashboards
 
 We provide a variety of dashboards to help monitor your BigIP devices, these dashboards are built in Grafana which makes it super flexible to apply changes. Below you will find all the dashboards you will get access to when you deploy the application.

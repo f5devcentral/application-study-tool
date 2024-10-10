@@ -1,4 +1,3 @@
-<!-- Guide to manipulating data being scrapped -->
 # Metric Obfuscation
 
 Metric data can be obfuscated before sending to storage systems (local Prometheus, F5 Datafabric,
