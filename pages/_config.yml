@@ -53,4 +53,4 @@ plugins:
 markdown: kramdown
 # domain: f5devcentral.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 # url: https://f5devcentral.github.io  # the base hostname and protocol for your site, e.g. http://example.com
-baseurl: /application-study-tool/pages    # place folder name if the site is served in a subfolder
+baseurl: /ast-github-pages-documentation/pages    # place folder name if the site is served in a subfolder
