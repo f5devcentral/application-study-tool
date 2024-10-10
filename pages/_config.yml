@@ -19,10 +19,6 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Application Study Tool Docs
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
 
 
 # Build settings
@@ -51,6 +47,6 @@ plugins:
 #   - vendor/ruby/
 
 markdown: kramdown
-# domain: f5devcentral.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
-# url: https://f5devcentral.github.io  # the base hostname and protocol for your site, e.g. http://example.com
+domain: ""       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: ""  # the base hostname and protocol for your site, e.g. http://example.com
 baseurl: /ast-github-pages-documentation/pages    # place folder name if the site is served in a subfolder
