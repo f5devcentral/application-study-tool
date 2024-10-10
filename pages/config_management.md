@@ -15,7 +15,7 @@ and [/services/otel_collector/receivers.yaml](/services/otel_collector/receivers
 3. Manual maintenance of the Otel Collector Config files in
 [/services/otel_collector/defaults](/services/otel_collector/defaults)
 
-## Using config_helper.py (Recommended For Most Users)
+### Using config_helper.py (Recommended For Most Users)
 With the included python script in [/src/config_helper.py](/src/config_helper.py), AST collector
 configuration is managed through 2 primary files:
 
@@ -144,21 +144,11 @@ bigip/1:
   username: SOME_OVERRIDE_ACCOUNT_NAME
 ```
 
-#### Run The Configuration Helper
-The config helper script can be run natively or via docker from the project root directory
-to merge the default and device level configs into the final OTEL Collector config as follows:
-```shell
-# Run the configuration generator from the project root directory
-docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
-```
+When the OTEL container is run, the default configs in
+[/services/otel_collector/defaults/](/services/otel_collector/defaults/) merge these files into
+the final configuration the OTEL Collector needs to run correctly.
 
-This will write 2 new files in the services/otel_collector directory:
-
-* `receivers.yaml` - The final list of scraper configs and their settings.
-* `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
-(prometheus).
-
-## Manual Maintenance Of Receiver and Pipeline Files
+### Manual Maintenance Of Receiver and Pipeline Files
 The files mentioned above can be managed directly by users if they want to skip the config_helper
 script in favor of their own automation / templating. In this case, you just need to update the files:
 
@@ -192,7 +182,7 @@ Any of these files can be modified directly to update settings as desired (e.g. 
 logging levels).
 
 
-## Manual Maintenance Of The OTEL Collector Config
+### Manual Maintenance Of The OTEL Collector Config
 You can also forgo all of the above config structure in favor of your own management scheme. If you're
 running with the base docker-compose file, you may need to modify the commands section to point at your
 own config files:

@@ -19,7 +19,7 @@ production levels of reliability. For production/operational use cases, you can 
 accounting for things like high availability, enhanced security via e.g. Grafana OIDC integration, and similar. Alternatively,
 the Openetlemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
 
-![](./diagrams/ui.gif)
+![](./pages/assets/ui.gif)
 
 ## Getting Started
 
