@@ -1,4 +1,7 @@
+<!-- Provide a glance at what dashboards can provide to the user -->
 # Dashboards
+
+We provide a variety of dashboards to help monitor your BigIP devices, these dashboards are built in Grafana which makes it super flexible to apply changes. Below you will find all the dashboards you will get access to when you deploy the application.
 
 ## Table of Contents
 - [Fleet](#fleet-dashboards)
@@ -26,7 +29,7 @@ Once you have deployed the application, you can access the dashboards at `http:/
 
 #### Changing the Grafana Credentials
 
-You can update the Grafana user/pass by changing the values of 
+You can update the Grafana user/pass by changing the values of the `GF_SECURITY_ADMIN_USER` and `GF_SECURITY_ADMIN_PASSWORD` `.env` variables
 
 
 ### Fleet Dashboards
@@ -62,20 +65,21 @@ The device dashboards provide more grainular information about how the device is
 *The Top N dashboard provides statistical highlights by presenting stats in a Top N, by default N is set to 10 this can be changed at top of the dashboard*
 #### Pools
 ![](./assets/BigIP-Device-Pools.png)
-*Here you can view*
+*Here you can view stats pretaining to Pools and Pool members on a BigIP.*
 
 
 #### Virtual Servers
 ![](./assets/BigIP-Device-Virtual-Server.png)
-*Here you can view*
+*Here you can view stats pretaining to all the virtual servers on a BigIP.*
 
 #### iRules
 ![](./assets/BigIP-Device-iRules.png)
+*This dashboard allows you to monitor iRule usage and performance.*
 
 #### WAF
 
 ![](./assets/BigIP-Device-WAF.png)
-
+*View the status of your WAF policies here.*
 
 
 
@@ -86,11 +90,11 @@ The profile dashboards dive into the different profiles configured on the device
 #### HTTP
 
 ![](./assets/BigIP-Device:Profile-HTTP.png)
-**
+*This dashboard enables the user to monitor their HTTP profiles, view information pretaining to HTTP requests and responses*
 
 
 ### Collector Stats
 
-You can monitor how the collector is performing with the 
+You can view stats about the Collector from the scrape duration to API requests/responses
 
 ![](./assets/Collector-Stats.png)

@@ -1,6 +1,7 @@
 ---
 layout: home
 ---
+<!-- Opening page that greets the user and help guide them to other pages -->
 # Seven Layer Cake
 
 ### Overview
@@ -21,7 +22,8 @@ the Openetlemetry Collector can be configured to send data to existing productio
 ### Table of Contents
 
 - [Quick Start](./quickstart.md)
-    - []
+    - [Installation](./quickstart.md#installation)
+    - [Configuration](./quickstart.md#configure-default-device-settings)
 - [Dashboards](./dashboard.md)
     - [Fleet](./dashboard.md#fleet-dashboards)
         - [Inventory](./dashboard.md#inventory)
@@ -39,10 +41,13 @@ the Openetlemetry Collector can be configured to send data to existing productio
         - [HTTP](./dashboard.md#http)
     - [Stats](./dashboard.md#collector-stats)
 - [Config Management Overview](./config_management.md)
+    - [Recommended Method](./config_management.md#using-config_helperpy-recommended-for-most-users)
+    - [Manual Maintenance](./config_management.md#manual-maintenance-of-receiver-and-pipeline-files)
 - [Config Migration (From v0.5.0 and Earlier)](./config_migration.md)
 - [Receiver Metrics Info](./receiver_metrics.md)
 - [Receiver Readme](./receiver_readme.md)
 - [Metric Obfuscation](./metric_obfuscation.md)
+    - [Example](./metric_obfuscation.md#masking-attributes-example)
 
 
  

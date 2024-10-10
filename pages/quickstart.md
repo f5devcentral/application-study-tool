@@ -1,4 +1,4 @@
-
+<!-- Everything necessary to get up and running -->
 # Quick Start
 
 ## Getting Started
