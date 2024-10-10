@@ -54,13 +54,13 @@ docker-compose up
 ## Configuration
 
 For additional configuration management background, see
-[pages/config-management.md](pages/config-management.md).
+[pages/config_management.md](pages/config_management.md).
 The below assumes you're using the config_helper script for assisted management.
 
 
 Application Study Tool config management relies on default configs in
-[/configs/ast_defaults.yaml](/configs/ast_defaults.yaml) and device specific information in
-[/configs/bigip_receivers.yaml](/configs/bigip_receivers.yaml).
+[/configs/ast_defaults.yaml](/config/ast_defaults.yaml) and device specific information in
+[/configs/bigip_receivers.yaml](/config/bigip_receivers.yaml).
 
 Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
 
