@@ -1,3 +1,6 @@
+---
+layout: page
+---
 # AST Configuration Management Overview
 
 ## Config Management Options
