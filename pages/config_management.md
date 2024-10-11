@@ -4,23 +4,23 @@
 In the post v0.6.0 management scheme, users can choose from one of the below options to manage
 the AST Otel Collector configs:
 
-1. Using the [/src/config_helper.py](/src/config_helper.py) script to generate full Otel Collector
+1. Using the [/src/config_helper.py](https://github.com/f5devcentral/application-study-tool/blob/main/src/config_helper.py) script to generate full Otel Collector
 Config files from a small set of configuration for each device plus a set of defaults (recommended for
 most users, and includes migration path from old big-ips.json configs)
 
 2. Manual maintenance of the Otel Collector Config files in
-[/services/otel_collector/pipelines.yaml](/services/otel_collector/pipelines.yaml)
-and [/services/otel_collector/receivers.yaml](/services/otel_collector/receivers.yaml)
+[/services/otel_collector/pipelines.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/pipelines.yaml)
+and [/services/otel_collector/receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/receivers.yaml)
 
 3. Manual maintenance of the Otel Collector Config files in
-[/services/otel_collector/defaults](/services/otel_collector/defaults)
+[/services/otel_collector/defaults](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/defaults)
 
 ### Using config_helper.py (Recommended For Most Users)
-With the included python script in [/src/config_helper.py](/src/config_helper.py), AST collector
+With the included python script in [/src/config_helper.py](https://github.com/f5devcentral/application-study-tool/blob/main/src/config_helper.py), AST collector
 configuration is managed through 2 primary files:
 
 1. A default file which contains settings that should be applied for each BigIP unless overriden (see below)
-in [/config/ast_defaults.yaml](/config/ast_defaults.yaml):
+in [/config/ast_defaults.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/ast_defaults.yaml):
 
 ```yaml
 # These configs are applied to each entry in the bigip_receivers file
@@ -83,7 +83,7 @@ pipelines:
 ```
 
 2. A file which contains settings that should override (or have no default) at the individual bigip level
-in [/config/bigip_receivers.yaml](/config/bigip_receivers.yaml):
+in [/config/bigip_receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/bigip_receivers.yaml):
 ```yaml
 # This file contains the list of BigIP receivers (scrape jobs).
 # Each item must have a unique key (e.g. bigip/1, bigip/2, etc).
@@ -109,9 +109,9 @@ bigip/1:
 ```
 
 When the config_helper script is run with the --generate-configs option, 2 new files are written out
-to the [/services/otel_collector](/services/otel_collector) directory:
+to the [/services/otel_collector](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector) directory:
 
-1. The first contains the OTEL Collector pipelines configuration [/services/otel_collector/pipelines.yaml](/services/otel_collector/pipelines.yaml) which is basically the contents of the default config pipelines section plus the list of receivers (bigip scrape jobs):
+1. The first contains the OTEL Collector pipelines configuration [/services/otel_collector/pipelines.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/pipelines.yaml) which is basically the contents of the default config pipelines section plus the list of receivers (bigip scrape jobs):
 ```yaml
 metrics/bigip:
   exporters:
@@ -126,7 +126,7 @@ metrics/bigip:
 ```
 
 2. The second contains the OTEL Collector receivers configuration
-[/services/otel_collector/receivers.yaml](/services/otel_collector/receivers.yaml)
+[/services/otel_collector/receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/receivers.yaml)
 which is the merged contents of the default config settings and the per-device settings:
 ```yaml
 bigip/1:
@@ -145,19 +145,33 @@ bigip/1:
 ```
 
 When the OTEL container is run, the default configs in
-[/services/otel_collector/defaults/](/services/otel_collector/defaults/) merge these files into
+[/services/otel_collector/defaults/](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/defaults/) merge these files into
 the final configuration the OTEL Collector needs to run correctly.
+
+#### Run The Configuration Helper
+The config helper script can be run natively or via docker from the project root directory
+to merge the default and device level configs into the final OTEL Collector config as follows:
+```shell
+# Run the configuration generator from the project root directory
+docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+```
+
+This will write 2 new files in the services/otel_collector directory:
+
+* `receivers.yaml` - The final list of scraper configs and their settings.
+* `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
+(prometheus).
 
 ### Manual Maintenance Of Receiver and Pipeline Files
 The files mentioned above can be managed directly by users if they want to skip the config_helper
 script in favor of their own automation / templating. In this case, you just need to update the files:
 
-* [/services/otel_collector/receivers.yaml](/services/otel_collector/receivers.yaml)
-* [/services/otel_collector/pipelines.yaml](/services/otel_collector/pipelines.yaml)
+* [/services/otel_collector/receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/receivers.yaml)
+* [/services/otel_collector/pipelines.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/pipelines.yaml)
 
 These are mapped into the final OTEL Collector config via the "file" directives in the
 receivers and services.pipelines section of the
-[/services/otel_collector/defaults/bigip-scraper-config.yaml]() file:
+[/services/otel_collector/defaults/bigip-scraper-config.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/defaults/bigip-scraper-config.yaml) file:
 
 ```
 receivers: ${file:/etc/otel-collector-config/receivers.yaml}

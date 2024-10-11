@@ -18,7 +18,7 @@ The attributes processor can be used to hash metric attributes before they're ex
 To enable this functionality for data being exported to F5:
 
 1. Add an attributes processor config as shown to 
-[services/otel_collector/defaults/bigip-scraper-config.yaml](services/otel_collector/defaults/bigip-scraper-config.yaml)
+[services/otel_collector/defaults/bigip-scraper-config.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/services/otel_collector/defaults/bigip-scraper-config.yaml)
 
 
 (This example will mask the f5.instance.management_ip and f5.node.ip_address fields):
@@ -33,7 +33,7 @@ processors:
         action: hash
 ```
 
-2. Edit the [config/ast_defaults.yaml](config/ast_defaults.yaml) file to include the new processor
+2. Edit the [config/ast_defaults.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/ast_defaults.yaml) file to include the new processor
 on the F5 Datafabric pipeline:
 ```yaml
 pipelines:
