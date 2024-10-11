@@ -4,6 +4,8 @@
 The configuration mangagement for AST Otel Collector is being updated to allow for more flexible 
 configuration, and to simplify configuration for advanced usecases.
 
+> Before you start, make sure to backup the /config/big-ips.json file!
+
 The old configuration process relied on a docker container that would run each time the AST
 docker-compose instance was started. The process wrote the generated configs to an internal volume
 where users were unable to view and modify the files to tune parameters for their deployment.
@@ -11,20 +13,22 @@ where users were unable to view and modify the files to tune parameters for thei
 In the new process, the raw otel configs are exposed in the /services/otel_collector directory where
 they can be managed manually, or through continued use of a refactored config_helper script.
 
-For additional detail on configuration management options in the post v0.6.0 scheme, please see [Config Management](./config_management.md)
+For additional detail on configuration management options in the post v0.6.0 scheme, please see [Config Management](https://github.com/f5devcentral/application-study-tool/blob/main/config_management.md)
 
 ## Migrating From pre v0.6.0 Configs
 There's a python script in /src/config_helper.py which will convert the original big-ips.json schema
 into the new management format. Assuming you have an existing list of configured BigIPs in
 /config/big-ips.json, migration is a 2 step process:
 
-1. Make sure the default values in [/config/ast_defaults.yaml](/config/ast_defaults.yaml) match your
+0. Backup the existing /config/big-ips.json file.
+1. Make sure the default values in [/config/ast_defaults.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/ast_defaults.yaml) match your
 desired default settings.
 2. Run the migration script.
+3. Run the config generation script.
 
 
 ## Verify Default Settings
-The default settings in [/config/ast_defaults.yaml](/config/ast_defaults.yaml) are merged with your existing values in big-ips.json by the script.
+The default settings in [/config/ast_defaults.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/ast_defaults.yaml) are merged with your existing values in big-ips.json by the script.
 
 You can reduce the amount of repetitive yaml in the output by making sure these values match
 your common values (e.g. if you use the username: "telemetry", updating that value in the defaults
@@ -83,7 +87,7 @@ pipelines:
 
 ## Run The Conversion Script
 
-The /src/config_helper.py script can be run on a system with python or via docker image as follows:
+The [/src/config_helper.py](https://github.com/f5devcentral/application-study-tool/blob/main/src/config_helper.py) script can be run on a system with python or via docker image as follows:
 
 ### Conversion Run Via Docker
 If you don't have an environment with python handy, you can run the script via
@@ -106,7 +110,7 @@ bigip/2:
 ```
 
 If the planned output looks correct, you can run again without the --dry-run to update
-the contents of [./config/bigip_receivers.yaml](./config/bigip_receivers.yaml)
+the contents of [./config/bigip_receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/bigip_receivers.yaml)
 ```shell
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --convert-legacy-config
 ```
@@ -137,7 +141,7 @@ bigip/2:
 ```
 
 If the planned output looks correct, you can run again without the --dry-run to update
-the contents of [./config/bigip_receivers.yaml](./config/bigip_receivers.yaml)
+the contents of [./config/bigip_receivers.yaml](https://github.com/f5devcentral/application-study-tool/blob/main/config/bigip_receivers.yaml)
 ```shell
 python ./src/config_helper.py --convert-legacy-config
 ```
@@ -147,4 +151,20 @@ Output:
 2024-09-25 17:06:29,897 - INFO - Successfully wrote data to './config/bigip_receivers.yaml'.
 ```
 
+## Run The Configuration Helper To Generate New Configs
+The config helper script can be run natively or via docker from the project root directory
+to merge the default and device level configs into the final OTEL Collector config as follows:
+```shell
+# Run the configuration generator from the project root directory
+docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+```
+
+This will write 2 new files in the services/otel_collector directory:
+
+* `receivers.yaml` - The final list of scraper configs and their settings.
+* `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
+(prometheus).
+
 ### Adding New Devices
+To add new devices or update the config after changes to the ast_defaults.yaml or receivers.yaml files,
+re-run the config helper script as shown above.
