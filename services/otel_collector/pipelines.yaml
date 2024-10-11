@@ -1,6 +1,6 @@
-metrics/bigip:
+metrics/local:
   exporters:
-  - otlphttp/metrics-bigip
+  - otlphttp/metrics-local
   - debug/bigip
   processors:
   - batch
