@@ -44,7 +44,7 @@ pipelines:
   # detail.
   metrics/local:
     #receivers list are generated via the config helper script
-    processors: [batch]
+    processors: [batch/local]
     exporters: [otlphttp/metrics-local, debug/bigip]
 
   # These pipeline configs are written to the OTEL config after having the configured receivers
