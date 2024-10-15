@@ -1,6 +1,7 @@
 # Dashboards
 
-We provide a variety of dashboards to help monitor your BigIP devices, these dashboards are built in Grafana which makes it super flexible to apply changes. Below you will find all the dashboards you will get access to when you deploy the application.
+Application Study Tool includes a variety of starter dashboards to help monitor your BigIP devices.
+These dashboards are built in Grafana and can be customized to suit your unique organizational needs.
 
 ## Table of Contents
 - [Fleet](#fleet-dashboards)

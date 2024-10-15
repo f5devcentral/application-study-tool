@@ -4,6 +4,8 @@
 > 
 > Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
 update a legacy configuration, see [pages/config_migration.md](pages/config_migration.md).
+>
+> Before you start, make sure to backup the /config/big-ips.json file!
 
 ## Overview
 
@@ -214,6 +216,10 @@ This will write 2 new files in the services/otel_collector directory:
 * `receivers.yaml` - The final list of scraper configs and their settings.
 * `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
 (prometheus, and optionally F5).
+
+## Adding New Devices or Updating Configs
+To add new devices or update the config after changes to the ast_defaults.yaml or receivers.yaml files,
+re-run the config helper script as shown above and then restart the otel collector container.
 
 ## Account Permissions
 The vast majority of telemetry data can be collected with read-only access to the BigIP. Some

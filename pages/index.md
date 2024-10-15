@@ -2,7 +2,7 @@
 layout: home
 ---
 <!-- Opening page that greets the user and help guide them to other pages -->
-# Seven Layer Cake
+# Application Study Took
 
 ### Overview
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
