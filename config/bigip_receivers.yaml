@@ -13,6 +13,7 @@ bigip/1:
   # username: SOME_OVERRIDE_ACCOUNT_NAME
   # password: "${SOME_OTHER_ENV_VAR_WITH_ANOTHER_PASSWORD}"
   # collection_interval: 30s
+  # timeout: 20s
   # data_types:
   #   f5.dns:
   #     enabled: false

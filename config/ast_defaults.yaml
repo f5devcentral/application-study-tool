@@ -8,6 +8,10 @@ bigip_receiver_defaults:
   # The password (not recommended) or a reference to an env variable (recommended, shown)
   # Below tells the collector to look for an environment variable named BIGIP_PASSWORD_1
   password: "${env:BIGIP_PASSWORD_1}"
+  # The timeout field can be used to adjust the amount of time the collector will wait for a response
+  # to BigIP iControl Rest requests. Larger boxes with more complex config may require setting this value
+  # higher. Set for individual devices in bigip_receivers.yaml
+  timeout: 10s
   # The data_types that should be enabled or disabled. DNS and GTM users can enable those modules
   # by setting the below to true. These will apply to all devices and may be better specified on the
   # per-reciever settings file below.
