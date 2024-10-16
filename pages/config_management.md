@@ -69,7 +69,7 @@ pipelines:
   # detail.
   metrics/local:
     #receivers list are generated via the config helper script
-    processors: [batch]
+    processors: [batch/local]
     exporters: [otlphttp/metrics-local, debug/bigip]
 
   # These pipeline configs are written to the OTEL config after having the configured receivers
@@ -78,7 +78,7 @@ pipelines:
   # detail.
   metrics/f5-datafabric:
     #receivers list are generated via the config helper script
-    processors: [batch, interval/f5-datafabric, attributes/f5-datafabric]
+    processors: [interval/f5-datafabric, attributes/f5-datafabric, batch/f5-datafabric]
     exporters: [otlp/f5-datafabric, debug/bigip]
 ```
 
@@ -118,7 +118,7 @@ metrics/bigip:
   - otlphttp/metrics-bigip
   - debug/bigip
   processors:
-  - batch
+  - batch/local
   receivers:
   # This was inserted here because the pipeline / default_pipeline for this device was
   # set to "metrics/bigip"
@@ -177,7 +177,7 @@ receivers and services.pipelines section of the
 receivers: ${file:/etc/otel-collector-config/receivers.yaml}
 
 processors:
-  batch:
+  batch/local:
 
 exporters:
   otlphttp/metrics-bigip:
@@ -209,7 +209,6 @@ own config files:
       - ./services/otel_collector:/etc/otel-collector-config
     # Update these as needed
     command: 
-      - "--config=/etc/otel-collector-config/defaults/default-config.yaml"
       - "--config=/etc/otel-collector-config/defaults/bigip-scraper-config.yaml"
     ...
 ```

@@ -41,7 +41,7 @@ pipelines:
   metrics/f5-datafabric:
     # receivers list are generated via the config helper script
     # Adding attributes/mask-some-attributes to the list of enabled processors.
-    processors: [batch, interval/f5-datafabric, attributes/mask-some-attributes, attributes/f5-datafabric]
+    processors: [interval/f5-datafabric, attributes/mask-some-attributes, attributes/f5-datafabric, batch/f5-datafabric]
     exporters: [otlp/f5-datafabric, debug/bigip]
 ...
 ```

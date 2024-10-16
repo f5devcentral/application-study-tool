@@ -31,8 +31,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./services/otel_collector:/etc/otel-collector-config
-    command: 
-      - "--config=/etc/otel-collector-config/defaults/default-config.yaml"
+    command:
       - "--config=/etc/otel-collector-config/defaults/bigip-scraper-config.yaml"
     env_file:
       - ".env"

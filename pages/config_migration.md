@@ -81,7 +81,7 @@ pipeline_default: metrics/bigip
 pipelines:
   metrics/bigip:
     #receivers list are generated via the config helper script
-    processors: [batch]
+    processors: [batch/local]
     exporters: [otlphttp/metrics-bigip, debug/bigip]
 ```
 

@@ -3,6 +3,6 @@ metrics/local:
   - otlphttp/metrics-local
   - debug/bigip
   processors:
-  - batch
+  - batch/local
   receivers:
   - bigip/1
