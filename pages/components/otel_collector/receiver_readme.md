@@ -1,6 +1,18 @@
+---
+layout: page
+title: BigIP Receiver Readme
+parent: OTEL Collector
+grand_parent: Components
+nav_order: 1
+---
+
 # F5 Big-IP Receiver
 
 This receiver fetches stats from a F5 Big-IP node using F5's [iControl REST API](https://clouddocs.f5.com/api/icontrol-rest).
+
+
+1. TOC
+{:toc}
 
 ## Prerequisites
 

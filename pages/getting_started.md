@@ -1,10 +1,29 @@
-# Quick Start
+---
+layout: page
+title: Getting Started
+nav_order: 2
+---
+# Getting Started
 
-## Getting Started
+1. TOC
+{:toc}
+
+## Background
+This instructions in this file will get a new installation up and running in as little as a few minutes.
+For more detailed information on AST config management options, see the
+[Configuration Management Overview]({{site.baseurl}}/config/) and related sections.
 
 ### Prerequisites
 
-docker (or compatible) - [Installation Instructions](https://docs.docker.com/engine/install/)
+[Git Client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+Docker (or compatible) container environment with compose.
+
+Installation Instructions:
+  * [General (docker engine)](https://docs.docker.com/engine/install/)
+  * [Ubuntu (docker engine)](https://docs.docker.com/engine/install/ubuntu/)
+  * [RHEL (docker engine)](https://docs.docker.com/engine/install/rhel/)
+  * [Podman](https://podman.io/docs/installation)
 
 ### Installation
 
@@ -146,6 +165,8 @@ The config helper script can be run natively or via docker from the project root
 to merge the default and device level configs into the final OTEL Collector config as follows:
 ```shell
 # Run the configuration generator from the project root directory
+# If `echo $PWD` doesn't give you the current directory on your system,
+# replace the '-v ${PWD}' section with '-v /path/to/your/directory'
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 ```
 
