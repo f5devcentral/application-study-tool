@@ -18,13 +18,50 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Application Study Tool Docs
+title: Application Study Tool
+description: A tool for monitoring BigIP Devices with Grafana, Prometheus, and OpenTelemetry
 
 
 # Build settings
-theme: minima
-plugins:
-  - jekyll-feed
+theme: just-the-docs
+url: https://f5devcentral.github.io/application-study-tool/
+
+aux_links:
+  AST Repository: https://github.com/f5devcentral/application-study-tool/
+
+heading_anchors: true
+nav_enabled: true
+
+nav_sort: case_sensitive
+
+# External navigation links
+nav_external_links:
+  - title: Application Study Tool on GitHub
+    url: https://github.com/f5devcentral/application-study-tool/
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer last edited timestamp
+last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+
+callouts:
+  warning:
+    title: Warning
+    color: red
+  important:
+    title: Important
+    color: blue
 
 # Exclude from processing.
 # The following items will not be processed, by default.

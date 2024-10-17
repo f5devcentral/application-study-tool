@@ -1,8 +1,17 @@
+---
+layout: page
+title: Config Migration (pre v0.6.0)
+parent: Configuration
+nav_order: 1
+---
 # AST Config Migration for Pre v0.6.0 Deployments
 
+1. TOC
+{:toc}
+
 ## Background
-The configuration mangagement for AST Otel Collector is being updated to allow for more flexible 
-configuration, and to simplify configuration for advanced usecases.
+The configuration management for AST Otel Collector is being updated to allow for more flexible 
+configuration, and to simplify configuration for advanced use-cases.
 
 > Before you start, make sure to backup the /config/big-ips.json file!
 
