@@ -208,7 +208,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 6,
         "x": 3,
         "y": 1
@@ -297,6 +297,7 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -312,25 +313,52 @@
             },
             "inspect": false
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "licensed": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Licensed"
+                },
+                "unlicensed": {
+                  "color": "#808080",
+                  "index": 1,
+                  "text": "Unlicensed"
+                }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#939393",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "f5_module_license_state"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 6,
         "x": 9,
         "y": 1
@@ -346,7 +374,13 @@
           ],
           "show": false
         },
-        "showHeader": false
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "License State"
+          }
+        ]
       },
       "pluginVersion": "11.2.0",
       "targets": [
@@ -357,7 +391,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f5_system_info{job=\"$device_name\"}",
+          "expr": "f5_module_license_info_ratio",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -365,7 +399,7 @@
           "refId": "A"
         }
       ],
-      "title": "Platform",
+      "title": "License State",
       "transformations": [
         {
           "id": "organize",
@@ -377,10 +411,13 @@
               "baseMac": true,
               "chassisId": false,
               "chassisType": false,
+              "dataType": true,
               "f5_device_management_ip": true,
               "f5_device_name": true,
               "f5_endpoint": true,
               "failover_state": true,
+              "instance": true,
+              "job": true,
               "marketingName": false,
               "partition": true,
               "platformId": false,
@@ -390,31 +427,18 @@
             "includeByName": {},
             "indexByName": {
               "Time": 0,
-              "Value": 14,
+              "Value": 2,
               "__name__": 1,
-              "baseMac": 5,
-              "chassisId": 8,
-              "chassisType": 9,
-              "f5_device_management_ip": 3,
-              "f5_device_name": 2,
-              "f5_endpoint": 4,
-              "failover_state": 10,
-              "marketingName": 6,
-              "partition": 11,
-              "platformId": 7,
-              "product": 12,
-              "version": 13
+              "dataType": 3,
+              "f5_module_license_state": 5,
+              "f5_module_name": 4,
+              "instance": 6,
+              "job": 7
             },
-            "renameByName": {}
-          }
-        },
-        {
-          "id": "reduce",
-          "options": {
-            "labelsToFields": false,
-            "reducers": [
-              "last"
-            ]
+            "renameByName": {
+              "f5_module_license_state": "License State",
+              "f5_module_name": "Module"
+            }
           }
         }
       ],
@@ -454,7 +478,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 3,
         "x": 15,
         "y": 1
@@ -528,7 +552,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 3,
         "x": 18,
         "y": 1
@@ -607,7 +631,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 3,
         "x": 21,
         "y": 1
@@ -691,6 +715,108 @@
     },
     {
       "datasource": {
+        "default": false,
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "Down"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "Up"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "transparent",
+                  "index": 2,
+                  "text": "None Configured"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "f5_system_failover_peer_active_state_ratio{job=\"$device_name\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{failover_peer_name}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Failover Peer",
+      "type": "stat"
+    },
+    {
+      "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -720,7 +846,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 3,
       "options": {
@@ -770,7 +896,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 10
       },
       "id": 8,
       "panels": [],
@@ -843,7 +969,7 @@
         "h": 6,
         "w": 7,
         "x": 0,
-        "y": 8
+        "y": 11
       },
       "id": 9,
       "options": {
@@ -916,7 +1042,7 @@
         "h": 6,
         "w": 5,
         "x": 7,
-        "y": 8
+        "y": 11
       },
       "id": 12,
       "options": {
@@ -1016,7 +1142,7 @@
         "h": 12,
         "w": 6,
         "x": 12,
-        "y": 8
+        "y": 11
       },
       "id": 10,
       "options": {
@@ -1120,7 +1246,7 @@
         "h": 12,
         "w": 6,
         "x": 18,
-        "y": 8
+        "y": 11
       },
       "id": 13,
       "options": {
@@ -1246,7 +1372,7 @@
         "h": 6,
         "w": 7,
         "x": 0,
-        "y": 14
+        "y": 17
       },
       "id": 11,
       "options": {
@@ -1319,7 +1445,7 @@
         "h": 6,
         "w": 5,
         "x": 7,
-        "y": 14
+        "y": 17
       },
       "id": 14,
       "options": {
@@ -1380,7 +1506,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 23
       },
       "id": 15,
       "panels": [],
@@ -1528,7 +1654,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 21
+        "y": 24
       },
       "id": 16,
       "options": {
@@ -1766,7 +1892,7 @@
         "h": 8,
         "w": 8,
         "x": 9,
-        "y": 21
+        "y": 24
       },
       "id": 17,
       "options": {
@@ -1885,7 +2011,7 @@
         "h": 8,
         "w": 7,
         "x": 17,
-        "y": 21
+        "y": 24
       },
       "id": 18,
       "options": {
@@ -1976,6 +2102,6 @@
   "timezone": "browser",
   "title": "Device Overview",
   "uid": "adpz4tutl28e8f",
-  "version": 4,
+  "version": 7,
   "weekStart": ""
 }
