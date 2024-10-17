@@ -755,12 +755,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "transparent",
                 "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
               }
             ]
           }
@@ -2102,6 +2098,6 @@
   "timezone": "browser",
   "title": "Device Overview",
   "uid": "adpz4tutl28e8f",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
