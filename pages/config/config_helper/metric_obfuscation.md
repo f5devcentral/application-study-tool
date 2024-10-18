@@ -1,7 +1,19 @@
+---
+layout: page
+title: Metric Obfuscation
+parent: Configuration Helper (Recommended)
+grandparent: Configuration
+nav_order: 4
+---
 # Metric Obfuscation
 
 Metric data can be obfuscated before sending to storage systems (local Prometheus, F5 Datafabric,
 or your Org metrics store) using the built-in functionality in the Opentelemetry Collector processors.
+
+
+{: .important }
+The config helper script must run after any changes to the default or device specific configs,
+and the Otel container restarted before changes will take effect.
 
 The Application Study Tool Opentelemetry Collector includes the following data processors which can
 be used to manipulate data before it's exported:
@@ -41,7 +53,7 @@ pipelines:
   metrics/f5-datafabric:
     # receivers list are generated via the config helper script
     # Adding attributes/mask-some-attributes to the list of enabled processors.
-    processors: [batch, interval/f5-datafabric, attributes/mask-some-attributes, attributes/f5-datafabric]
+    processors: [interval/f5-datafabric, attributes/mask-some-attributes, attributes/f5-datafabric, batch/f5-datafabric]
     exporters: [otlp/f5-datafabric, debug/bigip]
 ...
 ```

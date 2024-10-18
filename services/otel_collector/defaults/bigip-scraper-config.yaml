@@ -1,7 +1,9 @@
 receivers: ${file:/etc/otel-collector-config/receivers.yaml}
 
 processors:
-  batch:
+  batch/local:
+  batch/f5-datafabric:
+    send_batch_max_size: 8192
   # Only export data to f5 (if enabled) every 300s
   interval/f5-datafabric:
     interval: 300s

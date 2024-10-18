@@ -7,7 +7,11 @@ update a legacy configuration, see [pages/config_migration.md](pages/config_migr
 >
 > Before you start, make sure to backup the /config/big-ips.json file!
 
+
 ## Overview
+
+> See the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
+configuration, troubleshooting info, etc.
 
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
@@ -27,7 +31,15 @@ the Openetlemetry Collector can be configured to send data to existing productio
 
 ### Prerequisites
 
-docker (or compatible) - [Installation Instructions](https://docs.docker.com/engine/install/)
+[Git Client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+Docker (or compatible) container environment with compose.
+
+Installation Instructions:
+  * [General (docker engine)](https://docs.docker.com/engine/install/)
+  * [Ubuntu (docker engine)](https://docs.docker.com/engine/install/ubuntu/)
+  * [RHEL (docker engine)](https://docs.docker.com/engine/install/rhel/)
+  * [Podman](https://podman.io/docs/installation)
 
 ### Installation
 
@@ -206,9 +218,19 @@ as SENSOR_ID and SENSOR_SECRET_TOKEN (see [.env-example](./.env-example) for exa
 ## Run The Configuration Helper
 The config helper script can be run natively or via docker to merge the default and device
 level configs into the final OTEL Collector config from the project root directory as follows:
-```shell
+
+**Run With Docker**
+```bash
 # Run the configuration generator from the project root directory
-docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+# If `echo $PWD` doesn't give you the current directory on your system,
+# replace the '-v ${PWD}' section with '-v /path/to/your/directory'
+$ docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+```
+
+**Run With System Python**
+```bash
+$ pip install PyYAML==6.0.2
+$ python /app/src/config_helper.py --generate-config
 ```
 
 This will write 2 new files in the services/otel_collector directory:
