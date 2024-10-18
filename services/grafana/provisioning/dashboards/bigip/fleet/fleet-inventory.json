@@ -358,6 +358,7 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -430,49 +431,91 @@
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "f5_system_failover_peer_active_state_ratio",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
         }
       ],
       "title": "Inventory Detail",
       "transformations": [
         {
+          "id": "joinByField",
+          "options": {
+            "byField": "job",
+            "mode": "outer"
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Time": true,
+              "Time 1": true,
+              "Time 2": true,
               "Value": true,
+              "Value #A": true,
+              "Value #B": true,
               "__name__": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
               "dataType": true,
+              "dataType 1": true,
+              "dataType 2": true,
               "f5_endpoint": true,
+              "failover_peer_name": false,
               "instance": true,
+              "instance 1": true,
+              "instance 2": true,
               "job": true,
+              "job 1": true,
               "partition": true
             },
             "includeByName": {},
             "indexByName": {
-              "Time": 0,
-              "Value": 2,
-              "__name__": 1,
-              "dataType": 3,
-              "f5_instance_management_ip": 5,
-              "f5_system_baseMac": 7,
-              "f5_system_chassisType": 11,
-              "f5_system_marketing_name": 10,
-              "f5_system_partition": 12,
-              "failover_state": 13,
-              "instance": 14,
-              "job": 15,
-              "system_id": 6,
-              "system_name": 4,
-              "system_product_name": 9,
-              "system_version": 8
+              "Time 1": 12,
+              "Time 2": 17,
+              "Value #A": 16,
+              "Value #B": 21,
+              "__name__ 1": 13,
+              "__name__ 2": 18,
+              "dataType 1": 14,
+              "dataType 2": 19,
+              "f5_instance_management_ip": 1,
+              "f5_system_baseMac": 3,
+              "f5_system_chassisType": 7,
+              "f5_system_marketing_name": 6,
+              "f5_system_partition": 8,
+              "failover_peer_name": 9,
+              "failover_state": 10,
+              "instance 1": 15,
+              "instance 2": 20,
+              "job 1": 11,
+              "system_id": 2,
+              "system_name": 0,
+              "system_product_name": 5,
+              "system_version": 4
             },
             "renameByName": {
               "dataType": "",
+              "dataType 2": "",
               "f5_instance_management_ip": "Management IP",
               "f5_system_baseMac": "Base MAC",
               "f5_system_chassisType": "Chassis Type",
               "f5_system_marketing_name": "Product Type",
               "f5_system_partition": "Partition",
+              "failover_peer_name": "Failover Peer",
               "failover_state": "Failover State",
               "status": "Failover Status",
               "system_id": "System ID",
@@ -514,6 +557,6 @@
   "timezone": "browser",
   "title": "Fleet Inventory",
   "uid": "bdpz4za42wnb4a",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
