@@ -24,7 +24,8 @@ description: A tool for monitoring BigIP Devices with Grafana, Prometheus, and O
 
 # Build settings
 theme: just-the-docs
-url: https://f5devcentral.github.io/application-study-tool/
+url: https://f5devcentral.github.io
+baseurl: /application-study-tool/
 
 aux_links:
   AST Repository: https://github.com/f5devcentral/application-study-tool/
