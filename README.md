@@ -23,7 +23,7 @@ open source telemetry tools. The full installation includes:
 The Application Study Tool has everything needed to quickly get up and running with application insights at less than
 production levels of reliability. For production/operational use cases, you can build on the included components,
 accounting for things like high availability, enhanced security via e.g. Grafana OIDC integration, and similar. Alternatively,
-the Openetlemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
+the Opentelemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
 
 ![](./pages/assets/ui.gif)
 
