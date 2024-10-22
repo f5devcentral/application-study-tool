@@ -138,4 +138,4 @@ the 'BigIP Collector Stats' dashboard at the top level of the Dashboards section
 ## GTM and DNS Metrics Not Loading
 
 Metrics for DNS and GTM are disabled by default. See 
-[Configuration > Configuration Helper (Recommended) > Configure DNS & GTM]({{site.baseurl}}/config/config_helper/config_dns_gtm.html) for instructions to enable.
+[Configuration > Configuration Helper (Recommended) > Configure DNS & GTM]({{ site.url }}{{ site.baseurl }}config/config_helper/config_dns_gtm.html) for instructions to enable.

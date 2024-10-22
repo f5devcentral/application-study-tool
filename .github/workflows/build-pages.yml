@@ -1,0 +1,38 @@
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - development
+  workflow_dispatch:
+
+name: Pages-CI
+
+jobs:
+  validate:
+    name: Validate HTML
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ./pages
+          ruby-version: '3.3' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Cache HTMLProofer
+        id: cache-htmlproofer
+        uses: actions/cache@v3
+        with:
+          path: tmp/.htmlproofer
+          key: ${{ runner.os }}-htmlproofer
+      - name: Build Site
+        run: cd ./pages && bundle exec jekyll build
+      - name: Test with html-proofer
+        run: cd ./pages && bundle exec htmlproofer _site --ignore-urls "/github.com/,/web.archive.org/" --swap-urls '^/application-study-tool/:/'
+        env:
+          NOKOGIRI_USE_SYSTEM_LIBRARIES: true

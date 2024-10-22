@@ -16,14 +16,14 @@ configuration, troubleshooting info, etc.
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
 
-* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](pages/receiver_metrics.md).
+* Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](pages/components/otel_collector/receiver_metrics.md).
 * Prometheus timeseries database for storing and querying collected data.
 * Grafana Instance with pre-configured dashboards for quick insights at the device and "fleet" levels.
 
 The Application Study Tool has everything needed to quickly get up and running with application insights at less than
 production levels of reliability. For production/operational use cases, you can build on the included components,
 accounting for things like high availability, enhanced security via e.g. Grafana OIDC integration, and similar. Alternatively,
-the Openetlemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
+the Opentelemetry Collector can be configured to send data to existing production ops monitoring tools as desired.
 
 ![](./pages/assets/ui.gif)
 
@@ -163,8 +163,8 @@ BIGIP_PASSWORD_2=bar-foo123!
 ```
 
 The variable name (the part on the left of the equal sign) must match the configured
-value for the devices that use this password in config/ast_defaults.yaml or device specifc
-cofig in config/bigip_receivers.yaml. In the following example, bigip/1 uses BIGIP_PASSWORD_1
+value for the devices that use this password in config/ast_defaults.yaml or device specific
+config in config/bigip_receivers.yaml. In the following example, bigip/1 uses BIGIP_PASSWORD_1
 from  the defaults and bigip/2 uses BIGIP_PASSWORD_2 from the device settings:
 
 ```
@@ -236,7 +236,7 @@ $ python /app/src/config_helper.py --generate-config
 This will write 2 new files in the services/otel_collector directory:
 
 * `receivers.yaml` - The final list of scraper configs and their settings.
-* `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
+* `pipelines.yaml` - The final pipeline configs that map receivers to output destinations
 (prometheus, and optionally F5).
 
 ## Adding New Devices or Updating Configs
@@ -329,6 +329,20 @@ docker compose up
 The default Grafana user/pass is `admin/admin`, and can be accessed at
 `http://<hostname>:3000`.
 
+
+## Updating AST Versions
+Updating to a new release of the AST repo can be done with the following general process:
+
+1. Review the release notes for all intermediate versions and check for warnings about
+special instructions / breaking changes.
+2. Backup your ast_defaults.yaml and bigip_receivers.yaml files.
+3. Stash changes, update the repo state, and unstash changes as follows:
+```shell
+git stash
+git pull origin main
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.7.0)
+git stash pop
+```
 
 ## Support
 
