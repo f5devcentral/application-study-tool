@@ -11,7 +11,7 @@ nav_order: 2
 ## Background
 This instructions in this file will get a new installation up and running in as little as a few minutes.
 For more detailed information on AST config management options, see the
-[Configuration Management Overview]({{site.baseurl}}/config/) and related sections.
+[Configuration Management Overview]({{ site.url }}{{ site.baseurl }}config) and related sections.
 
 ### Prerequisites
 
@@ -131,7 +131,7 @@ BIGIP_PASSWORD_2=bar-foo123!
 ```
 
 The variable name (the part on the left of the equal sign) must match the configured
-value for the devices that use this password in config/ast_defaults.yaml or device specifc
+value for the devices that use this password in config/ast_defaults.yaml or device specific
 cofig in config/bigip_receivers.yaml. In the following example, bigip/1 uses BIGIP_PASSWORD_1
 from  the defaults and bigip/2 uses BIGIP_PASSWORD_2 from the device settings:
 
@@ -173,7 +173,7 @@ docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entryp
 This will write 2 new files in the services/otel_collector directory:
 
 * `receivers.yaml` - The final list of scraper configs and their settings.
-* `pipelines.yaml` - The final pipeline configs that map receievers to output destinations
+* `pipelines.yaml` - The final pipeline configs that map receivers to output destinations
 (prometheus).
 
 ### Configure CA File
@@ -229,3 +229,18 @@ docker compose up
 #### View The Dashboards
 The default Grafana user/pass is `admin/admin`, and can be accessed at
 `http://<hostname>:3000`.
+
+
+## Updating AST Versions
+Updating to a new release of the AST repo can be done with the following general process:
+
+1. Review the release notes for all intermediate versions and check for warnings about
+special instructions / breaking changes.
+2. Backup your ast_defaults.yaml and bigip_receivers.yaml files.
+3. Stash changes, update the repo state, and unstash changes as follows:
+```shell
+git stash
+git pull origin main
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.7.0)
+git stash pop
+```
