@@ -15,14 +15,14 @@ The file [/config/ast_defaults.yaml](https://github.com/f5devcentral/application
 contains global configuration settings that can be used to reduce the amount of boilerplate configuration
 required for each BigIP device to be monitored.
 
-Settings for each device are configured as described in [Configuration >	Configuration Helper (Recommended) > Device Configuration]({{ site.url }}{{ site.baseurl }}config/config_helper/config_receivers.html)
+Settings for each device are configured as described in [Configuration >	Configuration Helper (Recommended) > Device Configuration]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_receivers.html)
 
 {: .important }
 The config helper script must run after any changes to the default or device specific configs,
 and the Otel container restarted before changes will take effect.
 
 The config file appears as follows. Syntax for the bigip_receiver_defaults settings follow the spec laid 
-out in the [BigIP Receiver Readme]({{ site.url }}{{ site.baseurl }}components/otel_collector/receiver_readme.html) file.
+out in the [BigIP Receiver Readme]({{ site.url }}{{ site.baseurl }}/components/otel_collector/receiver_readme.html) file.
 
 Details for each section are provided below.
 

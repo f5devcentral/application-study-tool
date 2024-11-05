@@ -11,7 +11,7 @@ nav_order: 2
 ## Background
 This instructions in this file will get a new installation up and running in as little as a few minutes.
 For more detailed information on AST config management options, see the
-[Configuration Management Overview]({{ site.url }}{{ site.baseurl }}config) and related sections.
+[Configuration Management Overview]({{ site.url }}{{ site.baseurl }}/config) and related sections.
 
 ### Prerequisites
 

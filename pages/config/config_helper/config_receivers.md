@@ -17,7 +17,7 @@ The config helper script must run after any changes to the default or device spe
 and the otel container restarted before changes will take effect.
 
 The settings in this file are merged with the defaults outlined
-in [Configuration >	Configuration Helper (Recommended) > Default Configuration]({{ site.url }}{{ site.baseurl }}config/config_helper/config_defaults.html), with the more specific settings in this file taking precedence.
+in [Configuration >	Configuration Helper (Recommended) > Default Configuration]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_defaults.html), with the more specific settings in this file taking precedence.
 
 The following constraints apply:
 * There must be a top level entry for each BigIP Device you wish to monitor.
