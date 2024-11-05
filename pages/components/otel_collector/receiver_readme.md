@@ -95,4 +95,4 @@ TLS config is documented further under the [opentelemetry collector's configtls 
 
 ## Metrics
 
-Details about the metrics produced by this receiver can be found in [Receiver Metrics Info]({{ site.url }}{{ site.baseurl }}components/otel_collector/receiver_metrics.html)
+Details about the metrics produced by this receiver can be found in [Receiver Metrics Info]({{ site.url }}{{ site.baseurl }}/components/otel_collector/receiver_metrics.html)

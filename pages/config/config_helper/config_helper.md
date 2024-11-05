@@ -10,7 +10,7 @@ permalink: /config/config_helper
 # Managing AST Collector Configs With Config Helper
 
 This configuration section applies to the AST Opentelemetry Collector. For Grafana, Prometheus or other
-components, see the corresponding documentation in [> Components]({{ site.url }}{{ site.baseurl }}components)
+components, see the corresponding documentation in [> Components]({{ site.url }}{{ site.baseurl }}/components)
 
 ## Background
 AST includes a helper python script that can be used to streamline the management of the Opentelemetry
@@ -28,12 +28,12 @@ and the otel container restarted before changes will take effect.
 The default settings file reduces the amount of boilerplate that must be configured for each BigIP device
 to be monitored.
 
-* [Configuration >	Configuration Helper (Recommended) > Default Configuration]({{ site.url }}{{ site.baseurl }}config/config_helper/config_defaults.html)
+* [Configuration >	Configuration Helper (Recommended) > Default Configuration]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_defaults.html)
 
 Settings without a logical default (e.g. url of the bigIP device) or wishing to override the default can
 be set as described in:
 
-* [Configuration >	Configuration Helper (Recommended) > Device Configuration]({{ site.url }}{{ site.baseurl }}config/config_helper/config_receivers.html)
+* [Configuration >	Configuration Helper (Recommended) > Device Configuration]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_receivers.html)
 
 ## Run The Configuration Helper
 The config helper script can be run via docker (or natively if the system has python installed)
