@@ -3,7 +3,7 @@
 > 🚨🚨**Notice**🚨🚨
 > 
 > Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [pages/config_migration.md](pages/config_migration.md).
+update a legacy configuration, see [Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html).
 >
 > Before you start, make sure to backup the /config/big-ips.json file!
 
