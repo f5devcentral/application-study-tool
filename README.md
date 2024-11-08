@@ -68,7 +68,7 @@ docker-compose up
 ## Configuration
 
 For additional configuration management background, see
-[pages/config_management.md](pages/config_management.md).
+[AST Configuration Management Overview](https://f5devcentral.github.io/application-study-tool/config).
 The below assumes you're using the config_helper script for assisted management.
 
 
@@ -79,7 +79,7 @@ Application Study Tool config management relies on default configs in
 Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
 
 To update a legacy (pre v0.6.0) configuration, to the new scheme see
-[pages/config_migration.md](pages/config_migration.md)
+[Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html)
 
 ## Configure Default Device Settings
 
