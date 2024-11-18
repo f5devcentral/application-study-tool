@@ -1581,7 +1581,7 @@
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
-                "axisSoftMax": 1,
+                "axisSoftMax": 100,
                 "axisSoftMin": 0,
                 "barAlignment": 0,
                 "barWidthFactor": 0.6,
@@ -1623,7 +1623,7 @@
                   }
                 ]
               },
-              "unit": "percentunit"
+              "unit": "percent"
             },
             "overrides": []
           },
