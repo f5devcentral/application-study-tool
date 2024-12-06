@@ -191,7 +191,7 @@
           "refId": "A"
         }
       ],
-      "title": "Inventory Total By Device Type",
+      "title": "Inventory Total By Product Name",
       "type": "piechart"
     },
     {
@@ -249,14 +249,14 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_info) by (system_product_name)",
+          "expr": "sum(f5_system_info) by (f5_system_marketing_name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Inventory Total By Device Type",
+      "title": "Inventory Total By Porduct Type",
       "type": "piechart"
     },
     {
