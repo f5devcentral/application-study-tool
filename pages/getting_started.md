@@ -46,7 +46,7 @@ vi ./config/big_receivers.yaml
 # Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 # Start the tool
-docker-compose up
+docker compose up
 ```
 
 ## Configure Default Device Settings

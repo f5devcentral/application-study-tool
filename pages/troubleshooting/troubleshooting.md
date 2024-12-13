@@ -65,7 +65,7 @@ $ docker logs application-study-tool-otel-collector-1 >& otellogs.txt && gzip ot
 ### Stop and Start A Container
 Individual containers can be started and stopped using the `docker stop <container name or id>` command.
 This will cause the container to restart with any modifications to config files picked up (alternative
-to the `docker-compose down` and `docker-compose up` commands which restart all containers):
+to the `docker compose down` and `docker compose up` commands which restart all containers):
 
 ```shell
 $ docker stop fdbde8a3ee16
