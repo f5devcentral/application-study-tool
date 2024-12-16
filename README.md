@@ -62,7 +62,7 @@ vi ./config/bigip_receivers.yaml
 # Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
 # Start the tool
-docker-compose up
+docker compose up
 ```
 
 ## Configuration
@@ -99,7 +99,7 @@ bigip_receiver_defaults:
   # The data_types that should be enabled or disabled.
   # DNS and GTM are disabled by default and users can enable those modules
   # on all devices by setting the below to true.
-  # A full list of data_types is in pages/receiver_readme.md.
+  # A full list of data_types is at https://f5devcentral.github.io/application-study-tool/components/otel_collector/receiver_readme.html.
   data_types:
     f5.dns:
       enabled: false
