@@ -150,6 +150,27 @@ while [ -n "$BIG_IP_ADDR" ]; do # while not empty
   BIG_IP_NUM=$(($BIG_IP_NUM+1))
 done
 
+echo "Would you like to run the configuration generator now (y/n)?"
+read RUN_CONFIG_GEN
+if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
+  if [[ "$RUN_CONFIG_GEN" == Y* || "$RUN_CONFIG_GEN" == y* ]]; then
+    docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+  fi
+fi
 echo
 echo "Configuration complete."
 echo
+
+echo "Would you like to start the sevice now (y/n)?"
+read RUN_SERVICE
+if [ -n "$RUN_SERVICE" ]; then # not empty
+  if [[ "$RUN_SERVICE" == Y* || "$RUN_SERVICE" == y* ]]; then
+    # Quick check to ensure docker-compose file is present
+    if [ -f "./docker-compose.yaml" ]; then
+      docker compose up
+    else
+      echo "Error: docker-compose.yaml file does not exist in current directory. Cannot start docker compose service."
+      exit 1
+    fi
+  fi
+fi
