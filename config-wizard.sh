@@ -150,27 +150,84 @@ while [ -n "$BIG_IP_ADDR" ]; do # while not empty
   BIG_IP_NUM=$(($BIG_IP_NUM+1))
 done
 
+# File configuraiton is complete. Now prompt the user to run the Configuration Generator container.
+
+# CHECK FOR CONTAINER RUNTIME TOOLS AND PROMPT USER TO RUN THEM.
+CONTAINER_RUNTIME="#"
+echo "Checking for installation of Docker..."
+DOCKER=`command -v docker`
+if [ -n "$DOCKER" ]; then # not empty
+  echo "Docker is installed."
+  CONTAINER_RUNTIME="docker"
+else
+  PODMAN=`command -v podman`
+  if [ -n "$PODMAN" ]; then # not empty
+    echo "Podman is installed."
+    CONTAINER_RUNTIME="podman"
+  else
+    echo "Neither Docker nor Podman are installed. Please install one of these tools before continuing."
+    exit 1
+  fi
+fi
+
+# If we got to this point, either Docker or Podman is installed on the sytem.
 echo "Would you like to run the configuration generator now (y/n)?"
 read RUN_CONFIG_GEN
 if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
   if [[ "$RUN_CONFIG_GEN" == Y* ]] || [[ "$RUN_CONFIG_GEN" == y* ]]; then
-    docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+    $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+  else
+    echo "Configuration files have been created. The next step is to run the configuration gnerator with the following command:"
+    echo "  \$ $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config"
+    exit 1
   fi
 fi
 echo
 echo "Configuration complete."
 echo
 
+COMPOSE_TOOL="#"
+echo "Checking for installation of Docker Compose..."
+DOCKER_COMPOSE=`command -v docker-compose`
+
+if [ -n "$DOCKER_COMPOSE" ]; then # not empty
+  echo "Docker Compose is installed."
+  COMPOSE_TOOL="docker-compose"
+else # Docker Compose is not installed. Let's check Podman Compose.
+  PODMAN_COMPOSE=`command -v podman-compose`
+  if [ -n "$PODMAN_COMPOSE" ]; then # not empty
+    echo "Podman is installed."
+    COMPOSE_TOOL="podman-compose"
+  else
+    docker compose > /dev/null
+    if [[ "$?" == 0 ]]; then # command succeeded
+      echo "Docker Compose is installed."
+      COMPOSE_TOOL="docker compose"
+    else
+      echo "Neither Docker Compose nor Podman Compose are installed. Please install one of these tools in order to start the service."
+      exit 1
+    fi
+  fi
+fi
+
+# If we got to this point, either Docker Compose or Podman Compose is installed on the sytem.
 echo "Would you like to start the sevice now (y/n)?"
 read RUN_SERVICE
 if [ -n "$RUN_SERVICE" ]; then # not empty
   if [[ "$RUN_SERVICE" == Y* ]] || [[ "$RUN_SERVICE" == y* ]]; then
     # Quick check to ensure docker-compose file is present
     if [ -f "./docker-compose.yaml" ]; then
-      docker-compose up
+      # docker-compose up
+      $COMPOSE_TOOL up
     else
       echo "Error: docker-compose.yaml file does not exist in current directory. Cannot start docker compose service."
       exit 1
     fi
+  else
+    echo "Configuration is complete. The next step is to run the compose tool to start the service, using the following command:"
+    echo "  \$ $COMPOSE_TOOL up"
   fi
+ else
+  echo "Configuration is complete. The next step is to run the compose tool to start the service, using the following command:"
+  echo "  \$ $COMPOSE_TOOL up"
 fi
