@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This setting will cause this script to exit if any errors are encountered.
 set -e
@@ -86,11 +86,11 @@ fi
 
 # Ask user whether to validate certificates (skip when using self-signed certs)
 echo "Skip certificate verification (use self-signed certs) or verify CA certificates (requires CA file name)? "
-echo "Enter Y to use self-signed certificates, N to verify the certificates (or press Enter to leave as default): "
-read SKIP_CERT_VERIFY
+echo "Enter Y to use self-signed certificates, or N to verify the certificates (or press Enter to leave as default): "
+read DONT_VERIFY_CERTS
 
-if [ -n "$SKIP_CERT_VERIFY" ]; then # not empty
-  if [[ "$SKIP_CERT_VERIFY" == Y* || "$SKIP_CERT_VERIFY" == y* ]]; then
+if [ -n "$DONT_VERIFY_CERTS" ]; then # not empty
+  if [[ "$DONT_VERIFY_CERTS" == Y* ]] || [[ "$DONT_VERIFY_CERTS" == y* ]]; then
     # Don't verify certificates
     sed -i -e s/"insecure_skip_verify\:"/"insecure_skip_verify\: true #"/1 ./config/ast_defaults.yaml
     sed -i -e s/"ca_file\:"/"ca_file\: \"\" #"/1 ./config/ast_defaults.yaml
@@ -153,7 +153,7 @@ done
 echo "Would you like to run the configuration generator now (y/n)?"
 read RUN_CONFIG_GEN
 if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
-  if [[ "$RUN_CONFIG_GEN" == Y* || "$RUN_CONFIG_GEN" == y* ]]; then
+  if [[ "$RUN_CONFIG_GEN" == Y* ]] || [[ "$RUN_CONFIG_GEN" == y* ]]; then
     docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
   fi
 fi
@@ -164,10 +164,10 @@ echo
 echo "Would you like to start the sevice now (y/n)?"
 read RUN_SERVICE
 if [ -n "$RUN_SERVICE" ]; then # not empty
-  if [[ "$RUN_SERVICE" == Y* || "$RUN_SERVICE" == y* ]]; then
+  if [[ "$RUN_SERVICE" == Y* ]] || [[ "$RUN_SERVICE" == y* ]]; then
     # Quick check to ensure docker-compose file is present
     if [ -f "./docker-compose.yaml" ]; then
-      docker compose up
+      docker-compose up
     else
       echo "Error: docker-compose.yaml file does not exist in current directory. Cannot start docker compose service."
       exit 1
