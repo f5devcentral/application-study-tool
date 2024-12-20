@@ -113,6 +113,13 @@ fi
 
 echo "Enter the first BIG-IP management IP address (or press Enter to leave unchanged): "
 read BIG_IP_ADDR
+
+# Validate IPv4 IP address format
+while [[ -n "$BIG_IP_ADDR" ]] && ! [[ "${BIG_IP_ADDR}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; do
+  echo "Invalid IP address. Enter the first BIG-IP management IPv4 address in a.b.c.d format (or press Enter to stop adding devices): "
+  read BIG_IP_ADDR
+done;
+
 if [ -n "$BIG_IP_ADDR" ]; then # not empty
   # if file already exists, rename it and create a new file
   if [ -f "./config/bigip_receivers.yaml" ]; then
@@ -124,6 +131,7 @@ fi
 BIG_IP_NUM=1
 
 while [ -n "$BIG_IP_ADDR" ]; do # while not empty
+  echo "CONFIGURING BIG-IP $BIG_IP_NUM ($BIG_IP_ADDR)..."
   echo "Enter this BIG-IP's admin username (press Enter to use global default username and password): "
   read BIGIP_LOCAL_USER
   if [ -n "$BIGIP_LOCAL_USER" ]; then # not empty
@@ -147,6 +155,14 @@ while [ -n "$BIG_IP_ADDR" ]; do # while not empty
   fi
   echo "Enter the next BIG-IP management IP address (or press Enter to stop adding devices): "
   read BIG_IP_ADDR
+
+  # Validate IPv4 IP address format
+  while [[ -n "$BIG_IP_ADDR" ]] && ! [[ "${BIG_IP_ADDR}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; do
+    echo "Invalid IP address. Enter the first BIG-IP management IPv4 address in a.b.c.d format (or press Enter to stop adding devices): "
+    read BIG_IP_ADDR
+  done;
+
+  
   BIG_IP_NUM=$(($BIG_IP_NUM+1))
 done
 
