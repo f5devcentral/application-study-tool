@@ -150,7 +150,7 @@ while [ -n "$BIG_IP_ADDR" ]; do # while not empty
   BIG_IP_NUM=$(($BIG_IP_NUM+1))
 done
 
-# File configuraiton is complete. Now prompt the user to run the Configuration Generator container.
+# File configuration is complete. Now prompt the user to run the Configuration Generator container.
 
 # CHECK FOR CONTAINER RUNTIME TOOLS AND PROMPT USER TO RUN THEM.
 CONTAINER_RUNTIME="#"
@@ -198,15 +198,9 @@ else # Docker Compose is not installed. Let's check Podman Compose.
   if [ -n "$PODMAN_COMPOSE" ]; then # not empty
     echo "Podman is installed."
     COMPOSE_TOOL="podman-compose"
-  else
-    docker compose > /dev/null
-    if [[ "$?" == 0 ]]; then # command succeeded
-      echo "Docker Compose is installed."
-      COMPOSE_TOOL="docker compose"
-    else
-      echo "Neither Docker Compose nor Podman Compose are installed. Please install one of these tools in order to start the service."
-      exit 1
-    fi
+  else # neither is installed
+    echo "Neither Docker Compose nor Podman Compose are installed. Please install one of these tools in order to start the service."
+    exit 1
   fi
 fi
 
