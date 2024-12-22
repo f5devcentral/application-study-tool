@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# This setting will cause this script to exit if any errors are encountered.
-set -e
-
 echo
 echo "APPLICATION STUDY TOOL CONFIGURATION WIZARD"
-echo
+echo "Note: This script is meant to be run only at initial installation time. If you need to make changes afterwards or you make an error while inputting the required values, you will need to re-run the script and enter everything all over again. Alternatively, to just make one-off edits, you can manually edit the config files after the script exits."
 
 # THE FOLLOWING STEPS ARE PREREQS FOR THIS SCRIPT:
 # (Install Docker)
@@ -95,7 +92,7 @@ if [ -n "$DONT_VERIFY_CERTS" ]; then # not empty
     sed -i -e s/"insecure_skip_verify\:"/"insecure_skip_verify\: true #"/1 ./config/ast_defaults.yaml
     sed -i -e s/"ca_file\:"/"ca_file\: \"\" #"/1 ./config/ast_defaults.yaml
   else
-    # Verify certificates
+    # Yes, verify certificates
     echo "Enter the full pathname of the CA file: "
     read CA_FILE_PATH
     sed -i -e s/"insecure_skip_verify\:"/"insecure_skip_verify\: false #"/1 ./config/ast_defaults.yaml
@@ -105,6 +102,7 @@ if [ -n "$DONT_VERIFY_CERTS" ]; then # not empty
   fi
 fi
 
+# DO WE NEED THIS BLOCK?
 # CONFIGURE INDIVIDUAL BIG-IP ACCESS
 # Re-check that this file still exists in the current directory
 if [ ! -f "./.env.device-secrets" ]; then
