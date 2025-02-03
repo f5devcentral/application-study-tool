@@ -13,6 +13,8 @@ update a legacy configuration, see [Config Migration for Pre v0.6.0 Deployments]
 > See the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
 configuration, troubleshooting info, etc.
 
+> See the [F5 Application Study Tool Labs](https://clouddocs.f5.com/training/community/ast/html/) for an educational guided lab experience.
+
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
 
