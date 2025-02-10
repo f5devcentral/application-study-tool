@@ -809,6 +809,7 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -863,7 +864,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bps"
         },
         "overrides": []
       },
@@ -894,8 +896,8 @@
             "uid": "${datasource}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "sum by(job) (rate(f5_virtual_server_clientside_bytes_in_total{job=~\"$device_name\"}[$__rate_interval]))",
+          "editorMode": "code",
+          "expr": "8*sum by(job) (rate(f5_virtual_server_clientside_bytes_in_total{job=~\"$device_name\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -911,7 +913,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "-1*sum by(job) (rate(f5_virtual_server_clientside_bytes_out_total{job=~\"$device_name\"}[$__rate_interval]))",
+          "expr": "-8*sum by(job) (rate(f5_virtual_server_clientside_bytes_out_total{job=~\"$device_name\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -922,7 +924,7 @@
           "useBackend": false
         }
       ],
-      "title": "Client Side Total Bytes In/Out",
+      "title": "Client Side Data Rate In/Out",
       "type": "timeseries"
     }
   ],
@@ -979,6 +981,6 @@
   "timezone": "browser",
   "title": "Device Utilization",
   "uid": "aduca5eah75dsa",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

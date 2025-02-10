@@ -1727,7 +1727,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1782,7 +1783,7 @@
         },
         {
           "datasource": {
-            "name": "${datasource}",
+            "default": false,
             "type": "prometheus",
             "uid": "${datasource}"
           },
@@ -1829,7 +1830,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1837,7 +1839,7 @@
                   }
                 ]
               },
-              "unit": "binBps"
+              "unit": "bps"
             },
             "overrides": []
           },
@@ -1869,7 +1871,7 @@
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "rate(f5_virtual_server_clientside_bytes_in_total{job=\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+              "expr": "8 * rate(f5_virtual_server_clientside_bytes_in_total{job=\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -1884,7 +1886,7 @@
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "-1 * rate(f5_virtual_server_clientside_bytes_out_total{job=\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+              "expr": "-8 * rate(f5_virtual_server_clientside_bytes_out_total{job=\"$device_name\", f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
               "hide": false,
               "instant": false,
               "legendFormat": "{{f5_virtual_server_name}} - Out",
@@ -1943,7 +1945,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2072,7 +2075,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2174,7 +2178,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2276,7 +2281,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2393,7 +2399,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2511,7 +2518,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -3449,6 +3457,6 @@
   "timezone": "browser",
   "title": "Device Virtual Server",
   "uid": "ddq2jbj2v588wa",
-  "version": 10,
+  "version": 1,
   "weekStart": ""
 }
