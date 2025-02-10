@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.GITLAB_PASSWORD }}
       - name: Set variables
         run: |
-          VER=$(cat VERSION)
+          VER=$(cat COLLECTOR_VERSION)
           echo "VERSION=$VER" >> $GITHUB_ENV
       - name: Pull Gitlab Image
         run: docker pull registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }}
