@@ -80,8 +80,6 @@ Application Study Tool config management relies on default configs in
 
 Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
 
-To update a legacy (pre v0.6.0) configuration, to the new scheme see
-[Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html)
 
 ## Configure Default Device Settings
 
@@ -342,7 +340,7 @@ special instructions / breaking changes.
 ```shell
 git stash
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.7.0)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.0)
 git stash pop
 ```
 

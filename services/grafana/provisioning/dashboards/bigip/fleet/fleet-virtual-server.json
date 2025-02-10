@@ -694,7 +694,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bps"
         },
         "overrides": []
       },
@@ -725,7 +725,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(f5_virtual_server_clientside_bytes_in_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+          "expr": "8 * rate(f5_virtual_server_clientside_bytes_in_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -741,7 +741,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "-1 * rate(f5_virtual_server_clientside_bytes_out_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
+          "expr": "-8 * rate(f5_virtual_server_clientside_bytes_out_total{f5_virtual_server_name=~\"$virtual_server\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -1021,6 +1021,6 @@
   "timezone": "browser",
   "title": "Virtual Servers",
   "uid": "bdubjp6117lz4f",
-  "version": 6,
+  "version": 8,
   "weekStart": ""
 }
