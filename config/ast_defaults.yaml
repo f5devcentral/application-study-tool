@@ -16,7 +16,15 @@ bigip_receiver_defaults:
   # by setting the below to true. These will apply to all devices and may be better specified on the
   # per-reciever settings file below.
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
+      enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
       enabled: false
     f5.gtm:
       enabled: false

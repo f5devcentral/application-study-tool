@@ -60,6 +60,8 @@ Available data_types:
 f5.collector
 f5.license
 f5.module
+f5.nethsm
+f5.network
 f5.node
 f5.plane
 f5.policy.eviction
@@ -87,7 +89,11 @@ f5.ssl_certificate
 f5.system
 f5.virtual_server
 f5.policy.asm
+f5.apm                          ### DEFAULT DISABLE
+f5.cgnat                        ### DEFAULT DISABLE
 f5.dns                          ### DEFAULT DISABLE
+f5.dos                          ### DEFAULT DISABLE
+f5.firewall                     ### DEFAULT DISABLE
 f5.gtm                          ### DEFAULT DISABLE
 ```
 
