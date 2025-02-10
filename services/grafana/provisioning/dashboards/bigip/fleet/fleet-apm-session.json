@@ -25,6 +25,12 @@
       },
       {
         "type": "panel",
+        "id": "text",
+        "name": "Text",
+        "version": ""
+      },
+      {
+        "type": "panel",
         "id": "timeseries",
         "name": "Time series",
         "version": ""
@@ -54,7 +60,32 @@
     "panels": [
       {
         "datasource": {
-          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "APM Metrics are not enabled in the Opentelemtry Collector by default\n(due to the relatively large number of requests required to gather the data).\n\n\nFor data to populate in this dashboard, you need to enable them as follows (and then you might want\nto delete this panel):\n\n## Enable For All BigIPs\nYou can enable CGNAT metrics for all BigIPs by editing the\nconfig/ast_defaults.yaml file in the AST directory and setting\n\n```yaml\nbigip_receiver_defaults:\n...\n  data_types:\n...\n    f5.apm:\n      enabled: true\n```\n\n## Enable For Select BigIPs\nYou can enable CGNAT metrics for specific BigIPs by editing the\nconfig/bigip_receivers.yaml file and setting the flag for the\nspecific devices you need:\n\n```yaml\nbigip/1:\n  endpoint: https://10.0.0.1\n  data_types:\n    f5.apm:\n      enabled: true\n```",
+          "mode": "markdown"
+        },
+        "pluginVersion": "11.2.0",
+        "title": "Enabling APM Metrics",
+        "type": "text"
+      },
+      {
+        "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -117,7 +148,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 0
+          "y": 13
         },
         "id": 1,
         "options": {
@@ -155,7 +186,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -221,7 +251,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 0
+          "y": 13
         },
         "id": 2,
         "options": {
@@ -255,7 +285,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -318,7 +347,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 8
+          "y": 21
         },
         "id": 3,
         "options": {
@@ -352,7 +381,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -442,7 +470,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 8
+          "y": 21
         },
         "id": 4,
         "options": {

@@ -31,6 +31,12 @@
       },
       {
         "type": "panel",
+        "id": "text",
+        "name": "Text",
+        "version": ""
+      },
+      {
+        "type": "panel",
         "id": "timeseries",
         "name": "Time series",
         "version": ""
@@ -60,7 +66,32 @@
     "panels": [
       {
         "datasource": {
-          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 18,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "DoS Metrics are not enabled in the Opentelemtry Collector by default\n(due to the relatively large number of requests required to gather the data).\n\n\nFor data to populate in this dashboard, you need to enable them as follows (and then you might want\nto delete this panel):\n\n## Enable For All BigIPs\nYou can enable DoS metrics for all BigIPs by editing the\nconfig/ast_defaults.yaml file in the AST directory and setting\n\n```yaml\nbigip_receiver_defaults:\n...\n  data_types:\n...\n    f5.dos:\n      enabled: true\n```\n\n## Enable For Select BigIPs\nYou can enable DoS metrics for specific BigIPs by editing the\nconfig/bigip_receivers.yaml file and setting the flag for the\nspecific devices you need:\n\n```yaml\nbigip/1:\n  endpoint: https://10.0.0.1\n  data_types:\n    f5.dos:\n      enabled: true\n```",
+          "mode": "markdown"
+        },
+        "pluginVersion": "11.2.0",
+        "title": "Enabling DoS Metrics",
+        "type": "text"
+      },
+      {
+        "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -97,7 +128,7 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 0
+          "y": 13
         },
         "id": 1,
         "options": {
@@ -176,7 +207,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -240,7 +270,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 7
+          "y": 20
         },
         "id": 7,
         "options": {
@@ -278,7 +308,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -342,7 +371,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 7
+          "y": 20
         },
         "id": 8,
         "options": {
@@ -380,7 +409,6 @@
       },
       {
         "datasource": {
-          "name": "${datasource}",
           "type": "prometheus",
           "uid": "${datasource}"
         },
@@ -444,7 +472,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 7
+          "y": 20
         },
         "id": 9,
         "options": {
@@ -544,7 +572,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 15
+          "y": 28
         },
         "id": 3,
         "options": {
@@ -644,7 +672,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 15
+          "y": 28
         },
         "id": 2,
         "options": {
@@ -744,7 +772,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 15
+          "y": 28
         },
         "id": 10,
         "options": {
@@ -828,8 +856,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -844,7 +871,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 23
+          "y": 36
         },
         "id": 4,
         "options": {
@@ -929,8 +956,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -945,7 +971,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 23
+          "y": 36
         },
         "id": 12,
         "options": {
@@ -1030,8 +1056,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1046,7 +1071,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 23
+          "y": 36
         },
         "id": 13,
         "options": {
@@ -1131,8 +1156,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1147,7 +1171,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 31
+          "y": 44
         },
         "id": 14,
         "options": {
@@ -1232,8 +1256,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1248,7 +1271,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 31
+          "y": 44
         },
         "id": 15,
         "options": {
@@ -1333,8 +1356,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1349,7 +1371,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 31
+          "y": 44
         },
         "id": 16,
         "options": {
@@ -1434,8 +1456,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1450,7 +1471,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 39
+          "y": 52
         },
         "id": 6,
         "options": {
@@ -1534,8 +1555,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1550,7 +1570,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 39
+          "y": 52
         },
         "id": 17,
         "options": {
