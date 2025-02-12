@@ -31,7 +31,7 @@ The following settings are optional:
 - `collection_interval` (default = `10s`): This receiver collects metrics on an interval. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
 - `tls` (defaults defined [here](https://github.com/open-telemetry/opentelemetry-collector/blob/main/config/configtls/README.md)): TLS control. By default insecure settings are rejected and certificate verification is on.
 - `enable_http_client_metrics` (default = `false`): Enable collection of metrics for http client requests to the device.
-- `page_item_limit` (default = 100): The number of objects per page for paginated api requests
+- `page_item_limit` (default = 10000): The number of objects per page for paginated api requests (because bigip doesn't handle pagination as you might expect, its recommended not to adjust this lower)
 - `concurrent_workers` (default = 2): The number of concurrent API requests per receiver.
 - `data_types` (default: all enabled): This map allows you to enable / disable collection and sending of data by type. The list of available data types can be found in `./config.go`, in the DataTypesConfig struct definition.
 
