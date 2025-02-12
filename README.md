@@ -270,6 +270,14 @@ f5_policy_ip_intelligence_feed_list_count{}
 f5_policy_ip_intelligence_info{}
 f5_virtual_server_profile_client_ssl_secure_handshakes_total{}
 f5_policy_ip_intelligence_generation{}
+f5_pool_member_bytes_in_total{}
+f5_pool_member_bytes_out_total{}
+f5_pool_member_connection_count{}
+f5_pool_member_connections_total{}
+f5_pool_member_requests_total{}
+f5_pool_member_session_count{}
+f5_pool_member_packets_in_total{}
+f5_pool_member_packets_out_total{}
 f5_plane_cpu_utilization_5s{}
 ```
 
@@ -340,8 +348,12 @@ special instructions / breaking changes.
 ```shell
 git stash
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.0)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.1)
 git stash pop
+# <merge any conflicts with your local changes>
+# <re-run config scripts>
+docker compose down
+docker compose up
 ```
 
 ## Support
