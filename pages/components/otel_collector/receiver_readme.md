@@ -55,7 +55,7 @@ receivers:
         attribute_name: some_alternative_data_type_name
 ```
 
-Available data_types:
+### Available data_types:
 ```
 f5.collector
 f5.license

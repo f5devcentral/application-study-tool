@@ -178,7 +178,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "builder",
-            "expr": "sum by(f5_firewall_rule_action, f5_firewall_rule_stat_type) (rate(f5_firewall_rule_hits_total{job=~\"$device_name\", f5_firewall_rule_context_name=~\"$context\", f5_firewall_rule_name=~\"$rule_name\"}[$__interval]))",
+            "expr": "sum by(f5_firewall_rule_action, f5_firewall_rule_stat_type) (rate(f5_firewall_rule_hits_total{job=~\"$device_name\", f5_firewall_rule_context_name=~\"$context\", f5_firewall_rule_name=~\"$rule_name\"}[$__rate_interval]))",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
