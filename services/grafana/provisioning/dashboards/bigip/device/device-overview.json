@@ -209,7 +209,7 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
+        "w": 9,
         "x": 3,
         "y": 1
       },
@@ -359,8 +359,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
-        "x": 9,
+        "w": 8,
+        "x": 12,
         "y": 1
       },
       "id": 5,
@@ -454,210 +454,50 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
-          "max": 1,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 80
-              },
-              {
-                "color": "red",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 3,
-        "x": 15,
-        "y": 1
-      },
-      "id": 6,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(f5_system_cpu_utilization_ratio{job=\"$device_name\"}) / count(f5_system_cpu_utilization_ratio{job=\"$device_name\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Avg. CPU Utilization ",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 1,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 80
-              },
-              {
-                "color": "red",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 3,
-        "x": 18,
-        "y": 1
-      },
-      "id": 7,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "f5_system_memory_used_bytes{job=\"$device_name\", state=\"used\"} / ignoring(state) f5_system_memory_total_bytes{job=\"$device_name\"}",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Utilization",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "purple",
-            "mode": "palette-classic"
-          },
           "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
           },
           "mappings": [],
-          "unit": "decbytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "/.* Free/"
-            },
-            "properties": [
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "id": "color",
-                "value": {
-                  "mode": "fixed"
-                }
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
-        ]
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 21,
+        "w": 4,
+        "x": 20,
         "y": 1
       },
-      "id": 19,
+      "id": 26,
       "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "pieType": "donut",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
           "fields": "",
-          "values": false
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        }
+        "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -665,53 +505,54 @@
             "uid": "${datasource}"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
+          "editorMode": "builder",
           "exemplar": false,
-          "expr": "sort_desc(f5_system_logical_disk_application_used_bytes{job=\"$device_name\"})",
-          "format": "time_series",
+          "expr": "f5_module_provision_generation{level!=\"none\", job=~\"$device_name\"}",
+          "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
-          "legendFormat": "{{f5_system_logical_disk_name}} / {{f5_system_logical_disk_application_name}}",
+          "legendFormat": "__auto",
           "range": false,
           "refId": "A",
           "useBackend": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(f5_system_logical_disk_limit_bytes{job=\"$device_name\"}) by(f5_system_logical_disk_name) - sum(f5_system_logical_disk_usage_bytes{job=\"$device_name\", state=~\"free\"} * 1000000) by (f5_system_logical_disk_name) - sum(f5_system_logical_disk_application_used_bytes{job=\"$device_name\"}) by (f5_system_logical_disk_name)",
-          "fullMetaSearch": false,
-          "hide": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "{{f5_system_logical_disk_name}} / Other",
-          "range": false,
-          "refId": "B",
-          "useBackend": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "f5_system_logical_disk_usage_bytes{job=\"$device_name\", state=~\"free\"} * 1000000",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{f5_system_logical_disk_name}} / Free",
-          "range": false,
-          "refId": "C"
         }
       ],
-      "title": "Disk Use",
-      "type": "piechart"
+      "title": "Enabled Modules",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "dataType": true,
+              "f5_module_name": false,
+              "instance": true,
+              "job": true,
+              "level": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value": 7,
+              "__name__": 1,
+              "dataType": 2,
+              "f5_module_name": 4,
+              "instance": 6,
+              "job": 3,
+              "level": 5
+            },
+            "renameByName": {
+              "f5_module_name": "F5 Modules",
+              "job": "Big-IP Instance",
+              "level": "Level"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
@@ -1135,7 +976,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 6,
         "w": 6,
         "x": 12,
         "y": 11
@@ -1205,18 +1046,10 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "decimals": 2,
           "mappings": [],
-          "min": 0,
+          "max": 1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1234,28 +1067,31 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 4,
         "w": 6,
         "x": 18,
         "y": 11
       },
-      "id": 13,
+      "id": 6,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "show": false
+          "fields": "",
+          "values": false
         },
-        "showHeader": true
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
       "pluginVersion": "11.2.0",
       "targets": [
@@ -1264,42 +1100,91 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sort_desc(f5_system_process_memory_top_10_bytes{job=\"$device_name\"})",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
+          "expr": "sum(f5_system_cpu_utilization_ratio{job=\"$device_name\"}) / count(f5_system_cpu_utilization_ratio{job=\"$device_name\"})",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
-          "refId": "A",
-          "useBackend": false
+          "refId": "A"
         }
       ],
-      "title": "Top 10 Process By Memory",
-      "transformations": [
+      "title": "Avg. CPU Utilization ",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 15
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
         {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "__name__": true,
-              "dataType": true,
-              "instance": true,
-              "job": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Value": "Memory Used",
-              "process_name": "Process Name"
-            }
-          }
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "f5_system_memory_used_bytes{job=\"$device_name\", state=\"used\"} / ignoring(state) f5_system_memory_total_bytes{job=\"$device_name\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
         }
       ],
-      "type": "table"
+      "title": "Memory Utilization",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -1494,6 +1379,231 @@
         }
       ],
       "title": "SubSystem Memory Utilization",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "sort_desc(f5_system_process_memory_top_10_bytes{job=\"$device_name\"})",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Top 10 Process By Memory",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "dataType": true,
+              "instance": true,
+              "job": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value": "Memory Used",
+              "process_name": "Process Name"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.* Free/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 19
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sort_desc(f5_system_logical_disk_application_used_bytes{job=\"$device_name\"})",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "{{f5_system_logical_disk_name}} / {{f5_system_logical_disk_application_name}}",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(f5_system_logical_disk_limit_bytes{job=\"$device_name\"}) by(f5_system_logical_disk_name) - sum(f5_system_logical_disk_usage_bytes{job=\"$device_name\", state=~\"free\"} * 1000000) by (f5_system_logical_disk_name) - sum(f5_system_logical_disk_application_used_bytes{job=\"$device_name\"}) by (f5_system_logical_disk_name)",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "{{f5_system_logical_disk_name}} / Other",
+          "range": false,
+          "refId": "B",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "f5_system_logical_disk_usage_bytes{job=\"$device_name\", state=~\"free\"} * 1000000",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{f5_system_logical_disk_name}} / Free",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Disk Use",
       "type": "piechart"
     },
     {
@@ -2552,6 +2662,6 @@
   "timezone": "browser",
   "title": "Device Overview",
   "uid": "adpz4tutl28e8f",
-  "version": 6,
+  "version": 2,
   "weekStart": ""
 }
