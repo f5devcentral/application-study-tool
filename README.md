@@ -347,6 +347,7 @@ special instructions / breaking changes.
 3. Stash changes, update the repo state, and unstash changes as follows:
 ```shell
 git stash
+git fetch --tags
 git pull origin main
 git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.1)
 git stash pop
