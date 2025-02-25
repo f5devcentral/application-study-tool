@@ -11,6 +11,50 @@ permalink: /troubleshooting
 1. TOC
 {:toc}
 
+## Increase REST memory and timeouts to improve Big-IP REST experience <a name="1"></a>
+Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
+
+Increase internal timeouts from 60 to 600 seconds:
+```
+tmsh modify sys db icrd.timeout value 600
+tmsh modify sys db restjavad.timeout value 600
+tmsh modify sys db restnoded.timeout value 600
+```
+
+Increase RESTJAVAD memory (skip if experiencing memory pressure):
+```
+tmsh modify sys db provision.extramb value 2048
+tmsh modify sys db provision.tomcat.extramb value 256
+```
+
+Applies to TMOS 15.1.9 +:  
+```
+tmsh modify sys db provision.restjavad.extramb value 600
+```  
+
+save configuration:
+```
+tmsh save sys config
+```
+verify everything looks good:
+```
+tmsh list sys db icrd.timeout
+tmsh list sys db restjavad.timeout  
+tmsh list sys db restnoded.timeout 
+tmsh list sys db provision.extramb
+tmsh list sys db provision.tomcat.extramb
+tmsh list sys db provision.restjavad.extramb
+```
+
+then restart services:
+```
+tmsh restart sys service restjavad
+tmsh restart sys service restnoded
+```
+## Optimize REST Guidance and further examples
+> See the Repo located here [Megamattzilla](https://github.com/megamattzilla/as3-tips-and-tricks?tab=readme-ov-file#1-increase-rest-memory-and-timeouts-to-improve-big-ip-rest-experience-) for further information.
+___
+
 ## Useful Commands
 
 ### View Docker Container Status
