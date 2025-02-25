@@ -1,13 +1,5 @@
 # Application Study Tool
 
-> 🚨🚨**Notice**🚨🚨
-> 
-> Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html).
->
-> Before you start, make sure to backup the /config/big-ips.json file!
-
-
 ## Overview
 
 > See the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
@@ -355,6 +347,53 @@ git stash pop
 docker compose down
 docker compose up
 ```
+
+# Before we begin, let's review the tips and tricks for improving REST performance
+
+> See the Repo located here [Megamattzilla](https://github.com/megamattzilla/as3-tips-and-tricks?tab=readme-ov-file#1-increase-rest-memory-and-timeouts-to-improve-big-ip-rest-experience-) for detailed information.
+
+## #1 Increase REST memory and timeouts to improve Big-IP REST experience <a name="1"></a>
+Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
+
+Increase internal timeouts from 60 to 600 seconds:
+```
+tmsh modify sys db icrd.timeout value 600
+tmsh modify sys db restjavad.timeout value 600
+tmsh modify sys db restnoded.timeout value 600
+```
+
+Increase RESTJAVAD memory (skip if experiencing memory pressure):
+```
+tmsh modify sys db provision.extramb value 2048
+tmsh modify sys db provision.tomcat.extramb value 20
+```
+  
+After TMOS 15.1.9:  
+```
+tmsh modify sys db provision.restjavad.extramb value 600
+```  
+
+save configuration:
+```
+tmsh save sys config
+```
+verify everything looks good:
+```
+tmsh list sys db icrd.timeout
+tmsh list sys db restjavad.timeout  
+tmsh list sys db restnoded.timeout 
+tmsh list sys db provision.extramb
+tmsh list sys db provision.tomcat.extramb
+tmsh list sys db provision.restjavad.extramb
+```
+
+then restart services:
+```
+tmsh restart sys service restjavad
+tmsh restart sys service restnoded
+```
+
+___
 
 ## Support
 
