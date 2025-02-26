@@ -1,13 +1,5 @@
 # Application Study Tool
 
-> 🚨🚨**Notice**🚨🚨
-> 
-> Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html).
->
-> Before you start, make sure to backup the /config/big-ips.json file!
-
-
 ## Overview
 
 > See the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
@@ -347,6 +339,7 @@ special instructions / breaking changes.
 3. Stash changes, update the repo state, and unstash changes as follows:
 ```shell
 git stash
+git fetch --tags
 git pull origin main
 git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.1)
 git stash pop

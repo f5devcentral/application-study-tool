@@ -18,6 +18,7 @@ bigip_receiver_defaults:
   # The data_types that should be enabled or disabled. Default-disabled module users can enable those modules
   # by setting the below to true. These will apply to all devices and may be better specified on the
   # per-reciever settings file.
+  # The full list of available data types is [here](https://f5devcentral.github.io/application-study-tool/components/otel_collector/receiver_readme.html#available-data_types).
   data_types:
     f5.apm:
       enabled: false
