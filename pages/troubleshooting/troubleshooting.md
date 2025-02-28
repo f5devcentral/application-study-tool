@@ -11,7 +11,7 @@ permalink: /troubleshooting
 1. TOC
 {:toc}
 
-## Increase REST memory and timeouts to improve Big-IP REST experience <a name="1"></a>
+## Increase REST memory and timeouts to improve Big-IP REST experience
 Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
 
 Increase internal timeouts from 60 to 600 seconds:
