@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Configuration Helper (Recommended)
-parent: Configuration
+parent: Configuration Management
 nav_order: 3
 has_children: true
 permalink: /config/config_helper

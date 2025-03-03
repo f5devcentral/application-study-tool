@@ -2,7 +2,7 @@
 layout: page
 title: Via env File
 parent: Secrets Management
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 1
 ---
 

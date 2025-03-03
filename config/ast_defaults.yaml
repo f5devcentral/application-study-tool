@@ -32,6 +32,18 @@ bigip_receiver_defaults:
       enabled: false
     f5.gtm:
       enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
+      enabled: false
   # The TLS settings to use. Either a CA file must be specified or insecure_skip_verify
   # set to true (not recommended)
   tls:

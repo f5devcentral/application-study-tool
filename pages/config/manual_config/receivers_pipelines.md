@@ -2,7 +2,7 @@
 layout: page
 title: Receiver/Pipeline Config
 parent: Manual Configuration
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 1
 ---
 

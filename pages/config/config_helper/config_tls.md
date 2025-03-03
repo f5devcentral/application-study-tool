@@ -2,7 +2,7 @@
 layout: page
 title: Configure TLS
 parent: Configuration Helper (Recommended)
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 5
 ---
 

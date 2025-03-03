@@ -2,7 +2,7 @@
 layout: page
 title: Configure Export To F5 Datafabric
 parent: Configuration Helper (Recommended)
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 3
 ---
 
