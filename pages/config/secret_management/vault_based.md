@@ -2,7 +2,7 @@
 layout: page
 title: Via Vault Provider
 parent: Secrets Management
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 2
 ---
 

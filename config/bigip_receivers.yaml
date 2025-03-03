@@ -27,6 +27,18 @@ bigip/1:
     #   enabled: false
     # f5.gtm:
     #   enabled: false
+    # f5.policy.api_protection:
+    #   enabled: false
+    # f5.policy.asm:
+    #   enabled: false
+    # f5.policy.firewall:
+    #   enabled: false
+    # f5.policy.ip_intelligence:
+    #   enabled: false
+    # f5.policy.nat:
+    #   enabled: false
+    # f5.profile.dos:
+    #   enabled: false
   # tls:
   #   insecure_skip_verify: true
   #   ca_file:

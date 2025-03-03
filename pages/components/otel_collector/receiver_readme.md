@@ -65,15 +65,10 @@ f5.network
 f5.node
 f5.plane
 f5.policy.eviction
-f5.policy.firewall
-f5.policy.ip_intelligence
-f5.policy.api_protection
 f5.policy.bandwidth_control
-f5.policy.nat
 f5.pool
 f5.profile.client_ssl
 f5.profile.server_ssl
-f5.profile.dos
 f5.profile.fasthttp
 f5.profile.fastl4
 f5.profile.http
@@ -88,7 +83,12 @@ f5.rule
 f5.ssl_certificate
 f5.system
 f5.virtual_server
-f5.policy.asm
+f5.policy.api_protection        ### DEFAULT DISABLE
+f5.policy.asm                   ### DEFAULT DISABLE
+f5.policy.firewall              ### DEFAULT DISABLE
+f5.policy.ip_intelligence       ### DEFAULT DISABLE
+f5.policy.nat                   ### DEFAULT DISABLE
+f5.profile.dos                  ### DEFAULT DISABLE
 f5.apm                          ### DEFAULT DISABLE
 f5.cgnat                        ### DEFAULT DISABLE
 f5.dns                          ### DEFAULT DISABLE

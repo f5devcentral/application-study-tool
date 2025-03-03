@@ -2,7 +2,7 @@
 layout: page
 title: Configure DNS & GTM (Optional)
 parent: Configuration Helper (Recommended)
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 6
 ---
 
