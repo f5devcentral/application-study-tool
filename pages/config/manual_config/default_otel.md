@@ -2,7 +2,7 @@
 layout: page
 title: Std Otel Collector Config
 parent: Manual Configuration
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 2
 ---
 

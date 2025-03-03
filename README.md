@@ -89,13 +89,33 @@ bigip_receiver_defaults:
   # BIGIP_PASSWORD_1
   password: "${env:BIGIP_PASSWORD_1}"
   # The data_types that should be enabled or disabled.
-  # DNS and GTM are disabled by default and users can enable those modules
+  # These are disabled by default and users can enable those modules
   # on all devices by setting the below to true.
   # A full list of data_types is at https://f5devcentral.github.io/application-study-tool/components/otel_collector/receiver_readme.html.
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
       enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
+      enabled: false
     f5.gtm:
+      enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
       enabled: false
   # The TLS settings to use. Either a CA file must be specified or
   # insecure_skip_verify set to true (not recommended).
@@ -341,7 +361,7 @@ special instructions / breaking changes.
 git stash
 git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.8.1)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.0)
 git stash pop
 # <merge any conflicts with your local changes>
 # <re-run config scripts>
