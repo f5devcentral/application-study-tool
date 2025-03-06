@@ -1,17 +1,16 @@
 ---
 layout: page
-title: Configure DNS & GTM (Optional)
+title: Configure Optional Metrics
 parent: Configuration Helper (Recommended)
 grandparent: Configuration Management
 nav_order: 6
 ---
 
-## DNS and GTM Metrics
+## Optional Metrics
 
-By default, settings for the  collection of DNS and GTM metrics are disabled. They add a relatively large number of
+By default, settings for the  collection of some less common module metrics are disabled. They add a relatively large number of
 additional API calls, and since many devices may not have these features enabled, it was determined to
 make them 'opt in'.
-
 
 They can be enabled on a device by device basis (in `/config/bigip_receivers.yaml`),
 or globally (in `/config/ast_defaults.yaml`) as follows:
@@ -27,12 +26,32 @@ Edit the `/config/bigip_receivers.yaml` and add the following data_types configs
 bigip/1:
   endpoint: https://10.0.0.1
   # ...
-  # Enable DNS and/or GTM collection for this device:
+  # Enable optional modules by setting any to true
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
-      enabled: true
+      enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
+      enabled: false
     f5.gtm:
-      enabled: true
+      enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
+      enabled: false
   # ...
 ```
 
@@ -42,11 +61,31 @@ Edit the `/config/ast_defaults.yaml` and add the following data_types configs fo
 ```yaml
 bigip_receiver_defaults:
   # ...
-  # Enable DNS and/or GTM collection for all devices:
+  # Enable optional modules for all devices:
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
-      enabled: true
+      enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
+      enabled: false
     f5.gtm:
-      enabled: true
+      enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
+      enabled: false
   # ...
 ```
