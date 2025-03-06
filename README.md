@@ -295,6 +295,15 @@ f5_plane_cpu_utilization_5s{}
 
 This will impact data output in several dashboards/panels (denoted with description fields indicating as such).
 
+You can disable attempts to collect bash information with `enable_bash_collection: false` at the appropriate level (global or device).
+
+```yaml
+bigip/1:
+  endpoint: https://10.0.0.1
+  enable_bash_collection: false
+  #...
+```
+
 ### Configure CA File
 AST expects a valid TLS cert bundle unless `tls.insecure_skip_verify` is
 set to true for each device. In order to mount and use your CA file, you must
@@ -361,7 +370,7 @@ special instructions / breaking changes.
 git stash
 git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.0)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.1)
 git stash pop
 # <merge any conflicts with your local changes>
 # <re-run config scripts>
