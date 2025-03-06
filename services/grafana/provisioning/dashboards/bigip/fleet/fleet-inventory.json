@@ -385,14 +385,9 @@
           "mappings": [
             {
               "options": {
-                "0": {
-                  "color": "#434344",
-                  "index": 0,
-                  "text": "Disabled"
-                },
-                "1": {
+                "module-data": {
                   "color": "dark-green",
-                  "index": 1,
+                  "index": 0,
                   "text": "Enabled"
                 }
               },
@@ -405,10 +400,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 1
               }
             ]
           }
@@ -476,7 +467,7 @@
             "columnField": "f5_module_name",
             "emptyValue": "zero",
             "rowField": "job",
-            "valueField": "Value"
+            "valueField": "dataType"
           }
         },
         {
@@ -668,19 +659,22 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {},
+        "hide": 0,
         "includeAll": false,
         "label": "Prometheus",
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "type": "datasource"
       }
     ]
@@ -693,6 +687,6 @@
   "timezone": "browser",
   "title": "Fleet Inventory",
   "uid": "bdpz4za42wnb4a",
-  "version": 2,
+  "version": 9,
   "weekStart": ""
 }
