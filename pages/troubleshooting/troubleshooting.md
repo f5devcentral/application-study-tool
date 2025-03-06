@@ -179,7 +179,16 @@ hovering) and selecting 'Inspect > Query'
 * Are any queries to the BigIP timing or erroring out? Check the otel collector logs (`docker ps`) and
 the 'BigIP Collector Stats' dashboard at the top level of the Dashboards section in Grafana 
 
-## GTM and DNS Metrics Not Loading
+## GTM, DNS, ASM, APM, Firewall, NAT Metrics Not Loading
 
-Metrics for DNS and GTM are disabled by default. See 
+Metrics for GTM, DNS, ASM, APM, Firewall, NAT are disabled by default. See 
 [Configuration > Configuration Helper (Recommended) > Configure DNS & GTM]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_dns_gtm.html) for instructions to enable.
+
+## Max API Tokens Reached For User
+
+Several BigIP Bugs have been identified which can result in maximum tokens issued errors:
+
+* [ID1787517](https://cdn.f5.com/product/bugtracker/ID1787517.html)
+* [ID1103369](https://cdn.f5.com/product/bugtracker/ID1103369.html)
+
+v0.9.0 should prevent issues in ID1787517 from occuring on most systems. ID1103369 includes workaround steps for user encountering that issue.
