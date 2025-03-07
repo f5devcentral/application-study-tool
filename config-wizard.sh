@@ -189,10 +189,17 @@ echo "Would you like to run the configuration generator now (y/n)?"
 read RUN_CONFIG_GEN
 if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
   if [[ "$RUN_CONFIG_GEN" == Y* ]] || [[ "$RUN_CONFIG_GEN" == y* ]]; then
-    $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+    # Test to see if sudo is required before docker/podman command
+    $CONTAINER_RUNTIME version
+    if [[ "$?" == 1 ]]; then # Previous command failed
+      SUDO_REQUIRED=sudo
+      # CONTAINER_RUNTIME="$SUDO_REQUIRED $CONTAINER_RUNTIME"
+    else SUDO_REQUIRED=""
+    fi
+    $SUDO_REQUIRED $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
   else
     echo "Configuration files have been created. The next step is to run the configuration gnerator with the following command:"
-    echo "  \$ $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config"
+    echo "  \$ $SUDO_REQUIRED $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config"
     exit 1
   fi
 fi
@@ -226,16 +233,16 @@ if [ -n "$RUN_SERVICE" ]; then # not empty
     # Quick check to ensure docker-compose file is present
     if [ -f "./docker-compose.yaml" ]; then
       # docker-compose up
-      $COMPOSE_TOOL up
+      $SUDO_REQUIRED $COMPOSE_TOOL up
     else
       echo "Error: docker-compose.yaml file does not exist in current directory. Cannot start docker compose service."
       exit 1
     fi
   else
     echo "Configuration is complete. The next step is to run the compose tool to start the service, using the following command:"
-    echo "  \$ $COMPOSE_TOOL up"
+    echo "  \$ $SUDO_REQUIRED $COMPOSE_TOOL up"
   fi
- else
+else
   echo "Configuration is complete. The next step is to run the compose tool to start the service, using the following command:"
-  echo "  \$ $COMPOSE_TOOL up"
+  echo "  \$ $SUDO_REQUIRED $COMPOSE_TOOL up"
 fi
