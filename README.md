@@ -353,6 +353,11 @@ Once the above configurations have been made, the tool can be started with:
 ```
 docker compose up
 ```
+Note: This command requires your terminal session remain open. When you exit the shell, the Application Study Tool also exits.
+If you want the tool to survive closing your terminal session, you can use "nohup".
+```
+nohup bash -c "docker compose up" &
+```
 
 #### View The Dashboards
 The default Grafana user/pass is `admin/admin`, and can be accessed at
