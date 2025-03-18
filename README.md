@@ -55,7 +55,7 @@ vi ./config/ast_defaults.yaml
 vi ./config/bigip_receivers.yaml
 # Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
-# Start the tool
+# Start the tool (use `docker compose up -d` to start in background mode)
 docker compose up
 ```
 
@@ -350,7 +350,8 @@ cp .env-example .env
 ### Run Application Study Tool
 Once the above configurations have been made, the tool can be started with:
 
-```
+```shell
+# `docker compose up -d` to start in background mode
 docker compose up
 ```
 
@@ -370,11 +371,12 @@ special instructions / breaking changes.
 git stash
 git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.1)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.2)
 git stash pop
 # <merge any conflicts with your local changes>
 # <re-run config scripts>
 docker compose down
+# `docker compose up -d` to start in background mode
 docker compose up
 ```
 
