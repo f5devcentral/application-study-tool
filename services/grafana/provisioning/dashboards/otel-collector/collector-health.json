@@ -2268,7 +2268,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "max(otelcol_process_uptime${suffix}{service_instance_id=~\".*\",job=\"$job\"}) by (service_instance_id)",
+          "expr": "max(otelcol_process_uptime_seconds${suffix}{service_instance_id=~\".*\",job=\"$job\"}) by (service_instance_id)",
           "format": "time_series",
           "hide": false,
           "interval": "$minstep",
@@ -2347,7 +2347,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max(otelcol_process_uptime${suffix}{service_instance_id=~\".*\",job=\"$job\"}) by (service_instance_id,service_name,service_version)",
+          "expr": "max(otelcol_process_uptime_seconds${suffix}{job=\"$job\"}) by (instance, job)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3743,7 +3743,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(otelcol_process_memory_rss,job)",
+        "definition": "label_values(otelcol_process_memory_rss_bytes,job)",
         "hide": 0,
         "includeAll": false,
         "label": "Job",
@@ -3752,7 +3752,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(otelcol_process_memory_rss,job)",
+          "query": "label_values(otelcol_process_memory_rss_bytes,job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3958,7 +3958,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "query_result({__name__=~\"otelcol_process_uptime.+\",job=\"$job\"})",
+        "definition": "query_result({__name__=~\"otelcol_process_uptime_seconds.+\",job=\"$job\"})",
         "description": "Some newer prometheusremotewrite exporter versions/configurations add _total suffix, so this hidden variable detects if _total suffix should be used or not",
         "hide": 2,
         "includeAll": false,
@@ -3968,11 +3968,11 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result({__name__=~\"otelcol_process_uptime.+\",job=\"$job\"})",
+          "query": "query_result({__name__=~\"otelcol_process_uptime_seconds.+\",job=\"$job\"})",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/otelcol_process_uptime(.*){.*/",
+        "regex": "/otelcol_process_uptime_seconds(.*){.*/",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
