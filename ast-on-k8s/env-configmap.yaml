@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  GF_SECURITY_ADMIN_PASSWORD: admin
+  GF_SECURITY_ADMIN_USER: admin
+  SENSOR_ID: YOUR_ID
+  SENSOR_SECRET_TOKEN: YOUR_TOKEN
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: grafana-env
+  name: env
