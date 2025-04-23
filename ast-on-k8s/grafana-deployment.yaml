@@ -55,8 +55,33 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: datasources-conf
+            - mountPath: /etc/grafana/provisioning/dashboards
+              name: dashboards-conf
+            - mountPath: /etc/grafana/provisioning/dashboards/bigip/device
+              name: bigip-device-conf
+            # - mountPath: /etc/grafana/provisioning/dashboards/bigip/fleet
+            #   name: bigip-fleet-conf
+            # - mountPath: /etc/grafana/provisioning/dashboards/bigip/profile
+            #   name: bigip-profile-conf
       restartPolicy: Always
       volumes:
         - name: grafana
           persistentVolumeClaim:
             claimName: grafana
+        - name: datasources-conf
+          configMap:
+            name: datasources-config
+        - name: dashboards-conf
+          configMap:
+            name: dashboards-config
+        - name: bigip-device-conf
+          configMap:
+            name: bigip-device-config
+        - name: bigip-fleet-conf
+          configMap:
+            name: bigip-fleet-config
+        - name: bigip-profile-conf
+          configMap:
+            name: bigip-profile-config
