@@ -61,10 +61,12 @@ spec:
               name: dashboards-conf
             - mountPath: /etc/grafana/provisioning/dashboards/bigip/device
               name: bigip-device-conf
-            # - mountPath: /etc/grafana/provisioning/dashboards/bigip/fleet
-            #   name: bigip-fleet-conf
-            # - mountPath: /etc/grafana/provisioning/dashboards/bigip/profile
-            #   name: bigip-profile-conf
+            - mountPath: /etc/grafana/provisioning/dashboards/bigip/fleet
+              name: bigip-fleet-conf
+            - mountPath: /etc/grafana/provisioning/dashboards/bigip/profile
+              name: bigip-profile-conf
+            - mountPath: /etc/grafana/provisioning/dashboards/otel-collector
+              name: otel-collector-conf
       restartPolicy: Always
       volumes:
         - name: grafana
@@ -85,3 +87,6 @@ spec:
         - name: bigip-profile-conf
           configMap:
             name: bigip-profile-config
+        - name: otel-collector-conf
+          configMap:
+            name: otel-collector-config
