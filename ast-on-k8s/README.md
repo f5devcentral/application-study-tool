@@ -1,4 +1,6 @@
-# This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster
+# Running the Application Study Tool in Kubernetes
+
+This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster
 
 You will also need to modify the following files at minimum.
 - env-configmap.yaml:
