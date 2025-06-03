@@ -1,10 +1,6 @@
 # Running the Application Study Tool in Kubernetes
 
 This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster.
-I used Kompose (https://kompose.io/) to create the initial YAML files, but needed to make changes for this to actually work in a production-grade Kubernetes cluster:
-- Added permissions
-- Created the needed configmaps and secrets from the config files used by the Docker Compose version of AST.
-- Modifying some of the mount paths to work in a Kubernetes cluster
 
 To clone only this directory (./ast-on-k8s), where the Kubernetes manifest files are located, follow these steps:
 ```
@@ -38,7 +34,6 @@ kubectl get pods
 ```
 You should see output similar to the following:
 ```
-$ kubectl get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 grafana-54c8bbb46b-kf8fv          1/1     Running   0          2m14s
 otel-collector-5b87d546b6-rnkml   1/1     Running   0          2m13s
@@ -46,16 +41,16 @@ prometheus-69cbc96779-vcrhz       1/1     Running   0          2m13s
 ```
 
 Note that this creates and runs the Application Study Tool in a Kubernetes environment and includes the NodePort services for Grafana and Prometheus for external access.
-Depending on your connection to the cluster and connectivity requirements, a NodePort might be sufficient. However, most Internet-facing applications use a more robust ingress solution, such as a cloud loadbalancer or an F5 BIG-IP with CIS.
+Depending on your connection to the cluster and connectivity requirements, a NodePort might be sufficient. However, most Internet-facing applications use a more robust ingress solution, such as a cloud loadbalancer or an F5 BIG-IP with CIS (see [F5 Container Ingress Services](https://clouddocs.f5.com/containers/latest/))
 The ./extras directory contains example manifest files for a loadbalancer config in AKS.
 
-In the meantime, you can test that everything is running correctly by accessing Grafana though the NodePort service. First, get the NodePort port number with the following command:
+In the meantime, you can test that everything is running correctly by accessing Grafana though the NodePort service. You will need connectivity between your web browser and one of the worker nodes.
+First, get the NodePort port number with the following command:
 ```
 kubectl get svc
 ```
 You should see output similar to the following:
 ```
-$ kubectl get svc
 NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                            PORT(S)          AGE
 graf-service   NodePort       192.168.1.188   <none>                                 3000:31034/TCP   96m
 grafana        ClusterIP      192.168.1.18    <none>                                 3000/TCP         96m
@@ -64,8 +59,14 @@ openshift      ExternalName   <none>          kubernetes.default.svc.cluster.loc
 prom-service   NodePort       192.168.1.101   <none>                                 9090:32300/TCP   96m
 prometheus     ClusterIP      192.168.1.221   <none>                                 9090/TCP         96m
 ```
+In the resulting output, find the graf-service service, and note the port that 3000 is bound to. In the above example, this is port 31034. This is the NodePort port. Now, open a web browser and browse to one of the IP addresses of a worker node (this is not the same as a Cluster-IP address and will not appear in the above output) at the NodePort port. Example: 10.1.1.1:31034.
+If everything is working correctly and you have network connectivity to the worker node and the NodePort port, you should now see the Grafana dashboard.
+You can follow the same steps to access the Prometheus UI, which can be accessed over the bound port for the prom-service NodePort service (32300 in the above example).
 
+Notes:
 So far, this has been tested on the following platforms:
 - Azure Kubernetes Services (AKS)
 - F5 Distributed Cloud vK8s (with some additional configuration - docs coming soon).
 - RedHat OpenShift
+
+This collection was created by first leveraging [Kompose](https://kompose.io/) to generate the initial YAML files from the Application Study Tool Docker Compose file, followed by a series of changes needed to get it to work in a production-grade Kubernetes cluster. (More information on that coming soon.)
