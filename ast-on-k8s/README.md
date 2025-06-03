@@ -1,16 +1,19 @@
 # Running the Application Study Tool in Kubernetes
 
-This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster
+This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster.
+I used Kompose (https://kompose.io/) to create the initial YAML files, but needed to make changes for this to actually work in a production-grade Kubernetes cluster:
+- Added permissions
+- Created the needed configmaps and secrets
 
 To just clone this directory (./ast-on-k8s), where the Kubernetes manifest files are located, you can follow these steps:
 ```
-$ mkdir ast-on-k8s 
-$ cd ast-on-k8s 
-$ git init 
-$ git remote add -f origin https://github.com/javajason/ast-config-wizard 
-$ git config core.sparseCheckout true 
-$ echo “ast-on-k8s/“ >> .git/info/sparse-checkout 
-$ git pull origin main 
+mkdir ast-on-k8s 
+cd ast-on-k8s 
+git init 
+git remote add -f origin https://github.com/javajason/ast-config-wizard 
+git config core.sparseCheckout true 
+echo “ast-on-k8s/“ >> .git/info/sparse-checkout 
+git pull origin main 
 ```
 
 You will also need to modify the following files, at minimum.
@@ -25,6 +28,23 @@ You will also need to modify the following files, at minimum.
 
 Other files in this directory can also be modified for additional customization. See the original repo (https://github.com/f5devcentral/application-study-tool) for specific customization guidance.
 
+Deploy the AST application on Kubernetes using the following command. This requires the _kubectl_ client to be installed ahead of time and configured to connect and authenticate with your Kubernetes cluster.
+```
+kubectl create -f .
+```
+
+To verify AST has been successfully deployed, run the following command:
+```
+kubectl get pods
+```
+You should see output similar to the following:
+```
+$ kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+grafana-54c8bbb46b-kf8fv          1/1     Running   0          2m14s
+otel-collector-5b87d546b6-rnkml   1/1     Running   0          2m13s
+prometheus-69cbc96779-vcrhz       1/1     Running   0          2m13s
+```
 
 So far, it has been tested on the following platforms:
 - Azure Kubernetes Services (AKS)
