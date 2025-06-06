@@ -4,7 +4,7 @@ metadata:
   name: graf-lb-service
 spec:
   selector:
-    io.kompose.service: grafana
+    io.ast.service: grafana
   ports:
     - protocol: TCP
       port: 3000
@@ -22,7 +22,7 @@ metadata:
   name: prom-lb-service
 spec:
   selector:
-    io.kompose.service: prometheus
+    io.ast.service: prometheus
   ports:
     - protocol: TCP
       port: 9090
