@@ -18,5 +18,5 @@ metadata:
   annotations:
     use-subpath: "true"
   labels:
-    io.kompose.service: prometheus
+    io.ast.service: prometheus
   name: prometheus-cm0
