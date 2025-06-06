@@ -7,5 +7,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    io.kompose.service: grafana-env
+    io.ast.service: grafana-env
   name: env
