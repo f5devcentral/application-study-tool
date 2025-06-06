@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.kompose.service: grafana
+    io.ast.service: grafana
   name: grafana
 spec:
   accessModes:
