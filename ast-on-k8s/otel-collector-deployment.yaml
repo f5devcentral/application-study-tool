@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: otel-collector
+      io.ast.service: otel-collector
   strategy:
     type: Recreate
   template:
