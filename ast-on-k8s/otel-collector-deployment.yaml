@@ -1,11 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml
-    kompose.version: 1.34.0 (cbf2835db)
   labels:
-    io.kompose.service: otel-collector
+    io.ast.service: otel-collector
   name: otel-collector
 spec:
   replicas: 1
@@ -16,11 +13,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -f docker-compose.yaml
-        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        io.kompose.service: otel-collector
+        io.ast.service: otel-collector
     spec:
       securityContext:
           runAsUser: 0
