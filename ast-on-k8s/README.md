@@ -9,6 +9,7 @@ git clone -n --depth=1 --filter=tree:0 https://github.com/javajason/ast-config-w
 cd ast-config-wizard
 git sparse-checkout set --no-cone /ast-on-k8s
 git checkout
+cd ast-on-k8s
 ```
 
 You will also need to modify the following files, at minimum.
@@ -72,6 +73,7 @@ You can follow the same steps to access the Prometheus UI, which can be accessed
 Notes:
 As of this writing, this deployment has been tested on the following platforms:
 - Azure Kubernetes Services (AKS)
+- Google Kubernetes Engine (GKE)
 - F5 Distributed Cloud vK8s (with some additional configuration - docs coming soon).
 - RedHat OpenShift
 - K3s
