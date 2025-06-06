@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    io.kompose.service: grafana
+    io.ast.service: grafana
   ports:
     - port: 3000
       # By default and for convenience, the `targetPort` is set to
@@ -19,7 +19,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    io.kompose.service: prometheus
+    io.ast.service: prometheus
   ports:
     - port: 9090
       # By default and for convenience, the `targetPort` is set to
