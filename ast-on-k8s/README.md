@@ -24,7 +24,23 @@ You will also need to modify the following files, at minimum.
   This file has two environment variables that represent BIG-IP passwords, BIGIP_PASSWORD_1 and BIGIP_PASSWORD_2. If you have more than two BIG-IP passwords, you will need to add them here.
 - rec-pipe-configmap.yaml
   
-  This is the equivalent of the services/otel_collector/receivers.yaml file. You will need to list all BIG-IPs to be monitored, along with their settings, in this file. You will also need to reference the BIG-IPs (i.e., "bigip/1", "bigip/2", etc.) in the receivers subsection under pipelines.yaml section (also in this file).
+  This is the equivalent of the services/otel_collector/receivers.yaml file. You will need to list all BIG-IPs to be monitored, along with their settings, in this file.
+
+  You will also need to ensure these reference are included in the list of BIG-IPs (i.e., "bigip/1", "bigip/2", etc.) in the receivers subsection under pipelines.yaml section (also in this file). The pipelines.yaml section of this file will look like the following:
+```
+  pipelines.yaml: |
+    metrics/local:
+      exporters:
+      - otlphttp/metrics-local
+      - debug/bigip
+      processors:
+      - batch/local
+      receivers:
+      - bigip/1
+      - bigip/2
+      - bigip/3
+      ...
+```
 
 Other files in this directory can also be modified for additional customization. See the original repo (https://github.com/f5devcentral/application-study-tool) for specific customization guidance.
 
