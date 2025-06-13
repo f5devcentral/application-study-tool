@@ -24,9 +24,39 @@ You will also need to modify the following files, at minimum.
   This file has two environment variables that represent BIG-IP passwords, BIGIP_PASSWORD_1 and BIGIP_PASSWORD_2. If you have more than two BIG-IP passwords, you will need to add them here.
 - rec-pipe-configmap.yaml
   
-  This is the equivalent of the services/otel_collector/receivers.yaml file. You will need to list all BIG-IPs to be monitored, along with their settings, in this file.
+  This is the equivalent of the services/otel_collector/receivers.yaml file. You will need to list all BIG-IPs to be monitored, along with their settings, in this file (within the "receivers.yaml" section). The following is an example that shows how to include two BIG-IP devices. (Additional devices would be added to the end as bigip/3, bigip/4, etc.)
 
-  You will also need to ensure these reference are included in the list of BIG-IPs (i.e., "bigip/1", "bigip/2", etc.) in the receivers subsection under pipelines.yaml section (also in this file). The pipelines.yaml section of this file will look like the following:
+```
+  receivers.yaml: |
+    bigip/1:
+      collection_interval: 60s
+      data_types:
+        f5.apm:
+          enabled: true
+        ...
+      endpoint: https://10.1.1.5
+      password: ${env:BIGIP_PASSWORD_1}
+      timeout: 60s
+      tls:
+        ca_file: ''
+        insecure_skip_verify: true
+      username: admin
+    bigip/2:
+      collection_interval: 60s
+      data_types:
+        f5.apm:
+          enabled: false
+        ...
+      endpoint: https://10.1.1.15
+      password: ${env:BIGIP_PASSWORD_1}
+      timeout: 60s
+      tls:
+        ca_file: ''
+        insecure_skip_verify: true
+      username: admin
+  ```
+
+  You will also need to ensure reference to these devices are included in the list of BIG-IPs (i.e., "bigip/1", "bigip/2", etc.) in the receivers subsection under "pipelines.yaml" section (also in this file). The "pipelines.yaml" section of this file will look like the following:
 ```
   pipelines.yaml: |
     metrics/local:
