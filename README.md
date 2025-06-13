@@ -3,7 +3,7 @@
 ## Overview
 
 > Prior to installation, please see the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
-configuration, troubleshooting (REST changes) info, etc.
+configuration, troubleshooting (REST changes, HIGH CPU on control plane) info, etc.
 
 > See the [F5 Application Study Tool Labs](https://clouddocs.f5.com/training/community/ast/html/) for an educational guided lab experience.
 > 
