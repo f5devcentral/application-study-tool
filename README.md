@@ -6,6 +6,10 @@
 configuration, troubleshooting (REST changes) info, etc.
 
 > See the [F5 Application Study Tool Labs](https://clouddocs.f5.com/training/community/ast/html/) for an educational guided lab experience.
+> 
+> For enabling HTTPS within Grafana, see the [Make Grafana Listen on HTTPS guide](https://community.f5.com/kb/technicalarticles/application-study-tool-make-grafana-listen-on-https/341728) for guidance.
+>
+> To review ideas on integrating your secrets with a vault, see the [Integrating your secrets with Hashi vault](https://community.f5.com/kb/TechnicalArticles/f5-app-study-tool-with-passwords-stored-in-vault/341155) for further information.
 
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
