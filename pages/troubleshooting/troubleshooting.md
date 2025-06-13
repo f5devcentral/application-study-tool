@@ -14,6 +14,7 @@ permalink: /troubleshooting
 ## Extremely high CPU usage >80%
 In the receivers file, please modify the concurrent worker count. The default count is 2, please set to 1 within the configuration file using the concurrent_workers attribute. This is only necessary if you have an extremely large amount of virtual servers (monolithic approach) 1000+ virtual servers. It's recommended to separate or split the workload with another instance of BIG-IP to reduce blast radius for changes.
 Example:
+```
 receivers:
   bigip:
     collection_interval: 30s
@@ -23,6 +24,7 @@ receivers:
     tls:
       insecure_skip_verify: true
     concurrent_workers: 1
+```
 
 ## Increase REST memory and timeouts to improve Big-IP REST experience
 Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
