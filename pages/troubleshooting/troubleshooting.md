@@ -12,7 +12,7 @@ permalink: /troubleshooting
 {:toc}
 
 ## Extremely high CPU usage >80%
-In the receivers file, please modify the concurrent worker count. The default count is 2, please set to 1 within the configuration file using the concurrent_workers attribute.
+In the receivers file, please modify the concurrent worker count. The default count is 2, please set to 1 within the configuration file using the concurrent_workers attribute. This is only necessary if you have an extremely large amount of virtual servers (monolithic approach) 1000+ virtual servers. It's recommended to separate or split the workload with another instance of BIG-IP to reduce blast radius for changes.
 Example:
 receivers:
   bigip:
