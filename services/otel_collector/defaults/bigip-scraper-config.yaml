@@ -32,4 +32,13 @@ exporters:
     sampling_thereafter: 200
 
 service:
+  # Changed in upstream otel collector, default only responds on localhost
+  telemetry:
+    metrics:
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: '0.0.0.0'
+                port: 8888
   pipelines: ${file:/etc/otel-collector-config/pipelines.yaml}

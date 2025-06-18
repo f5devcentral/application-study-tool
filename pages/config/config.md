@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Configuration
+title: Configuration Management
 nav_order: 3
 has_children: true
 permalink: /config

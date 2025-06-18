@@ -2,7 +2,7 @@
 layout: page
 title: Metric Obfuscation
 parent: Configuration Helper (Recommended)
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 4
 ---
 # Metric Obfuscation

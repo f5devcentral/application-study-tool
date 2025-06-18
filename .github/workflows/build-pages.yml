@@ -11,6 +11,8 @@ name: Pages-CI
 jobs:
   validate:
     name: Validate HTML
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest

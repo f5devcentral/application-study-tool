@@ -6,7 +6,7 @@
 bigip/1:
   # Endpoint must be specified for each device
   # Set this to the management IP for the device. This must be
-  # reachable from the Application Study Tool host.
+  # reachable from the Application Study Tool host (port 443).
   endpoint: https://10.0.0.1
   ## Uncommenting any of the following lines will override the defaults in
   ## ast_defaults.yaml bigip_receiver_defaults section.
@@ -15,10 +15,30 @@ bigip/1:
   # collection_interval: 30s
   # timeout: 20s
   # data_types:
-  #   f5.dns:
-  #     enabled: false
-  #   f5.gtm:
-  #     enabled: false
+    # f5.apm:
+    #   enabled: false
+    # f5.cgnat:
+    #   enabled: false
+    # f5.dns:
+    #   enabled: false
+    # f5.dos:
+    #   enabled: false
+    # f5.firewall:
+    #   enabled: false
+    # f5.gtm:
+    #   enabled: false
+    # f5.policy.api_protection:
+    #   enabled: false
+    # f5.policy.asm:
+    #   enabled: false
+    # f5.policy.firewall:
+    #   enabled: false
+    # f5.policy.ip_intelligence:
+    #   enabled: false
+    # f5.policy.nat:
+    #   enabled: false
+    # f5.profile.dos:
+    #   enabled: false
   # tls:
   #   insecure_skip_verify: true
   #   ca_file:
