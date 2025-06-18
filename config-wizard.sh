@@ -190,7 +190,7 @@ read RUN_CONFIG_GEN
 if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
   if [[ "$RUN_CONFIG_GEN" == Y* ]] || [[ "$RUN_CONFIG_GEN" == y* ]]; then
     # Ask user if sudo is required before docker/podman command
-    echo "Do you require 'sudo' to run ${CONTAINER_RUNTIME}? (If you are unsure, choose 'y'.) (y/n)?"
+    echo "Do you require 'sudo' to run ${CONTAINER_RUNTIME}? (If you are unsure, choose 'y'.) (y/n)"
     read USER_WANTS_SUDO
     if [[ "$USER_WANTS_SUDO" == Y* ]] || [[ "$USER_WANTS_SUDO" == y* ]]; then
       SUDO_REQUIRED=sudo
@@ -198,7 +198,7 @@ if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
     fi
     # Quick check to see if docker/podman will run successfully.
     $SUDO_REQUIRED $CONTAINER_RUNTIME version > /dev/null
-    if [[ ! "$?" == 0 ]]; then
+    if ! [[ "$?" == 0 ]]; then
       echo
       echo "$CONTAINER_RUNTIME failed. Check the permissions or try running again with 'sudo'."
       exit 1
@@ -235,6 +235,7 @@ else # Docker Compose is not installed. Let's check Podman Compose.
     COMPOSE_TOOL="podman-compose"
   else # neither is installed
     echo "Neither Docker Compose nor Podman Compose are installed. Please install one of these tools in order to start the service."
+    echo "Then run '$SUDO_REQUIRED $COMPOSE_TOOL up'"
     exit 1
   fi
 fi
