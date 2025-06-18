@@ -189,14 +189,28 @@ echo "Would you like to run the configuration generator now (y/n)?"
 read RUN_CONFIG_GEN
 if [ -n "$RUN_CONFIG_GEN" ]; then # not empty
   if [[ "$RUN_CONFIG_GEN" == Y* ]] || [[ "$RUN_CONFIG_GEN" == y* ]]; then
-    # Test to see if sudo is required before docker/podman command
-    $CONTAINER_RUNTIME version
-    if [[ "$?" == 1 ]]; then # Previous command failed
+    # Ask user if sudo is required before docker/podman command
+    echo "Do you require 'sudo' to run ${CONTAINER_RUNTIME}? (If you are unsure, choose 'y'.) (y/n)
+    read USER_WANTS_SUDO
+    if [[ "$USER_WANTS_SUDO" == Y* ]] || [[ "$USER_WANTS_SUDO" == y* ]]; then  
       SUDO_REQUIRED=sudo
-      # CONTAINER_RUNTIME="$SUDO_REQUIRED $CONTAINER_RUNTIME"
     else SUDO_REQUIRED=""
     fi
-    $SUDO_REQUIRED $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+    # Quick check to see if docker/podman will run successfully.
+    $SUDO_REQUIRED $CONTAINER_RUNTIME version > /dev/null
+    if ! [[ "$?" == 0 ]]; then
+      echo
+      echo "$CONTAINER_RUNTIME failed. Check the permissions or try running again with 'sudo'."
+      exit 1
+    else
+    # Initial check passed, so try to run the Config Generator.
+      $SUDO_REQUIRED $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
+      if ! [[ "$?" == 0 ]]; then
+        echo
+        echo "$CONTAINER_RUNTIME failed. Check the permissions or try running again with 'sudo'."
+        exit 1
+      fi
+    fi
   else
     echo "Configuration files have been created. The next step is to run the configuration gnerator with the following command:"
     echo "  \$ $SUDO_REQUIRED $CONTAINER_RUNTIME run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config"
@@ -234,6 +248,12 @@ if [ -n "$RUN_SERVICE" ]; then # not empty
     if [ -f "./docker-compose.yaml" ]; then
       # docker-compose up
       $SUDO_REQUIRED $COMPOSE_TOOL up
+      if ! [[ "$?" == 0 ]]; then
+        echo
+        echo "$COMPOSE_TOOL failed. Check the permissions or try running again with 'sudo'."
+        echo "Then run '$SUDO_REQUIRED $COMPOSE_TOOL up'"
+        exit 1
+      fi
     else
       echo "Error: docker-compose.yaml file does not exist in current directory. Cannot start docker compose service."
       exit 1
