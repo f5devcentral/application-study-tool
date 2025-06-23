@@ -375,7 +375,7 @@ special instructions / breaking changes.
 git stash
 git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.3)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.4)
 git stash pop
 # <merge any conflicts with your local changes>
 # <re-run config scripts>
