@@ -5,11 +5,11 @@ This directory contains the manifest files for running the Application Study Too
 To clone only this directory (./ast-on-k8s), where the Kubernetes manifest files are located, follow these steps:
 ```
 git init 
-git clone -n --depth=1 --filter=tree:0 https://github.com/javajason/ast-config-wizard/
-cd ast-config-wizard
-git sparse-checkout set --no-cone /ast-on-k8s
+git clone -n --depth=1 --filter=tree:0 https://github.com/f5devcentral/application-study-tool/
+cd application-study-tool
+git sparse-checkout set --no-cone /community/ast-on-k8s
 git checkout
-cd ast-on-k8s
+cd community/ast-on-k8s
 ```
 
 You will also need to modify the following files, at minimum.
