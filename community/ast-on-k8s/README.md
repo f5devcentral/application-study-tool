@@ -2,7 +2,7 @@
 
 This directory contains the manifest files for running the Application Study Tool in a Kubernetes cluster.
 
-To clone only this directory (./ast-on-k8s), where the Kubernetes manifest files are located, follow these steps:
+To clone only this directory (./community/ast-on-k8s), where the Kubernetes manifest files are located, follow these steps:
 ```
 git init 
 git clone -n --depth=1 --filter=tree:0 https://github.com/f5devcentral/application-study-tool/
