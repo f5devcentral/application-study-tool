@@ -82,7 +82,7 @@ The profile dashboards dive into the different profiles configured on the device
 #### HTTP
 
 *This dashboard enables the user to monitor their HTTP profiles, view information pretaining to HTTP requests and responses*
-![](../../assets/BigIP-Device:Profile-HTTP.png)
+![](../../assets/BigIP-Device-Profile-HTTP.png)
 
 
 ### Collector Stats

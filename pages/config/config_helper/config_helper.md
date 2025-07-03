@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Configuration Helper (Recommended)
-parent: Configuration
+parent: Configuration Management
 nav_order: 3
 has_children: true
 permalink: /config/config_helper
@@ -127,6 +127,6 @@ to take effect. This can be accomplished in a few ways, but the simplest is typi
 
 (From the project root directory)
 ```bash
-$ docker-compose down
-$ docker-compose up -d
+$ docker compose down
+$ docker compose up -d
 ```

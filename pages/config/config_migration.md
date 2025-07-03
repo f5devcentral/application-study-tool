@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Config Migration (pre v0.6.0)
-parent: Configuration
+parent: Configuration Management
 nav_order: 1
 ---
 # AST Config Migration for Pre v0.6.0 Deployments

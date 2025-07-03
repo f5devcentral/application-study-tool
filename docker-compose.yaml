@@ -27,7 +27,7 @@ services:
       - 7lc_network
 
   otel-collector:
-    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.7.0
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.4
     restart: unless-stopped
     volumes:
       - ./services/otel_collector:/etc/otel-collector-config

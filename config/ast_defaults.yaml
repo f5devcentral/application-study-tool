@@ -8,17 +8,41 @@ bigip_receiver_defaults:
   # The password (not recommended) or a reference to an env variable (recommended, shown)
   # Below tells the collector to look for an environment variable named BIGIP_PASSWORD_1
   password: "${env:BIGIP_PASSWORD_1}"
-  # The timeout field can be used to adjust the amount of time the collector will wait for a response
+  # The timeout field can be used to adjust the maximum amount of time the collector will wait for a response
   # to BigIP iControl Rest requests. Larger boxes with more complex config may require setting this value
-  # higher. Set for individual devices in bigip_receivers.yaml
-  timeout: 10s
-  # The data_types that should be enabled or disabled. DNS and GTM users can enable those modules
+  # higher.
+  # This value should be less than or equal to the collection_interval. Any requests that haven't completed
+  # before this timer expires (starting at the beginning of the collection interval) will be cancelled.
+  # You can set this for individual devices in bigip_receivers.yaml.
+  timeout: 60s
+  # The data_types that should be enabled or disabled. Default-disabled module users can enable those modules
   # by setting the below to true. These will apply to all devices and may be better specified on the
-  # per-reciever settings file below.
+  # per-reciever settings file.
+  # The full list of available data types is [here](https://f5devcentral.github.io/application-study-tool/components/otel_collector/receiver_readme.html#available-data_types).
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
       enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
+      enabled: false
     f5.gtm:
+      enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
       enabled: false
   # The TLS settings to use. Either a CA file must be specified or insecure_skip_verify
   # set to true (not recommended)

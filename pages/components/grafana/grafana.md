@@ -58,3 +58,24 @@ JSON following these
 
 You can save dashboard files under /services/grafana/provisioning/dashboards from the project root to
 automatically load them when the container is started.
+
+### Import AST Dashboards into Your Own Grafana Instance
+If you have your own (non-AST) Grafana instance and would like to display AST dashboards from your instance, follow these steps:
+
+#### Connect your Grafana instance to the AST Prometheus instance.
+- In the menu bar on the left, click Connections >> Data sources. 
+- If this is a new instance of Grafana, the “Add data source” button will appear in the middle of the screen. If this is an existing instance with pre-existing data sources, the button will be in the upper-right corner of the screen and will say “Add new data source”. Either way, click on it.
+- Select Prometheus from the list of data sources. You may have to scroll down or enter “prometheus” in the search bar. 
+- Fill in a name (for example, “ast-prometheus”), and the URL/IP address to get to the Prometheus instance. (Unless the port for the AST instance of Prometheus was modified, it will be the default of 9090.) 
+- The “Interval behaviour >> Scrape interval” is set to 15s by default. This will work but, if you want to save connections, you can set it to 60s. 
+- Click the blue "Save & test" button and ensure you get the message, “Successfully queried the Prometheus API.” at the bottom of the screen. 
+
+#### Import the Dashboard Configuration
+- Click on “Dashboards” in the menu on the left. 
+- Click the blue “New” button in the upper-right and, from the drop-down, select "Import". 
+- If you have saved the dashboard you wish to import as a JSON file export, click on "Upload dashboard JSON file" and upload the JSON file you exported. If you just copied the JSON contents, you can paste it in the "Import via dashboard JSON model" box below.
+- Give the dashboard a name (under Name). 
+- Under the Prometheus drop-down, select your Prometheus data source.
+- Click Import.
+
+You will now see the new dashboard in your own Grafana instance.

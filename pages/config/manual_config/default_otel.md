@@ -2,7 +2,7 @@
 layout: page
 title: Std Otel Collector Config
 parent: Manual Configuration
-grandparent: Configuration
+grandparent: Configuration Management
 nav_order: 2
 ---
 
@@ -54,6 +54,6 @@ to take effect. This can be accomplished in a few ways, but the simplest is typi
 
 (From the project root directory)
 ```bash
-$ docker-compose down
-$ docker-compose up -d
+$ docker compose down
+$ docker compose up -d
 ```

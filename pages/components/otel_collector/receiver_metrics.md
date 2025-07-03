@@ -82,6 +82,493 @@ The total number of HTTP responses received by the scraper by status
 | path | The path of the endpoint | Any Str |
 | status_code | The HTTP status code of the response | Any Int |
 
+### f5.apm.access.sessions.current
+
+The current number of APM access sessions by state
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {session} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.apm.session.state | The APM session state for the metric | Str: ``established``, ``active`` |
+
+### f5.apm.access.sessions.limit
+
+The maximum number of APM access sessions
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {session} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+
+### f5.apm.sessions.current
+
+The current number of APM sessions by session type
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {session} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.apm.session.type | The APM session type for the metric | Str: ``connectivity``, ``swg``, ``swg_limited`` |
+
+### f5.apm.sessions.limit
+
+The maximum number of APM sessions by session type
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {session} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.apm.session.type | The APM session type for the metric | Str: ``connectivity``, ``swg``, ``swg_limited`` |
+
+### f5.cgnat.lsn_pool.generation
+
+Config Generation of the lsn pool.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {generation} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.hairpin_connections.current
+
+Current active hairpin connections for the lsn pool.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {connection} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.hairpin_connections.failures
+
+The total failed hairpin connections for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {connection} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.hairpin_connections.requests
+
+The total requested hairpin connections for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {connection} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.clients.limit_reached
+
+The total clients which reached their block allocation limit.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {client} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.info
+
+Info about the lsn pool PBA config.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+| f5.cgnat.lsn_pool.pba.block_idle_timeout | The PBA Block Idle Timeout | Any Int |
+| f5.cgnat.lsn_pool.pba.block_lifetime | The PBA Block Idle lifetime | Any Int |
+| f5.cgnat.lsn_pool.pba.block_size | The PBA Block Size | Any Int |
+| f5.cgnat.lsn_pool.pba.block_client_limit | The PBA Block Client Limit | Any Int |
+| f5.cgnat.lsn_pool.pba.block_zombie_timeout | The PBA Block Zombie Timeout | Any Int |
+
+### f5.cgnat.lsn_pool.pba.port_blocks.active
+
+Current active port blocks lsn pool.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {block} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.port_blocks.allocation_failures
+
+The total failed port block allocations for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {allocation} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.port_blocks.allocations
+
+The total port block allocations for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {allocation} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.zombie_port_blocks.active
+
+Current active zombie port blocks for the lsn pool.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {block} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.zombie_port_blocks.created
+
+The total zombie port block creations for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {block} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.pba.zombie_port_blocks.deleted
+
+The total zombie port block deletions for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {block} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.translations.current
+
+Current active translations for the lsn pool.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {translation} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.translations.failures
+
+The total failed translations for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {translation} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.cgnat.lsn_pool.translations.requests
+
+The total requested translations for the lsn pool.
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {translation} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.pool.name | The name of a Pool. | Any Str |
+
+### f5.dos.attacks
+
+The DoS Attacks for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {attack} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.attacks.detected
+
+The DoS Attacks Detected for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {attack} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.ba.detected
+
+The Bad Actor detected for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {detection} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.ba.drops
+
+The Bad Actor drops for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {drop} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.ba.stats
+
+The Bad Actor stats for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {stat} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.bd.detected
+
+The BD detected for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {detection} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.bd.drops
+
+The BD drops for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {drop} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.bd.stats
+
+The BD stats for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {stat} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.bytes
+
+The DoS Bytes for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| By | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.bytes.drops
+
+The DoS Bytes Dropped for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {drop} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.drops
+
+The DoS Drops for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {drop} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.dos.stats
+
+The DoS Stats for a Vector
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {stat} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.dos.vector_name | The name of the DDoS Vector | Any Str |
+
+### f5.firewall.rule.hits
+
+The total count of firewall rule hits by rule
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {hit} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.firewall.rule.name | The AFM Firewall rule name | Any Str |
+| f5.firewall.rule.stat_type | The AFM Firewall rule stat type | Any Str |
+| f5.firewall.rule.action | The AFM Firewall rule action | Any Str |
+| f5.firewall.rule.context_name | The context for the AFM Firewall rule stat | Any Str |
+
 ### f5.gtm.distributed_app.count
 
 The number of enabled gtm distributed apps
@@ -211,6 +698,22 @@ The expiration time of the license.
 | dataType | The data type which signifies the schema for the metric | Any Str |
 | registration_key | The registration key of the current license | Any Str |
 
+### f5.module.license.info
+
+License status for a bigip module
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.module.name | The name of a module. | Any Str |
+| f5.module.license.state | The license status of a module. | Str: ``licensed``, ``unlicensed`` |
+
 ### f5.module.provision.generation
 
 Config Generation of the BigIP for this provision.
@@ -226,6 +729,595 @@ Config Generation of the BigIP for this provision.
 | dataType | The data type which signifies the schema for the metric | Any Str |
 | f5.module.name | The name of a module. | Any Str |
 | level | The provisioning level of a module | Any Str |
+
+### f5.nethsm.async_queue.done
+
+The total count of async_queue done
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {task} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.done.last_second
+
+The current count of async_queue done tasks in the last 1 second
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {task} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.ops_per_second.avg
+
+The current average of async_queue ops/sec
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {operation} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.queue_time.avg
+
+The average queue time
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| us | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.queue_time.max
+
+The max queue time
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| us | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.queued
+
+The current tasks queued
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {task} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.async_queue.queued.max
+
+The maximum tasks queued
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {task} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.queue | The id of the nethsm queue | Any Int |
+
+### f5.nethsm.pkcs11d.operation.errors
+
+The pkcs11d error statistic
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {error} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.thread | The id of the nethsm thread | Any Int |
+| f5.nethsm.vendor | The nethsm vendor string | Any Str |
+| operation | The pks11d operation types | Str: ``sign``, ``decrypt``, ``find_key``, ``find_key_id``, ``gen_key_rsa``, ``delete_key`` |
+
+### f5.nethsm.pkcs11d.operations
+
+The pkcs11d statistic
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {operation} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.nethsm.thread | The id of the nethsm thread | Any Int |
+| f5.nethsm.vendor | The nethsm vendor string | Any Str |
+| operation | The pks11d operation types | Str: ``sign``, ``decrypt``, ``find_key``, ``find_key_id``, ``gen_key_rsa``, ``delete_key`` |
+
+### f5.network.address.info
+
+The information for a configured self-ip
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.address | The network address | Any Str |
+| f5.network.address.name | The name of a network address | Any Str |
+| f5.network.address.source | The configuration source of an network address | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.address.floating | The enabled or disabled state of floating for the network address | Str: ``enabled``, ``disabled`` |
+
+### f5.network.interface.bits_in
+
+The number of bits in
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| bits | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.bits_out
+
+The number of bits out
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| bits | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.dropped
+
+The number of drops (all) on the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packet} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.enabled
+
+The interface enabled status
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| 1 | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.errors
+
+The number of errors (all) on the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {error} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.info
+
+Information about the network interface
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+| f5.network.interface.index | The index (ifIndex) of a network interface | Any Int |
+| f5.network.interface.media_active | The active interface media | Any Str |
+| mtu | The MTU for the network interface or VLAN | Any Int |
+| mac_address | The mac address of an interface | Any Str |
+
+### f5.network.interface.packets_in
+
+The number of packets in
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.packets_out
+
+The number of packets out
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.interface.status
+
+The interface active status
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| 1 | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.vlan.broadcast.packets_in
+
+The broadcast packets into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.broadcast.packets_out
+
+The broadcast packets out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.bytes_in
+
+The number of bytes into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| By | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.bytes_out
+
+The  number of bytes out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| By | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.discards_in
+
+The number of input discards on the vlan
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {discard} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.discards_out
+
+The number of output discards on the vlan
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {discard} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.errors_in
+
+The number of errors into the vlan
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {error} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.errors_out
+
+The number of errors out of the vlan
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {error} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.info
+
+Info about the VLAN
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+| mtu | The MTU for the network interface or VLAN | Any Int |
+| mac_address | The mac address of an interface | Any Str |
+
+### f5.network.vlan.member.info
+
+Info about the VLAN member interface
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| {info} | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+| f5.network.vlan.tag_mode | The tag mode for a VLAN | Any Str |
+| f5.network.interface.name | The name of a physical network interface | Any Str |
+
+### f5.network.vlan.multicast.packets_in
+
+The multicast packets into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.multicast.packets_out
+
+The multicast packets out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.pva.bytes_in
+
+The number of PVA bytes into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| By | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.pva.bytes_out
+
+The  number of PVA bytes out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| By | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.pva.packets_in
+
+The PVA packets into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.pva.packets_out
+
+The PVA packets out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.unicast.packets_in
+
+The unicast packets into the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
+
+### f5.network.vlan.unicast.packets_out
+
+The unicast packets out of the interface
+
+| Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
+| ---- | ----------- | ---------- | ----------------------- | --------- |
+| {packets} | Sum | Int | Cumulative | true |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| f5.network.vlan.name | The name of a VLAN | Any Str |
+| f5.network.vlan.id | The VLAN identifier / tag | Any Int |
 
 ### f5.node.availability
 
@@ -1220,6 +2312,7 @@ Information about the pool
 
 | Name | Description | Values |
 | ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
 | f5.pool.name | The name of a Pool. | Any Str |
 | f5.pool.load_balancing_mode | The load balancing mode of a pool. | Any Str |
 | f5.monitor.name | The full path name of a monitor | Any Str |
@@ -1446,7 +2539,7 @@ Cumulative total number of packets transmitted from the pool.
 
 ### f5.pool.queue_age.average
 
-Average age of queue entries in this pool, in seconds
+Average age of queue entries in this pool, in mseconds
 
 | Unit | Metric Type | Value Type |
 | ---- | ----------- | ---------- |
@@ -1461,7 +2554,7 @@ Average age of queue entries in this pool, in seconds
 
 ### f5.pool.queue_age.recent_max
 
-Recent maximum age of queue entries in this pool, in seconds
+Recent maximum age of queue entries in this pool, in mseconds
 
 | Unit | Metric Type | Value Type |
 | ---- | ----------- | ---------- |
@@ -2784,7 +3877,7 @@ The number of transmission errors
 
 | Unit | Metric Type | Value Type | Aggregation Temporality | Monotonic |
 | ---- | ----------- | ---------- | ----------------------- | --------- |
-| {packets} | Sum | Int | Cumulative | true |
+| {error} | Sum | Int | Cumulative | true |
 
 #### Attributes
 
@@ -4506,6 +5599,35 @@ The user utilization of the identified CPU over the last 5 seconds.
 | dataType | The data type which signifies the schema for the metric | Any Str |
 | cpu.id | The Integer ID of the CPU. | Any Int |
 | slot.id | The chassis slot on the device | Any Int |
+
+### f5.system.failover.active_state
+
+The failover state of the system.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| 1 | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+
+### f5.system.failover.peer.active_state
+
+The failover state of the peer system.
+
+| Unit | Metric Type | Value Type |
+| ---- | ----------- | ---------- |
+| 1 | Gauge | Int |
+
+#### Attributes
+
+| Name | Description | Values |
+| ---- | ----------- | ------ |
+| dataType | The data type which signifies the schema for the metric | Any Str |
+| failover.peer_name | The failover peer device name. | Any Str |
 
 ### f5.system.info
 

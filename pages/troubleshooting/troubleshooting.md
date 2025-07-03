@@ -11,6 +11,65 @@ permalink: /troubleshooting
 1. TOC
 {:toc}
 
+## Extremely high CPU usage >80%
+In the receivers file, please modify the concurrent worker count. The default count is 2, please set to 1 within the configuration file using the concurrent_workers attribute. This is only necessary if you have an extremely large amount of virtual servers (monolithic approach) 1000+ virtual servers. It's recommended to separate or split the workload with another instance of BIG-IP to reduce blast radius for changes.
+Example:
+```
+receivers:
+  bigip:
+    collection_interval: 30s
+    endpoint: https://localhost:443
+    username: otelu
+    password: ${env:BIGIP_PASSWORD}
+    tls:
+      insecure_skip_verify: true
+    concurrent_workers: 1
+```
+
+## Increase REST memory and timeouts to improve Big-IP REST experience
+Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
+
+Increase internal timeouts from 60 to 600 seconds:
+```
+tmsh modify sys db icrd.timeout value 600
+tmsh modify sys db restjavad.timeout value 600
+tmsh modify sys db restnoded.timeout value 600
+```
+
+Increase RESTJAVAD memory (skip if experiencing memory pressure):
+```
+tmsh modify sys db provision.extramb value 2048
+tmsh modify sys db provision.tomcat.extramb value 256
+```
+
+Applies to TMOS 15.1.9 +:  
+```
+tmsh modify sys db provision.restjavad.extramb value 600
+```  
+
+save configuration:
+```
+tmsh save sys config
+```
+verify everything looks good:
+```
+tmsh list sys db icrd.timeout
+tmsh list sys db restjavad.timeout  
+tmsh list sys db restnoded.timeout 
+tmsh list sys db provision.extramb
+tmsh list sys db provision.tomcat.extramb
+tmsh list sys db provision.restjavad.extramb
+```
+
+then restart services:
+```
+tmsh restart sys service restjavad
+tmsh restart sys service restnoded
+```
+## Optimize REST Guidance and further examples
+> See the Repo located here [Megamattzilla](https://github.com/megamattzilla/as3-tips-and-tricks?tab=readme-ov-file#1-increase-rest-memory-and-timeouts-to-improve-big-ip-rest-experience-) for further information.
+___
+
 ## Useful Commands
 
 ### View Docker Container Status
@@ -65,7 +124,7 @@ $ docker logs application-study-tool-otel-collector-1 >& otellogs.txt && gzip ot
 ### Stop and Start A Container
 Individual containers can be started and stopped using the `docker stop <container name or id>` command.
 This will cause the container to restart with any modifications to config files picked up (alternative
-to the `docker-compose down` and `docker-compose up` commands which restart all containers):
+to the `docker compose down` and `docker compose up` commands which restart all containers):
 
 ```shell
 $ docker stop fdbde8a3ee16
@@ -135,7 +194,16 @@ hovering) and selecting 'Inspect > Query'
 * Are any queries to the BigIP timing or erroring out? Check the otel collector logs (`docker ps`) and
 the 'BigIP Collector Stats' dashboard at the top level of the Dashboards section in Grafana 
 
-## GTM and DNS Metrics Not Loading
+## GTM, DNS, ASM, APM, Firewall, NAT Metrics Not Loading
 
-Metrics for DNS and GTM are disabled by default. See 
+Metrics for GTM, DNS, ASM, APM, Firewall, NAT are disabled by default. See 
 [Configuration > Configuration Helper (Recommended) > Configure DNS & GTM]({{ site.url }}{{ site.baseurl }}/config/config_helper/config_dns_gtm.html) for instructions to enable.
+
+## Max API Tokens Reached For User
+
+Several BigIP Bugs have been identified which can result in maximum tokens issued errors:
+
+* [ID1787517](https://cdn.f5.com/product/bugtracker/ID1787517.html)
+* [ID1103369](https://cdn.f5.com/product/bugtracker/ID1103369.html)
+
+v0.9.0 should prevent issues in ID1787517 from occuring on most systems. ID1103369 includes workaround steps for user encountering that issue.

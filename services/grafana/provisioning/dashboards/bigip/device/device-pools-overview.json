@@ -806,6 +806,7 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -861,7 +862,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bps"
         },
         "overrides": []
       },
@@ -892,8 +893,8 @@
             "uid": "${datasource}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "rate(f5_pool_bytes_in_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval])",
+          "editorMode": "code",
+          "expr": "rate(f5_pool_bytes_in_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * 8",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -909,7 +910,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(f5_pool_bytes_out_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * -1",
+          "expr": "rate(f5_pool_bytes_out_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * -8",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -1191,7 +1192,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "green",
@@ -1267,7 +1269,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1551,6 +1554,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1581,7 +1585,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1589,7 +1594,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bps"
         },
         "overrides": []
       },
@@ -1620,8 +1625,8 @@
             "uid": "${datasource}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "rate(f5_pool_member_bytes_in_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval])",
+          "editorMode": "code",
+          "expr": "rate(f5_pool_member_bytes_in_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * 8",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -1637,7 +1642,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(f5_pool_member_bytes_out_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * -1",
+          "expr": "rate(f5_pool_member_bytes_out_total{job=\"$device_name\", f5_pool_name=~\"$pool\"}[$__rate_interval]) * -8",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -1669,6 +1674,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1699,7 +1705,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1769,6 +1776,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1799,7 +1807,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1927,6 +1936,6 @@
   "timezone": "browser",
   "title": "Device Pools",
   "uid": "cdu11thaxntvkf",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

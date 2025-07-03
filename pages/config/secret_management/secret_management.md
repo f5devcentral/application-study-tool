@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Secrets Management
-parent: Configuration
+parent: Configuration Management
 nav_order: 4
 ---
 
