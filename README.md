@@ -1,17 +1,15 @@
 # Application Study Tool
 
-> 🚨🚨**Notice**🚨🚨
-> 
-> Configuration for the Application Study Tool has changed significantly in the v0.6.0 release. To
-update a legacy configuration, see [Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html).
->
-> Before you start, make sure to backup the /config/big-ips.json file!
-
-
 ## Overview
 
-> See the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
-configuration, troubleshooting info, etc.
+> Prior to installation, please see the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
+configuration, troubleshooting (REST changes, HIGH CPU on control plane) info, etc.
+
+> See the [F5 Application Study Tool Labs](https://clouddocs.f5.com/training/community/ast/html/) for an educational guided lab experience.
+> 
+> For enabling HTTPS within Grafana, see the [Make Grafana Listen on HTTPS guide](https://community.f5.com/kb/technicalarticles/application-study-tool-make-grafana-listen-on-https/341728) for guidance.
+>
+> To review ideas on integrating your secrets with a vault, see the [Integrating your secrets with Hashi vault](https://community.f5.com/kb/TechnicalArticles/f5-app-study-tool-with-passwords-stored-in-vault/341155) for further information.
 
 The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
@@ -61,8 +59,8 @@ vi ./config/ast_defaults.yaml
 vi ./config/bigip_receivers.yaml
 # Run the configuration generator
 docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entrypoint.sh python:3.12.6-slim-bookworm --generate-config
-# Start the tool
-docker-compose up
+# Start the tool (use `docker compose up -d` to start in background mode)
+docker compose up
 ```
 
 ## Configuration
@@ -78,8 +76,6 @@ Application Study Tool config management relies on default configs in
 
 Settings in the bigip_receivers.yaml override those in ast_defaults.yaml.
 
-To update a legacy (pre v0.6.0) configuration, to the new scheme see
-[Config Migration for Pre v0.6.0 Deployments](https://f5devcentral.github.io/application-study-tool/config/config_migration.html)
 
 ## Configure Default Device Settings
 
@@ -97,13 +93,33 @@ bigip_receiver_defaults:
   # BIGIP_PASSWORD_1
   password: "${env:BIGIP_PASSWORD_1}"
   # The data_types that should be enabled or disabled.
-  # DNS and GTM are disabled by default and users can enable those modules
+  # These are disabled by default and users can enable those modules
   # on all devices by setting the below to true.
-  # A full list of data_types is in pages/receiver_readme.md.
+  # A full list of data_types is at https://f5devcentral.github.io/application-study-tool/components/otel_collector/receiver_readme.html.
   data_types:
+    f5.apm:
+      enabled: false
+    f5.cgnat:
+      enabled: false
     f5.dns:
       enabled: false
+    f5.dos:
+      enabled: false
+    f5.firewall:
+      enabled: false
     f5.gtm:
+      enabled: false
+    f5.policy.api_protection:
+      enabled: false
+    f5.policy.asm:
+      enabled: false
+    f5.policy.firewall:
+      enabled: false
+    f5.policy.ip_intelligence:
+      enabled: false
+    f5.policy.nat:
+      enabled: false
+    f5.profile.dos:
       enabled: false
   # The TLS settings to use. Either a CA file must be specified or
   # insecure_skip_verify set to true (not recommended).
@@ -270,10 +286,27 @@ f5_policy_ip_intelligence_feed_list_count{}
 f5_policy_ip_intelligence_info{}
 f5_virtual_server_profile_client_ssl_secure_handshakes_total{}
 f5_policy_ip_intelligence_generation{}
+f5_pool_member_bytes_in_total{}
+f5_pool_member_bytes_out_total{}
+f5_pool_member_connection_count{}
+f5_pool_member_connections_total{}
+f5_pool_member_requests_total{}
+f5_pool_member_session_count{}
+f5_pool_member_packets_in_total{}
+f5_pool_member_packets_out_total{}
 f5_plane_cpu_utilization_5s{}
 ```
 
 This will impact data output in several dashboards/panels (denoted with description fields indicating as such).
+
+You can disable attempts to collect bash information with `enable_bash_collection: false` at the appropriate level (global or device).
+
+```yaml
+bigip/1:
+  endpoint: https://10.0.0.1
+  enable_bash_collection: false
+  #...
+```
 
 ### Configure CA File
 AST expects a valid TLS cert bundle unless `tls.insecure_skip_verify` is
@@ -321,7 +354,8 @@ cp .env-example .env
 ### Run Application Study Tool
 Once the above configurations have been made, the tool can be started with:
 
-```
+```shell
+# `docker compose up -d` to start in background mode
 docker compose up
 ```
 
@@ -339,9 +373,15 @@ special instructions / breaking changes.
 3. Stash changes, update the repo state, and unstash changes as follows:
 ```shell
 git stash
+git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.7.0)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.4)
 git stash pop
+# <merge any conflicts with your local changes>
+# <re-run config scripts>
+docker compose down
+# `docker compose up -d` to start in background mode
+docker compose up
 ```
 
 ## Support

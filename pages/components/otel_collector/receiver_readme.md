@@ -31,7 +31,7 @@ The following settings are optional:
 - `collection_interval` (default = `10s`): This receiver collects metrics on an interval. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
 - `tls` (defaults defined [here](https://github.com/open-telemetry/opentelemetry-collector/blob/main/config/configtls/README.md)): TLS control. By default insecure settings are rejected and certificate verification is on.
 - `enable_http_client_metrics` (default = `false`): Enable collection of metrics for http client requests to the device.
-- `page_item_limit` (default = 100): The number of objects per page for paginated api requests
+- `page_item_limit` (default = 10000): The number of objects per page for paginated api requests (because bigip doesn't handle pagination as you might expect, its recommended not to adjust this lower)
 - `concurrent_workers` (default = 2): The number of concurrent API requests per receiver.
 - `data_types` (default: all enabled): This map allows you to enable / disable collection and sending of data by type. The list of available data types can be found in `./config.go`, in the DataTypesConfig struct definition.
 
@@ -55,23 +55,20 @@ receivers:
         attribute_name: some_alternative_data_type_name
 ```
 
-Available data_types:
+### Available data_types:
 ```
 f5.collector
 f5.license
 f5.module
+f5.nethsm
+f5.network
 f5.node
 f5.plane
 f5.policy.eviction
-f5.policy.firewall
-f5.policy.ip_intelligence
-f5.policy.api_protection
 f5.policy.bandwidth_control
-f5.policy.nat
 f5.pool
 f5.profile.client_ssl
 f5.profile.server_ssl
-f5.profile.dos
 f5.profile.fasthttp
 f5.profile.fastl4
 f5.profile.http
@@ -86,8 +83,17 @@ f5.rule
 f5.ssl_certificate
 f5.system
 f5.virtual_server
-f5.policy.asm
+f5.policy.api_protection        ### DEFAULT DISABLE
+f5.policy.asm                   ### DEFAULT DISABLE
+f5.policy.firewall              ### DEFAULT DISABLE
+f5.policy.ip_intelligence       ### DEFAULT DISABLE
+f5.policy.nat                   ### DEFAULT DISABLE
+f5.profile.dos                  ### DEFAULT DISABLE
+f5.apm                          ### DEFAULT DISABLE
+f5.cgnat                        ### DEFAULT DISABLE
 f5.dns                          ### DEFAULT DISABLE
+f5.dos                          ### DEFAULT DISABLE
+f5.firewall                     ### DEFAULT DISABLE
 f5.gtm                          ### DEFAULT DISABLE
 ```
 
