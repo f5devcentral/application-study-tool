@@ -19,7 +19,9 @@ If not already done, the following steps are requirements for running this scrip
 $ git clone https://github.com/f5devcentral/application-study-tool.git
 $ cd application-study-tool
 $ ./community/config-wizard/config-wizard.sh
-(IMPORTANT: be sure to run the command like the above, which executes it from the main application-study-tool directory. Do not CD into the community/ directory before running the script.)
+(IMPORTANT: be sure to run the command like the above, which executes it from the
+main application-study-tool directory. Do not CD into the community/ directory
+before running the script.)
 ```
 
 ## How to Use This Tool
