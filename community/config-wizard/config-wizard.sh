@@ -8,7 +8,6 @@ echo "Note: This script is meant to be run only at initial installation time. If
 # (Install Docker)
 # git clone https://github.com/f5devcentral/application-study-tool.git
 # cd application-study-tool
-# chmod +x config-wizard.sh
 # Then the user can run this setup wizard by running "./config-wizard.sh".
 
 # Check if .env file, .env.device-secrets, and config directory do not exist. If they don't, but the example files exist, copy the example files to the actual files.
