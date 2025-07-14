@@ -14,7 +14,7 @@ Alternatively, to just make one-off edits, you can manually edit the config file
 Pre-installing Docker or Podman prior to running this script is recommended
 in order to allow this script to launch the Application Study Tool. However, it is not strictly required.
 
-The following steps, however, are required before running this script:
+If not already done, the following steps are requirements for running this script.
 ```
 $ git clone https://github.com/f5devcentral/application-study-tool.git
 $ cd application-study-tool
@@ -22,9 +22,11 @@ $ chmod +x config-wizard.sh
 $ ./config-wizard.sh
 ```
 
+## How to Use This Tool
 This script will prompt you for the information it needs to configure the Application Study Tool.
 This includes BIG-IP management IP addresses, credentials, and other information. It will continue adding BIG-IP devices
 until you tell it to stop (by just hitting ENTER instead of entering a management IP address).
+
 It updates the required configuration files as it goes, so if you abort the script in the middle of using it,
 your the configuration information you have entered thus far will be saved in the AST configuration files. You will then
 want to revisit this process by manually editing the configuration files and adding any remaining settings.
