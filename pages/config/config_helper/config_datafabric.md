@@ -45,4 +45,4 @@ SENSOR_ID="YOUR_ID"
 $ vi .env
 ```
 
-Finally, [Run The Configuration Helper]({{ site.url }}{{ site.baseurl }}/config/config_helper#run-the-configuration-helper) and restart the project containers.
+Finally, [Run The Configuration Helper]({{ site.url }}{{ site.baseurl }}/config/config_helper) and restart the project containers.
