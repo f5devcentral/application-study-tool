@@ -2,12 +2,8 @@ name: Push Image to ghcr.io
 run-name: ${{ github.actor }} is running this workflow
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-    #tags:
-    #  - 'v[0-9]+.[0-9]+.[0-9]+'
-
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   Pull-From_Gitlab:
     permissions:
@@ -38,13 +34,7 @@ jobs:
       - name: Push to Github
         run:
           |
-            exit_code=0
-            docker pull ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:${{ env.VERSION }} > /dev/null 2>&1 || exit_code=$?
-            if [ $exit_code -eq 0 ]; then
-                 echo "Image already exists in the github registry, skipping push"
-                 exit 0
-            fi
-            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:${{ env.VERSION }}
-            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:latest
-            docker push ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:${{ env.VERSION }}
-            docker push ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:latest
+            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:${{ env.VERSION }}
+            docker tag registry.gitlab.com/f5/greenhouse/apps/seven-layer-cake-collector/otel_custom_collector:${{ env.VERSION }} ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:latest
+            docker push ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:${{ env.VERSION }}
+            docker push ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:latest

@@ -28,8 +28,8 @@ services:
       - 7lc_network
 
   otel-collector:
-    # ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector:v2.0.1
-    image: ghcr.io/f5networks/f5-insight-for-bigip/otel_custom_collector@sha256:0155a441a39a3b6ea42799a4f2172e0ad5b30758970b560c3bc7f7c87903262a
+    # ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5
     restart: unless-stopped
     volumes:
       - ./services/otel_collector:/etc/otel-collector-config
