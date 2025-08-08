@@ -11,7 +11,7 @@ configuration, troubleshooting (REST changes, HIGH CPU on control plane) info, e
 >
 > To review ideas on integrating your secrets with a vault, see the [Integrating your secrets with Hashi vault](https://community.f5.com/kb/TechnicalArticles/f5-app-study-tool-with-passwords-stored-in-vault/341155) for further information.
 
-The Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
+The F5 Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
 
 * Custom Instance of OpenTelemetry Collector with enhanced BIG-IP data receivers (data fetched via iControlRest) [Full List of Metrics Collected](pages/components/otel_collector/receiver_metrics.md).
@@ -177,6 +177,8 @@ Create a file called .env.device-secrets, and add your BIP passwords like so:
 BIGIP_PASSWORD_1=foo-bar123!
 BIGIP_PASSWORD_2=bar-foo123!
 ```
+> **Note:** Ensure that the permissions on the (_.env.device-secrets_) file are restricted to allow read access only to the user running the Docker containers.
+> This ensures that credential information remains protected from unauthorized access.
 
 The variable name (the part on the left of the equal sign) must match the configured
 value for the devices that use this password in config/ast_defaults.yaml or device specific
@@ -352,7 +354,7 @@ cp .env-example .env
 ```
 
 ### Run Application Study Tool
-Once the above configurations have been made, the tool can be started with:
+After the above configurations have been made, start the tool with:
 
 ```shell
 # `docker compose up -d` to start in background mode
@@ -361,7 +363,7 @@ docker compose up
 
 #### View The Dashboards
 The default Grafana user/pass is `admin/admin`, and can be accessed at
-`http://<hostname>:3000`.
+`http://<hostname>:3000`. If HTTPS is configured, use `https://<hostname>:3001`.
 
 
 ## Updating AST Versions
@@ -375,7 +377,7 @@ special instructions / breaking changes.
 git stash
 git fetch --tags
 git pull origin main
-git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.4)
+git checkout tags/RELEASE_VERSION #(e.g. tags/v0.9.5)
 git stash pop
 # <merge any conflicts with your local changes>
 # <re-run config scripts>
@@ -383,7 +385,6 @@ docker compose down
 # `docker compose up -d` to start in background mode
 docker compose up
 ```
-
 ## Support
 
 For support, please open a GitHub issue.  Note, the code in this repository is community supported and is not supported by F5 Networks.  For a complete list of supported projects please reference [SUPPORT.md](SUPPORT.md).
@@ -398,7 +399,7 @@ Please refer to the [F5 DevCentral Community Code of Conduct](code_of_conduct.md
 
 ## Copyright
 
-Copyright 2014-2024 F5 Networks Inc.
+Copyright 2014-2025 F5 Networks Inc.
 
 ### F5 Networks Contributor License Agreement
 
