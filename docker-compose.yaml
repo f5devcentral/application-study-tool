@@ -6,7 +6,8 @@ volumes:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.54.1
+    # prom/prometheus:v2.53.5
+    image: prom/prometheus@sha256:7a34573f0b9c952286b33d537f233cd5b708e12263733aa646e50c33f598f16c
     container_name: prometheus
     restart: unless-stopped
     stop_grace_period: 5m
@@ -21,13 +22,14 @@ services:
       - '--web.enable-lifecycle'
       - '--enable-feature=otlp-write-receiver'
       - '--storage.tsdb.retention.time=1y'
-    ports:
-      - 9090:9090
+    expose:
+      - 9090
     networks:
       - 7lc_network
 
   otel-collector:
-    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.4
+    # ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5
+    image: ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5
     restart: unless-stopped
     volumes:
       - ./services/otel_collector:/etc/otel-collector-config
@@ -40,7 +42,8 @@ services:
       - 7lc_network
 
   grafana:
-    image: grafana/grafana:11.2.0
+    # grafana/grafana:v11.6.3
+    image: grafana/grafana@sha256:6128afd8174f01e39a78341cb457588f723bbb9c3b25c4d43c4b775881767069
     container_name: grafana
     restart: unless-stopped
     ports:

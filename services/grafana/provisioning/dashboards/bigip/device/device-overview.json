@@ -1178,7 +1178,7 @@
           "exemplar": false,
           "expr": "f5_system_memory_used_bytes{job=\"$device_name\", state=\"used\"} / ignoring(state) f5_system_memory_total_bytes{job=\"$device_name\"}",
           "instant": true,
-          "legendFormat": "__auto",
+          "legendFormat": "{{instance}}",
           "range": false,
           "refId": "A"
         }

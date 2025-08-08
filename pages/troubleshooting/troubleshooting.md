@@ -65,9 +65,9 @@ This output shows everything looks good:
 ```shell
 $ docker ps
 CONTAINER ID   IMAGE                                                                      COMMAND                  CREATED              STATUS          PORTS                       NAMES
-cb4cf8867390   grafana/grafana:11.2.0                                                     "/run.sh"                About a minute ago   Up 49 seconds   0.0.0.0:3000->3000/tcp      grafana
-bb8891f2cd47   prom/prometheus:v2.54.1                                                    "/bin/prometheus --c…"   About a minute ago   Up 49 seconds   0.0.0.0:9090->9090/tcp      prometheus
-df2739cd67cb   ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.6.0   "/otelcol-custom --c…"   About a minute ago   Up 49 seconds   4317/tcp, 55679-55680/tcp   application-study-tool-otel-collector-1
+cb4cf8867390   grafana/grafana:11.6.3                                                     "/run.sh"                About a minute ago   Up 49 seconds   0.0.0.0:3000->3000/tcp      grafana
+bb8891f2cd47   prom/prometheus:v2.53.5                                                    "/bin/prometheus --c…"   About a minute ago   Up 49 seconds   0.0.0.0:9090->9090/tcp      prometheus
+df2739cd67cb   ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5       "/otelcol-custom --c…"   About a minute ago   Up 49 seconds   4317/tcp, 55679-55680/tcp   application-study-tool-otel-collector-1
 ```
 
 This output shows a problem (Restarting container) for the `application-study-tool-otel-collector-1`
@@ -75,9 +75,9 @@ container (the otel collector):
 ```shell
 $ docker ps
 CONTAINER ID   IMAGE                                                                      COMMAND                  CREATED          STATUS                         PORTS                    NAMES
-fdbde8a3ee16   ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.6.0   "/otelcol-custom --c…"   14 seconds ago   Restarting (1) 5 seconds ago                            application-study-tool-otel-collector-1
-b7ef41accd46   grafana/grafana:11.2.0                                                     "/run.sh"                14 seconds ago   Up 13 seconds                  0.0.0.0:3000->3000/tcp   grafana
-8edff3e8666e   prom/prometheus:v2.54.1                                                    "/bin/prometheus --c…"   14 seconds ago   Up 13 seconds                  0.0.0.0:9090->9090/tcp   prometheus
+fdbde8a3ee16   ghcr.io/f5devcentral/application-study-tool/otel_custom_collector:v0.9.5       "/otelcol-custom --c…"   14 seconds ago   Restarting (1) 5 seconds ago                            application-study-tool-otel-collector-1
+b7ef41accd46   grafana/grafana:11.6.3                                                     "/run.sh"                14 seconds ago   Up 13 seconds                  0.0.0.0:3000->3000/tcp   grafana
+8edff3e8666e   prom/prometheus:v2.53.5                                                    "/bin/prometheus --c…"   14 seconds ago   Up 13 seconds                  0.0.0.0:9090->9090/tcp   prometheus
 ```
 
 ### View Docker Container Logs
