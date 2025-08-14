@@ -3,9 +3,13 @@
 ## Overview
 
 > Prior to installation, please see the [AST Docsite](https://f5devcentral.github.io/application-study-tool/) for detailed
-configuration, troubleshooting (REST changes) info, etc.
+configuration, troubleshooting (REST changes, HIGH CPU on control plane) info, etc.
 
 > See the [F5 Application Study Tool Labs](https://clouddocs.f5.com/training/community/ast/html/) for an educational guided lab experience.
+> 
+> For enabling HTTPS within Grafana, see the [Make Grafana Listen on HTTPS guide](https://community.f5.com/kb/technicalarticles/application-study-tool-make-grafana-listen-on-https/341728) for guidance.
+>
+> To review ideas on integrating your secrets with a vault, see the [Integrating your secrets with Hashi vault](https://community.f5.com/kb/TechnicalArticles/f5-app-study-tool-with-passwords-stored-in-vault/341155) for further information.
 
 The F5 Application Study Tool is intended to provide enhanced insights into (classic) BIG-IP products, leveraging best in class
 open source telemetry tools. The full installation includes:
@@ -242,9 +246,14 @@ $ docker run --rm -it -w /app -v ${PWD}:/app --entrypoint /app/src/bin/init_entr
 ```
 
 **Run With System Python**
+
+This command requires Python to already be installed on the host. If it is not, installation instructions can be found here:
+* [Install on Ubuntu](https://docs.python-guide.org/starting/install3/linux/)
+* [Install on RHEL and compatible Linux distributions](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/installing_and_using_dynamic_programming_languages/assembly_installing-and-using-python_installing-and-using-dynamic-programming-languages)
+
 ```bash
-$ pip install PyYAML==6.0.2
-$ python /app/src/config_helper.py --generate-config
+# Run the configuration generator from the project root directory
+$ python3 src/config_helper.py --generate-config
 ```
 
 This will write 2 new files in the services/otel_collector directory:
