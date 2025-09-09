@@ -6,3 +6,7 @@ metrics/local:
   - batch/local
   receivers:
   - bigip/1
+logs/clickhouse:
+  receivers: [syslog/sslo_logs, syslog/sslo_logs_tcp]
+  processors: [batch/clickhouse]
+  exporters: [debug/bigip, clickhouse/sslo_logs]

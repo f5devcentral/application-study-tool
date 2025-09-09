@@ -3,6 +3,7 @@ version: '3'
 volumes:
   prometheus:
   grafana:
+  clickhouse:
 
 services:
   prometheus:
@@ -52,6 +53,25 @@ services:
       - grafana:/var/lib/grafana
       - ./services/grafana/provisioning/:/etc/grafana/provisioning
     env_file: ".env"
+    networks:
+      - 7lc_network
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.1.4
+    user: "101:101"
+    hostname: clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - ./services/clickhouse/config.d:/etc/clickhouse-server/config.d
+      - ./services/clickhouse/users.d:/etc/clickhouse-server/users.d
+      - ./services/clickhouse/docker-entrypoint-initdb.d/init-otel-db.sh:/docker-entrypoint-initdb.d/init-otel-db.sh
+      - clickhouse:/var/lib/clickhouse
+    env_file: ".env"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
     networks:
       - 7lc_network
 

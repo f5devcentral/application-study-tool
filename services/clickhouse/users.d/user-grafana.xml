@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <users>
+        <grafana>
+            <profile>default</profile>
+            <networks>
+                <host>grafana</host>
+            </networks>
+            <quota>default</quota>
+            <password from_env="GRAFANA_CLICKHOUSE_PASSWORD" />
+            <grants>
+                <query>GRANT SELECT ON otel.*</query>
+            </grants>
+        </grafana>
+    </users>
+</clickhouse>

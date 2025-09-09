@@ -37,3 +37,30 @@ providers:
     allowUiUpdates: true
     options:
       path: /etc/grafana/provisioning/dashboards/bigip/fleet
+  - name: 'SSLO Dashboards'
+    orgId: 1
+    folder: 'SSLO Dashboards'
+    type: file
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/sslo
+  - name: Application
+    type: file
+    folder: Application
+    updateIntervalSeconds: 30
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/application
+  - name: Infrastructure
+    type: file
+    folder: Observability Infra.
+    updateIntervalSeconds: 30
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/infrastructure

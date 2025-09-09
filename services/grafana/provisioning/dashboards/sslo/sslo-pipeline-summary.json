@@ -1,0 +1,978 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 9,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 20,
+        "panels": [],
+        "title": "SSLO Logging System Overview",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "index": 1,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "blue",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "up{job=\"clickhouse\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Clickhouse Service",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "index": 1,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "blue",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        "id": 13,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "exemplar": false,
+            "expr": "up{job=\"otel-collector\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Otel Service",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-clickhouse-datasource",
+          "uid": "PDEE91DDB90597936"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "builderOptions": {
+              "aggregates": [],
+              "columns": [
+                {
+                  "alias": "Timestamp",
+                  "custom": false,
+                  "name": "Timestamp",
+                  "type": "DateTime"
+                },
+                {
+                  "alias": "accesses",
+                  "custom": false,
+                  "name": "accesses",
+                  "type": "UInt16"
+                },
+                {
+                  "hint": "time",
+                  "name": "Timestamp",
+                  "type": "DateTime"
+                }
+              ],
+              "database": "api_detection",
+              "filters": [
+                {
+                  "condition": "AND",
+                  "filterType": "custom",
+                  "hint": "time",
+                  "key": "",
+                  "operator": "WITH IN DASHBOARD TIME RANGE",
+                  "type": "datetime"
+                }
+              ],
+              "groupBy": [],
+              "limit": 1,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [
+                {
+                  "default": true,
+                  "dir": "ASC",
+                  "hint": "time",
+                  "name": ""
+                }
+              ],
+              "queryType": "timeseries",
+              "table": "detected_api_endpoints"
+            },
+            "datasource": {
+              "type": "grafana-clickhouse-datasource",
+              "uid": "PDEE91DDB90597936"
+            },
+            "editorType": "sql",
+            "format": 1,
+            "meta": {
+              "builderOptions": {
+                "aggregates": [],
+                "columns": [
+                  {
+                    "alias": "Timestamp",
+                    "custom": false,
+                    "name": "Timestamp",
+                    "type": "DateTime"
+                  },
+                  {
+                    "alias": "accesses",
+                    "custom": false,
+                    "name": "accesses",
+                    "type": "UInt16"
+                  },
+                  {
+                    "hint": "time",
+                    "name": "Timestamp",
+                    "type": "DateTime"
+                  }
+                ],
+                "database": "api_detection",
+                "filters": [
+                  {
+                    "condition": "AND",
+                    "filterType": "custom",
+                    "hint": "time",
+                    "key": "",
+                    "operator": "WITH IN DASHBOARD TIME RANGE",
+                    "type": "datetime"
+                  }
+                ],
+                "groupBy": [],
+                "limit": 1,
+                "meta": {},
+                "mode": "aggregate",
+                "orderBy": [
+                  {
+                    "default": true,
+                    "dir": "ASC",
+                    "hint": "time",
+                    "name": ""
+                  }
+                ],
+                "queryType": "timeseries",
+                "table": "detected_api_endpoints"
+              }
+            },
+            "pluginVersion": "4.8.2",
+            "queryType": "table",
+            "rawSql": "SELECT count(*) from \"otel\".\"sslo_logs\" as Value",
+            "refId": "A"
+          }
+        ],
+        "title": "Accumulated Logs",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 6,
+        "panels": [],
+        "title": "System State Detail",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "axisSoftMin": 0,
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 5
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "rate(process_cpu_seconds_total{job=\"log-analyzer\"}[$__rate_interval])",
+            "fullMetaSearch": false,
+            "includeNullMetadata": false,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(job) (rate(otelcol_process_cpu_seconds_total{job=\"otel-collector\"}[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "rate(ClickHouseProfileEvents_OSCPUVirtualTimeMicroseconds[5m])/1000000",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "CPU Utilization",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "axisSoftMin": 0,
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 5
+        },
+        "id": 16,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "ClickHouseAsyncMetrics_MemoryResident{job=\"clickhouse\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": false,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(job) (otelcol_process_runtime_total_sys_memory_bytes{job=\"otel-collector\"})",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "process_resident_memory_bytes{job=\"log-analyzer\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{job}}",
+            "range": true,
+            "refId": "C",
+            "useBackend": false
+          }
+        ],
+        "title": "Memory Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "shades"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "axisSoftMin": 0,
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "reqps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Refused"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "dark-red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 11
+        },
+        "id": 21,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(receiver) (rate(otelcol_receiver_accepted_log_records_total{receiver=\"syslog/sslo_logs_tcp\"}[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "Accepted",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(receiver) (rate(otelcol_receiver_refused_log_records_total{receiver=\"syslog/sslo_logs_tcp\"}[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "Refused",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          }
+        ],
+        "title": "Incoming Syslog Messages",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "name": "${datasource}",
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "shades"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "axisSoftMin": 0,
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "reqps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Failed"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "dark-red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 11
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(exporter) (rate(otelcol_exporter_sent_log_records_total{exporter=\"clickhouse/sslo_logs\"}[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "Sent",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(exporter) (rate(otelcol_exporter_send_failed_log_records_total{exporter=\"clickhouse/sslo_logs\"}[$__rate_interval]))",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": false,
+            "instant": false,
+            "legendFormat": "Failed",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          }
+        ],
+        "title": "Outgoing Otel Logs",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "1m",
+    "schemaVersion": 40,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "ClickHouse",
+            "value": "PDEE91DDB90597936"
+          },
+          "includeAll": false,
+          "label": "Clickhouse",
+          "name": "log_datasource",
+          "options": [],
+          "query": "grafana-clickhouse-datasource",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "Prometheus",
+            "value": "PBFA97CFB590B2093"
+          },
+          "includeAll": false,
+          "label": "Prometheus",
+          "name": "datasource",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "SSLO Pipeline Summary",
+    "uid": "bdy1jayi74npea",
+    "version": 5,
+    "weekStart": ""
+  }

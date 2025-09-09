@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <users>
+        <otel>
+            <profile>default</profile>
+            <networks>
+		        <host>otel-collector</host>
+            </networks>
+	        <grants>
+                <query>GRANT INSERT ON otel.*</query>
+                <query>GRANT SELECT ON otel.*</query>
+                <query>GRANT CREATE DATABASE ON otel.*</query>
+                <query>GRANT CREATE TABLE ON otel.*</query>
+            </grants>
+            <quota>default</quota>
+            <password from_env="OTEL_COLLECTOR_CLICKHOUSE_PASSWORD" />
+        </otel>
+    </users>
+</clickhouse>

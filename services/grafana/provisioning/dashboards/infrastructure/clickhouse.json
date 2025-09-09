@@ -1,0 +1,5565 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_PROMETHEUS",
+        "label": "Prometheus",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "prometheus",
+        "pluginName": "Prometheus"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "11.3.1"
+      },
+      {
+        "type": "datasource",
+        "id": "prometheus",
+        "name": "Prometheus",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "timeseries",
+        "name": "Time series",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "enable": true,
+          "expr": "resets(ClickHouseAsyncMetrics_Uptime{instance=~\"$instance\"}[$__rate_interval])",
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "name": "Restarts",
+          "showIn": 0,
+          "step": "60s",
+          "tagKeys": "instance",
+          "titleFormat": "Restart",
+          "useValueForTime": false
+        }
+      ]
+    },
+    "description": "ClickHouse internal exporter metrics",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "id": null,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "ClickHouse monitoring docs",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://clickhouse.tech/docs/en/operations/monitoring/"
+      }
+    ],
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "uptime"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 14,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 1,
+          "showHeader": true
+        },
+        "pluginVersion": "11.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseMetrics_VersionInteger",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseMetrics_Revision",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseAsyncMetrics_NumberOfTables",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseAsyncMetrics_Uptime",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseAsyncMetrics_NumberOfDatabases",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "E"
+          }
+        ],
+        "title": "Nodes",
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "instance"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time 1": true,
+                "Time 10": true,
+                "Time 2": true,
+                "Time 3": true,
+                "Time 4": true,
+                "Time 5": true,
+                "Time 6": true,
+                "Time 7": true,
+                "Time 8": true,
+                "Time 9": true,
+                "Value #A 2": true,
+                "Value #B 2": true,
+                "Value #C 2": true,
+                "Value #D 2": true,
+                "Value #E 2": true,
+                "__name__ 1": true,
+                "__name__ 10": true,
+                "__name__ 2": true,
+                "__name__ 3": true,
+                "__name__ 4": true,
+                "__name__ 5": true,
+                "__name__ 6": true,
+                "__name__ 7": true,
+                "__name__ 8": true,
+                "__name__ 9": true,
+                "job 1": true,
+                "job 10": true,
+                "job 2": true,
+                "job 3": true,
+                "job 4": true,
+                "job 5": true,
+                "job 6": true,
+                "job 7": true,
+                "job 8": true,
+                "job 9": true
+              },
+              "indexByName": {
+                "Time 1": 6,
+                "Time 10": 37,
+                "Time 2": 9,
+                "Time 3": 13,
+                "Time 4": 16,
+                "Time 5": 20,
+                "Time 6": 23,
+                "Time 7": 27,
+                "Time 8": 30,
+                "Time 9": 34,
+                "Value #A 1": 1,
+                "Value #A 2": 12,
+                "Value #B 1": 2,
+                "Value #B 2": 19,
+                "Value #C 1": 3,
+                "Value #C 2": 26,
+                "Value #D 1": 5,
+                "Value #D 2": 33,
+                "Value #E 1": 4,
+                "Value #E 2": 40,
+                "__name__ 1": 7,
+                "__name__ 10": 38,
+                "__name__ 2": 10,
+                "__name__ 3": 14,
+                "__name__ 4": 17,
+                "__name__ 5": 21,
+                "__name__ 6": 24,
+                "__name__ 7": 28,
+                "__name__ 8": 31,
+                "__name__ 9": 35,
+                "instance": 0,
+                "job 1": 8,
+                "job 10": 39,
+                "job 2": 11,
+                "job 3": 15,
+                "job 4": 18,
+                "job 5": 22,
+                "job 6": 25,
+                "job 7": 29,
+                "job 8": 32,
+                "job 9": 36
+              },
+              "renameByName": {
+                "Value #A 1": "version",
+                "Value #B 1": "revision",
+                "Value #C 1": "tables",
+                "Value #D 1": "uptime",
+                "Value #E 1": "databases"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Total amount of memory (bytes) allocated by the server.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 29,
+        "maxDataPoints": 200,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseMetrics_MemoryTracking",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory",
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Number of connections to TCP server (clients with native interface), also included server-server distributed query connections. \nNumber of connections to HTTP server",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 73,
+        "maxDataPoints": 200,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseMetrics_TCPConnection",
+            "interval": "",
+            "legendFormat": "tcp - {{instance}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "ClickHouseMetrics_HTTPConnection",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "http - {{instance}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Connections",
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Number of times the number of query processing threads was lowered due to slow reads.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "cps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 0,
+          "y": 13
+        },
+        "id": 72,
+        "maxDataPoints": 200,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadBackoff{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+            "interval": "",
+            "legendFormat": "peaks - {{instance}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "rate(ClickHouseProfileEvents_ReadBackoff{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "trend - {{instance}}",
+            "refId": "C"
+          }
+        ],
+        "title": "Read backoff",
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Number of reads from a file that were slow. This indicate system overload. Thresholds are controlled by read_backoff_* settings.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "cps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 12,
+          "y": 13
+        },
+        "id": 71,
+        "maxDataPoints": 200,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "max_over_time( (irate(ClickHouseProfileEvents_SlowRead{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+            "interval": "",
+            "legendFormat": "peaks - {{instance}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "exemplar": false,
+            "expr": "rate(ClickHouseProfileEvents_SlowRead{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "trend - {{instance}}",
+            "refId": "C"
+          }
+        ],
+        "title": "Slow reads",
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "id": 12,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of queries to be interpreted and potentially executed. Does not include queries that failed to parse or were rejected due to AST size limits, quota limits or limits on the number of simultaneously running queries. May include internal queries initiated by ClickHouse itself. Does not count subqueries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 19
+            },
+            "id": 2,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_Query{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_Query{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Same as Queries, but only for SELECT queries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 19
+            },
+            "id": 3,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectQuery{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectQuery{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "SELECT queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Same as Queries, but only for INSERT queries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 27
+            },
+            "id": 4,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_InsertQuery{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_InsertQuery{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "INSERT queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Same as Failed queries, but only for SELECT queries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 27
+            },
+            "id": 6,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_FailedSelectQuery{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_FailedSelectQuery{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Failed SELECT queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of failed queries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 35
+            },
+            "id": 5,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_FailedQuery{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_FailedQuery{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Failed queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times when memory limit exceeded for query.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 35
+            },
+            "id": 85,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_QueryMemoryLimitExceeded{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_QueryMemoryLimitExceeded{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Queries memory limit",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of queries that are stopped and waiting due to 'priority' setting.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 43
+            },
+            "id": 86,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseMetrics_QueryPreempted{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseMetrics_QueryPreempted{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Query preemted",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Same as Failed queries, but only for INSERT queries.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 43
+            },
+            "id": 7,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_FailedInsertQuery{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_FailedInsertQuery{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Failed INSERT queries",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Avg queries latencies",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 51
+            },
+            "id": 8,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_QueryTimeMicroseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_Query{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Query latencies (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Avg SELECT queries latencies",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 51
+            },
+            "id": 9,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_SelectQueryTimeMicroseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_SelectQuery{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "SELECT query latencies (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Avg INSERT queries latencies",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 59
+            },
+            "id": 10,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_InsertQueryTimeMicroseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_InsertQuery{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "INSERT query latencies (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Queries",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 19
+        },
+        "id": 64,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of rows INSERTed to all tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 30
+            },
+            "id": 62,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_InsertedRows{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_InsertedRows{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Inserted rows",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of bytes (uncompressed; for columns as they stored in memory) INSERTed to all tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 30
+            },
+            "id": 65,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_InsertedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_InsertedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Inserted bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the INSERT of a block to a MergeTree table was throttled due to high number of active data parts for partition.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 38
+            },
+            "id": 66,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DelayedInserts{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DelayedInserts{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Delayed inserts",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the INSERT of a block to a MergeTree table was rejected with 'Too many parts' exception due to high number of active data parts for partition.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 38
+            },
+            "id": 67,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_RejectedInserts{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_RejectedInserts{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Rejected inserts",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Total number of milliseconds spent while the INSERT of a block to a MergeTree table was throttled due to high number of active data parts for partition.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 46
+            },
+            "id": 69,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_DelayedInsertsMilliseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_DelayedInserts{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Delayed inserts blocks (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Insert",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 20
+        },
+        "id": 125,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of data parts selected to read from a MergeTree table.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 27
+            },
+            "id": 126,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectedParts{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectedParts{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Parts",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of (non-adjacent) ranges in all data parts selected to read from a MergeTree table.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 27
+            },
+            "id": 127,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectedRanges{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectedRanges{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Ranges",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of marks (index granules) selected to read from a MergeTree table.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 35
+            },
+            "id": 128,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectedMarks{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectedMarks{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Marks",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of rows SELECTed from all tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 35
+            },
+            "id": 129,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectedRows{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectedRows{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Rows",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of bytes (uncompressed; for columns as they stored in memory) SELECTed from all tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 43
+            },
+            "id": 130,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_SelectedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_SelectedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Bytes",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Select",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 21
+        },
+        "id": 17,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the 'lseek' function was called.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 33
+            },
+            "id": 20,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_Seek{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_Seek{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "lseek",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of files opened",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 33
+            },
+            "id": 19,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_FileOpen{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_FileOpen{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Open Files",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of reads (read/pread) from a file descriptor. Does not include sockets.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 41
+            },
+            "id": 22,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorRead{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorRead{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read from FD",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of writes (write/pwrite) to a file descriptor. Does not include sockets.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 41
+            },
+            "id": 23,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_WriteBufferFromFileDescriptorWrite{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_WriteBufferFromFileDescriptorWrite{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Write to FD",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the read (read/pread) from a file descriptor have failed.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 49
+            },
+            "id": 24,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadFailed{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadFailed{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read from FD failed",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the read (read/pread) from a file descriptor have failed.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 49
+            },
+            "id": 25,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadFailed{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadFailed{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read from FD failed",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of bytes read from file descriptors. If the file is compressed, this will show the compressed data size.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 57
+            },
+            "id": 21,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReadBufferFromFileDescriptorReadBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read bytes from FD",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of bytes written to file descriptors. If the file is compressed, this will show compressed data size.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 57
+            },
+            "id": 26,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_WriteBufferFromFileDescriptorWriteBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_WriteBufferFromFileDescriptorWriteBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Write bytes to FD",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of bytes (the number of bytes before decompression) read from compressed sources (files, network).",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 65
+            },
+            "id": 51,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReadCompressedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReadCompressedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read compressed bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of uncompressed bytes (the number of bytes after decompression) read from compressed sources (files, network).",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 65
+            },
+            "id": 53,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_CompressedReadBufferBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_CompressedReadBufferBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Read uncompressed bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of compressed blocks (the blocks of data that are compressed independent of each other) read from compressed sources (files, network).",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 73
+            },
+            "id": 52,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_CompressedReadBufferBlocks{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_CompressedReadBufferBlocks{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Compressed blocks",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "IO",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 22
+        },
+        "id": 56,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of Replicated tables that are currently in readonly state due to re-initialization after ZooKeeper session loss or due to startup without ZooKeeper configured.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 31
+            },
+            "id": 74,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_ReadonlyReplica",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Readonly replica",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times a data part was failed to download from replica of a ReplicatedMergeTree table.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 31
+            },
+            "id": 58,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReplicatedPartFailedFetches{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReplicatedPartFailedFetches{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Replicated part failed fetches",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times a data part was downloaded from replica of a ReplicatedMergeTree table.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 39
+            },
+            "id": 57,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReplicatedPartFetches{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReplicatedPartFetches{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Replicated part fetches",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times we prefer to download already merged part from replica of ReplicatedMergeTree table instead of performing a merge ourself (usually we prefer doing a merge ourself to save network traffic). This happens when we have not all source parts to perform a merge or when the data part is old enough.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 39
+            },
+            "id": 60,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReplicatedPartFetchesOfMerged{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReplicatedPartFetchesOfMerged{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Replicated part fetches or merges",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times data parts of ReplicatedMergeTree tables were successfully merged.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 47
+            },
+            "id": 59,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReplicatedPartMerges{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReplicatedPartMerges{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Replicated part merges",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times a data part that we wanted doesn't exist on any replica (even on replicas that are offline right now). That data parts are definitely lost. This is normal due to asynchronous replication (if quorum inserts were not enabled), when the replica on which the data part was written was failed and when it became online after fail it doesn't contain that data part.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 47
+            },
+            "id": 61,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ReplicatedDataLoss{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ReplicatedDataLoss{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Replicated part data loss",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Replicas",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 23
+        },
+        "id": 76,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of launched background merges.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 29
+            },
+            "id": 77,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_Merge{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_Merge{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Merge",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Rows read for background merges. This is the number of rows before merge.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 29
+            },
+            "id": 78,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergedRows{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergedRows{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Merged rows",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Uncompressed bytes (for columns as they stored in memory) that was read for background merges. This is the number before merge.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 37
+            },
+            "id": 79,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergedUncompressedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergedUncompressedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Merge uncompressed bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Avg merge duration",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 37
+            },
+            "id": 80,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_MergesTimeMilliseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_Merge{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Merge duration (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of rows INSERTed to MergeTree tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 45
+            },
+            "id": 81,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergeTreeDataWriterRows{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergeTreeDataWriterRows{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "MergeTree rows",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of blocks INSERTed to MergeTree tables. Each block forms a data part of level zero.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 45
+            },
+            "id": 82,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergeTreeDataWriterBlocks{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergeTreeDataWriterBlocks{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "MergeTree blocks",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Uncompressed bytes (for columns as they stored in memory) INSERTed to MergeTree tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 53
+            },
+            "id": 83,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergeTreeDataWriterUncompressedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergeTreeDataWriterUncompressedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "MergeTree uncompressed bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Bytes written to filesystem for data INSERTed to MergeTree tables.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 53
+            },
+            "id": 84,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MergeTreeDataWriterCompressedBytes{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MergeTreeDataWriterCompressedBytes{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "MergeTree compressed bytes",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Disk space reserved for currently running background merges. It is slightly more than the total size of currently merging parts.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 61
+            },
+            "id": 123,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_DiskSpaceReservedForMerge",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Reserved space",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Merge",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 92,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 26
+            },
+            "id": 102,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_UncompressedCacheHits{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_UncompressedCacheHits{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Uncompressed Cache Hits",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 26
+            },
+            "id": 103,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_UncompressedCacheMisses{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_UncompressedCacheMisses{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Uncompressed Cache Misses",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 34
+            },
+            "id": 104,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MarkCacheHits{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MarkCacheHits{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Mark Cache Hits",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 34
+            },
+            "id": 105,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_MarkCacheMisses{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_MarkCacheMisses{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Mark Cache Misses",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Cache",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 25
+        },
+        "id": 90,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "The part is generating now, it is not in data_parts list.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 27
+            },
+            "id": 114,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsTemporary",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Temporary",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "The part is in data_parts, but not used for SELECTs.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 27
+            },
+            "id": 115,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsPreCommitted",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Pre commited",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "The part is in data_parts, but not used for SELECTs.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 35
+            },
+            "id": 116,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsCommitted",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Commited",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Not active data part, but could be used by only current SELECTs, could be deleted after SELECTs finishes.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 35
+            },
+            "id": 117,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsOutdated",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Outdated",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Not active data part with identity refcounter, it is deleting right now by a cleaner.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 43
+            },
+            "id": 118,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsDeleting",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Deleting",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Part was moved to another disk and should be deleted in own destructor.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 43
+            },
+            "id": 119,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsDeleteOnDestroy",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Delete on destroy",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Wide parts.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 51
+            },
+            "id": 120,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsWide",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Wide",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Compact parts.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 51
+            },
+            "id": 122,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsCompact",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Compact",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "In-memory parts.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 59
+            },
+            "id": 121,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_PartsInMemory",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "In-memory",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Parts",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 94,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of connections to remote servers sending data that was INSERTed into Distributed tables. Both synchronous and asynchronous mode.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 25
+            },
+            "id": 112,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_DistributedSend",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Send",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of pending files to process for asynchronous insertion into Distributed tables. Number of files for every shard is summed.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 25
+            },
+            "id": 113,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_DistributedFilesToInsert",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Files to insert",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the INSERT of a block to a Distributed table was throttled due to high number of pending bytes.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 33
+            },
+            "id": 106,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DistributedDelayedInserts{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DistributedDelayedInserts{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Distributed delayed inserts",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times the INSERT of a block to a Distributed table was rejected with 'Too many bytes' exception due to high number of pending bytes.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 33
+            },
+            "id": 107,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DistributedRejectedInserts{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DistributedRejectedInserts{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Distributed rejected inserts",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Total number of milliseconds spent while the INSERT of a block to a Distributed table was throttled due to high number of pending bytes.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 41
+            },
+            "id": 108,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "increase(ClickHouseProfileEvents_DistributedDelayedInsertsMilliseconds{instance=~\"$instance\"}[$__rate_interval]) / increase(ClickHouseProfileEvents_DistributedDelayedInserts{instance=~\"$instance\"}[$__rate_interval])",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Distributed delayed inserts blocks (avg)",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Total count when distributed connection fails with retry",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 41
+            },
+            "id": 109,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DistributedConnectionFailTry{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DistributedConnectionFailTry{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Distributed connection fail try",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Total count when distributed connection fails after all retries finished",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 49
+            },
+            "id": 110,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DistributedConnectionFailAtAll{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DistributedConnectionFailAtAll{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Distributed connection fail at all",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 49
+            },
+            "id": 111,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_DistributedSyncInsertionTimeoutExceeded{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_DistributedSyncInsertionTimeoutExceeded{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Distributed sync insertation timeout",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Distributed",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 27
+        },
+        "id": 88,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundProcessingPool (merges, mutations, or replication queue bookkeeping)",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 28
+            },
+            "id": 95,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundPoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundPool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundFetchesPool",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 28
+            },
+            "id": 96,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundFetchesPoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundFetchesPool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundProcessingPool for moves",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 36
+            },
+            "id": 97,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundMovePoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundMovePool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundSchedulePool. This pool is used for periodic ReplicatedMergeTree tasks, like cleaning old data parts, altering data parts, replica re-initialization, etc.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 36
+            },
+            "id": 98,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundSchedulePoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundSchedulePool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundBufferFlushSchedulePool. This pool is used for periodic Buffer flushes",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 44
+            },
+            "id": 99,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundBufferFlushSchedulePoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundBufferFlushSchedulePool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundDistributedSchedulePool. This pool is used for distributed sends that is done in background.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 44
+            },
+            "id": 100,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundDistributedSchedulePoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundDistributedSchedulePool task",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of active tasks in BackgroundProcessingPool for message streaming",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 52
+            },
+            "id": 101,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_BackgroundMessageBrokerSchedulePoolTask",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "BackgroundMessageBrokerSchedulePool task",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Background pool",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 28,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 29
+            },
+            "id": 30,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperInit{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperInit{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Init",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 29
+            },
+            "id": 31,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperTransactions{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperTransactions{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Transactions",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 37
+            },
+            "id": 32,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperList{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperList{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "List",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 37
+            },
+            "id": 33,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperCreate{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperCreate{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Create",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 45
+            },
+            "id": 34,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperRemove{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperRemove{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Remove",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 45
+            },
+            "id": 35,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperExists{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperExists{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Exists",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 53
+            },
+            "id": 36,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperGet{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperGet{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Get",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 53
+            },
+            "id": 37,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperSet{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperSet{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Set",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 61
+            },
+            "id": 38,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperMulti{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperMulti{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Multi",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 61
+            },
+            "id": 39,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperCheck{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperCheck{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Check",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 69
+            },
+            "id": 40,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperClose{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperClose{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Close",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 69
+            },
+            "id": 41,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperWatchResponse{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperWatchResponse{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Watch response",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 77
+            },
+            "id": 42,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperUserExceptions{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperUserExceptions{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "User Exceptions",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 77
+            },
+            "id": 43,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperHardwareExceptions{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperHardwareExceptions{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Hardware Exceptions",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 85
+            },
+            "id": 46,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperBytesReceived{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperBytesReceived{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Bytes received",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 85
+            },
+            "id": 45,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_ZooKeeperBytesSent{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_ZooKeeperBytesSent{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Bytes sent",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of sessions (connections) to ZooKeeper. Should be no more than one, because using more than one connection to ZooKeeper may lead to bugs due to lack of linearizability (stale reads) that ZooKeeper consistency model allows.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 93
+            },
+            "id": 48,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_ZooKeeperSession",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Sessions",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of ephemeral nodes hold in ZooKeeper.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 93
+            },
+            "id": 47,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_EphemeralNode",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Ephemeral Node",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of watches (event subscriptions) in ZooKeeper.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 101
+            },
+            "id": 50,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_ZooKeeperWatch",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Watches",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of requests to ZooKeeper in fly.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 101
+            },
+            "id": 49,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "ClickHouseMetrics_ZooKeeperRequest",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Requests",
+            "transparent": true,
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "description": "Number of times an error happened while trying to remove ephemeral node. This is not an issue, because our implementation of ZooKeeper library guarantee that the session will expire and the node will be removed.",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 109
+            },
+            "id": 70,
+            "maxDataPoints": 200,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.5.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "max_over_time( (irate(ClickHouseProfileEvents_CannotRemoveEphemeralNode{instance=~\"$instance\"}[2m]))[$__rate_interval:15s] ) * $peaks",
+                "interval": "",
+                "legendFormat": "peaks - {{instance}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${datasource}"
+                },
+                "exemplar": false,
+                "expr": "rate(ClickHouseProfileEvents_CannotRemoveEphemeralNode{instance=~\"$instance\"}[$__rate_interval]) * $trends",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "trend - {{instance}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Remove ephemeral node failed",
+            "transparent": true,
+            "type": "timeseries"
+          }
+        ],
+        "title": "Zookeeper",
+        "type": "row"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 40,
+    "tags": [
+      "ClickHouse",
+      "DB"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "includeAll": false,
+          "label": "DataSource",
+          "name": "datasource",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(ClickHouseAsyncMetrics_Uptime, instance)",
+          "includeAll": true,
+          "label": "Node",
+          "multi": true,
+          "name": "instance",
+          "options": [],
+          "query": {
+            "query": "label_values(ClickHouseAsyncMetrics_Uptime, instance)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "1",
+            "value": "1"
+          },
+          "includeAll": false,
+          "label": "Show trends",
+          "name": "trends",
+          "options": [
+            {
+              "selected": true,
+              "text": "Yes",
+              "value": "1"
+            },
+            {
+              "selected": false,
+              "text": "No",
+              "value": "null"
+            }
+          ],
+          "query": "Yes : 1, No : null",
+          "type": "custom"
+        },
+        {
+          "current": {
+            "text": "null",
+            "value": "null"
+          },
+          "description": "Be aware of the points limit per timeseries for Grafana. This option may not work for a time range > 24h",
+          "includeAll": false,
+          "label": "Show peaks",
+          "name": "peaks",
+          "options": [
+            {
+              "selected": false,
+              "text": "Yes",
+              "value": "1"
+            },
+            {
+              "selected": true,
+              "text": "No",
+              "value": "null"
+            }
+          ],
+          "query": "Yes : 1, No : null",
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "ClickHouse Overview",
+    "uid": "thEkJB_Mz",
+    "version": 1,
+    "weekStart": ""
+  }

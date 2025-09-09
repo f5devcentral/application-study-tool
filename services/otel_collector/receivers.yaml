@@ -11,3 +11,28 @@ bigip/1:
     ca_file: ''
     insecure_skip_verify: false
   username: admin
+
+syslog/sslo_logs:
+  udp:
+    listen_address: "0.0.0.0:54526"
+  operators:
+  - type: json_parser
+    parse_from: attributes.message
+  protocol: rfc5424
+  location: UTC
+
+syslog/sslo_logs_tcp:
+  tcp:
+    listen_address: "0.0.0.0:54526"
+    tls:
+      ca_file: /etc/otel-collector-config/ssl/ca.pem
+      cert_file: /etc/otel-collector-config/ssl/cert.pem
+      key_file: /etc/otel-collector-config/ssl/key.pem
+  operators:
+  - type: regex_parser
+    parse_from: attributes.message
+    on_error: send
+    regex: >-
+      ^(?P<flow_id>\S+) (?P<vip>\S+) Traffic summary - (?P<l4_protocol>\S+) (?P<src_ip>\S+):(?P<src_port>\d+) -> (?P<dst_ip>\S+):(?P<dst_port>\d+) clientSSL: (?P<client_ssl_protocol>\S+) (?P<client_ssl_cipher>\S+) serverSSL: (?P<server_ssl_protocol>\S+) (?P<server_ssl_cipher>\S+) L7 (?P<l7_protocol>\S+) \((?P<sslo_host>\S+)\) decryption-status: (?P<decryption_status>\S+) duration: (?P<duration>\d+) msec service-path: (?P<service_path>\S+) client-bytes-in: (?P<client_bytes_in>\d+) client-bytes-out: (?P<client_bytes_out>\d+) server-bytes-in: (?P<server_bytes_in>\d+) server-bytes-out: (?P<server_bytes_out>\d+) client-tls-handshake: (?P<client_tls_handshake>\S+) server-tls-handshake: (?P<server_tls_handshake>\S+) reset-cause: '(?P<reset_cause>\S+)' policy-rule: '(?P<policy_rule>[^']+)' url-category: (?P<url_category>\S+) ingress: (?P<ingress>\S+) egress: (?P<egress>\S+)$
+  protocol: rfc5424
+  location: UTC

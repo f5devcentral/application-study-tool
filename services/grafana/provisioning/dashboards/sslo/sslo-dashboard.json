@@ -1,0 +1,2006 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 8,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT \n  toStartOfMinute(Timestamp) as bucketed_timestamp,\n  dst_ip,\n  count(dst_ip) as Value\nFROM \"otel\".\"sslo_logs\"\nWHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  (Timestamp >= $__fromTime AND Timestamp <= $__toTime)\nGROUP BY bucketed_timestamp, dst_ip\nORDER BY bucketed_timestamp DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "Count Over Time - Destination IP",
+      "transformations": [
+        {
+          "id": "prepareTimeSeries",
+          "options": {
+            "format": "multi"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "with qa AS (\n  SELECT \n  toStartOfMinute(Timestamp) as bucketed_timestamp,\n  vip,\n  quantiles(0.5, 0.75, 0.99)(duration) as quants\nFROM \"otel\".\"sslo_logs\"\nWHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  (Timestamp >= $__fromTime AND Timestamp <= $__toTime)\nGROUP BY bucketed_timestamp, vip\nORDER BY bucketed_timestamp DESC\n)\nSELECT\n  qa.bucketed_timestamp AS bucketed_timestamp,\n  qa.vip AS vip,\n  arrayElement(qa.quants, 1) AS p50,\n  arrayElement(qa.quants, 2) AS p75,\n  arrayElement(qa.quants, 3) AS p99\nFROM qa",
+          "refId": "A"
+        }
+      ],
+      "title": "Duration Quantile By Virtual Server",
+      "transformations": [
+        {
+          "id": "prepareTimeSeries",
+          "options": {
+            "format": "multi"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT \n  toStartOfMinute(Timestamp) as bucketed_timestamp,\n  sslo_host,\n  avg(client_bytes_in) as In,\n  avg(client_bytes_out) as Out\nFROM \"otel\".\"sslo_logs\"\nWHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  (Timestamp >= $__fromTime AND Timestamp <= $__toTime)\nGROUP BY bucketed_timestamp, sslo_host\nORDER BY bucketed_timestamp DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "Avg Client Bytes In/Out By SSLO Hostname",
+      "transformations": [
+        {
+          "id": "prepareTimeSeries",
+          "options": {
+            "format": "multi"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Trend Data",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Top N = ${N}",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 10
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT src_ip, count(src_ip) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY src_ip ORDER by Value DESC  LIMIT ${N}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top ${N} Client IPs",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "A": "Count",
+              "src_ip": "Client IP"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 10
+      },
+      "id": 14,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT dst_ip, count(dst_ip) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY dst_ip ORDER by Value DESC  LIMIT ${N}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top ${N} Destination IPs",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "A": "Count",
+              "dst_ip": "Destination IP",
+              "src_ip": "Client IP"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 10
+      },
+      "id": 15,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT sslo_host, count(sslo_host) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY sslo_host ORDER by Value DESC  LIMIT ${N}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top ${N} Destination Hosts",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "A": "Count",
+              "src_ip": "Client IP",
+              "sslo_host": "Hostname"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 16,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "columns": [],
+              "database": "",
+              "limit": 1000,
+              "mode": "list",
+              "queryType": "table",
+              "table": ""
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT dst_port, count(dst_port) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY dst_port ORDER by Value DESC  LIMIT ${N}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top ${N} Destination Hosts",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "A": "Count",
+              "dst_port": "Destination Port",
+              "src_ip": "Client IP",
+              "sslo_host": "Hostname"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 4,
+      "panels": [],
+      "title": "SSL Protocol / Ciphers",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 18
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT client_ssl_protocol, count(client_ssl_protocol) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY client_ssl_protocol LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Client SSL Protocol",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 18
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT client_ssl_cipher, count(client_ssl_cipher) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY client_ssl_cipher LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Client SSL Cipher",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 18
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT server_ssl_protocol, count(server_ssl_protocol) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY server_ssl_protocol LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Server SSL Protocol",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 18
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT server_ssl_cipher, count(server_ssl_cipher) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY server_ssl_cipher LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Server SSL Cipher",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 7,
+      "panels": [],
+      "title": "Other Stats",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 26
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT decryption_status, count(decryption_status) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY decryption_status  LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Decrypt Status",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 26
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT l7_protocol, count(l7_protocol) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY l7_protocol LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "L7 Protocols",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 26
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT url_category, count(url_category) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY url_category LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "URL Categories",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "${datasource_clickhouse}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 26
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "builderOptions": {
+            "aggregates": [
+              {
+                "aggregateType": "count",
+                "alias": "Value",
+                "column": "decryption_status"
+              }
+            ],
+            "columns": [
+              {
+                "alias": "decryption_status",
+                "custom": false,
+                "name": "decryption_status",
+                "type": "LowCardinality(String)"
+              }
+            ],
+            "database": "otel",
+            "filters": [],
+            "groupBy": [
+              "decryption_status"
+            ],
+            "limit": 1000,
+            "meta": {},
+            "mode": "aggregate",
+            "orderBy": [],
+            "queryType": "table",
+            "table": "sslo_logs"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "${datasource_clickhouse}"
+          },
+          "editorType": "sql",
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "aggregates": [
+                {
+                  "aggregateType": "count",
+                  "alias": "Value",
+                  "column": "decryption_status"
+                }
+              ],
+              "columns": [
+                {
+                  "alias": "decryption_status",
+                  "custom": false,
+                  "name": "decryption_status",
+                  "type": "LowCardinality(String)"
+                }
+              ],
+              "database": "otel",
+              "filters": [],
+              "groupBy": [
+                "decryption_status"
+              ],
+              "limit": 1000,
+              "meta": {},
+              "mode": "aggregate",
+              "orderBy": [],
+              "queryType": "table",
+              "table": "sslo_logs"
+            }
+          },
+          "pluginVersion": "4.8.2",
+          "queryType": "table",
+          "rawSql": "SELECT policy_rule, count(policy_rule) as Value FROM \"otel\".\"sslo_logs\" WHERE \n  (hostname = '${device_name}' OR '${device_name}' = 'all') AND\n  (sslo_host = '${sslo_host}' OR '${sslo_host}' = 'all') AND\n  (vip = '${virtual_server}' OR '${virtual_server}' = 'all') AND\n  ( Timestamp >= $__fromTime AND Timestamp <= $__toTime )\nGROUP BY policy_rule LIMIT 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Policy Rules",
+      "type": "piechart"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "ClickHouse",
+          "value": "PDEE91DDB90597936"
+        },
+        "label": "Clickhouse",
+        "name": "datasource_clickhouse",
+        "options": [],
+        "query": "grafana-clickhouse-datasource",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "allValue": "all",
+        "allowCustomValue": false,
+        "current": {
+          "text": "17-1-demo.f5kc.com",
+          "value": "17-1-demo.f5kc.com"
+        },
+        "datasource": {
+          "type": "grafana-clickhouse-datasource",
+          "uid": "${datasource_clickhouse}"
+        },
+        "definition": "SELECT DISTINCT(hostname) from \"otel\".\"sslo_logs\"",
+        "includeAll": true,
+        "label": "Device Hostname",
+        "name": "device_name",
+        "options": [],
+        "query": "SELECT DISTINCT(hostname) from \"otel\".\"sslo_logs\"",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allValue": "all",
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "grafana-clickhouse-datasource",
+          "uid": "${datasource_clickhouse}"
+        },
+        "definition": "SELECT DISTINCT(sslo_host) from \"otel\".\"sslo_logs\"",
+        "description": "",
+        "includeAll": true,
+        "label": "SSLO Hostname",
+        "name": "sslo_host",
+        "options": [],
+        "query": "SELECT DISTINCT(sslo_host) from \"otel\".\"sslo_logs\"",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allValue": "all",
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "grafana-clickhouse-datasource",
+          "uid": "${datasource_clickhouse}"
+        },
+        "definition": "SELECT distinct(vip) from \"otel\".\"sslo_logs\"",
+        "includeAll": true,
+        "label": "Virtual Server",
+        "name": "virtual_server",
+        "options": [],
+        "query": "SELECT distinct(vip) from \"otel\".\"sslo_logs\"",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "10",
+          "value": "10"
+        },
+        "description": "Number to limit Top N queries to",
+        "label": "N",
+        "name": "N",
+        "options": [
+          {
+            "selected": true,
+            "text": "10",
+            "value": "10"
+          }
+        ],
+        "query": "10",
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "SSLO Overview",
+  "uid": "begg6frac9728f",
+  "version": 3,
+  "weekStart": ""
+}
