@@ -39,6 +39,9 @@ services:
     env_file:
       - ".env"
       - ".env.device-secrets"
+    ports:
+      - 514:54526/udp
+      - 6514:54526
     networks:
       - 7lc_network
 
