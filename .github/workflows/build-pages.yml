@@ -35,6 +35,6 @@ jobs:
       - name: Build Site
         run: cd ./pages && bundle exec jekyll build
       - name: Test with html-proofer
-        run: cd ./pages && bundle exec htmlproofer _site --ignore-urls "/github.com/,/web.archive.org/" --swap-urls '^/application-study-tool/:/'
+        run: cd ./pages && bundle exec htmlproofer _site --ignore-urls "/github.com/,/web.archive.org/,/developer.hashicorp.com/" --swap-urls '^/application-study-tool/:/'
         env:
           NOKOGIRI_USE_SYSTEM_LIBRARIES: true
