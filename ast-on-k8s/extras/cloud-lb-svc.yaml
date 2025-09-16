@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graf-lb-svc
+  annotations:
+    cloud.google.com/l4-rbs: "enabled"
+spec:
+  type: LoadBalancer
+  selector:
+    io.ast.service: grafana
+  ports:
+  - name: tcp-port
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
