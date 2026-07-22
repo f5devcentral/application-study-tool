@@ -1,18 +1,6 @@
 receivers: ${file:/etc/otel-collector-config/receivers.yaml}
 
-processors:
-  batch/local:
-  batch/f5-datafabric:
-    send_batch_max_size: 8192
-  # Only export data to f5 (if enabled) every 300s
-  interval/f5-datafabric:
-    interval: 300s
-  # Apply the folowing transformations to metrics bound for F5 Datafabric
-  attributes/f5-datafabric:
-    actions:
-      - key: dataType
-        action: upsert
-        value: bigip-ast-metric
+processors: ${file:/etc/otel-collector-config/generated_processors.yaml}
 
 exporters:
   otlphttp/metrics-local:

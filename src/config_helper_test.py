@@ -9,6 +9,7 @@ from config_helper import (
     deep_merge,
     generate_receiver_configs,
     generate_pipeline_configs,
+    generate_processors_config,
     generate_configs,
 )
 
@@ -185,10 +186,11 @@ class TestConfigFunctions(unittest.TestCase):
         args.default_config_file = "default.yaml"
         args.receiver_input_file = "input.yaml"
 
-        receiver_output, pipeline_output = generate_configs(args)
+        receiver_output, pipeline_output, processor_output = generate_configs(args)
 
         self.assertIsNotNone(receiver_output)
         self.assertIsNotNone(pipeline_output)
+        self.assertIsNotNone(processor_output)
         self.assertIn("receiver1", pipeline_output["default_pipeline"]["receivers"])
         mock_info.assert_any_call(
             "Generating configs from  %s and %s...",
@@ -225,10 +227,11 @@ class TestConfigFunctions(unittest.TestCase):
         args.default_config_file = "default.yaml"
         args.receiver_input_file = "input.yaml"
 
-        receiver_output, pipeline_output = generate_configs(args)
+        receiver_output, pipeline_output, processor_output = generate_configs(args)
 
         self.assertIsNotNone(receiver_output)
         self.assertIsNotNone(pipeline_output)
+        self.assertIsNotNone(processor_output)
         self.assertIn("receiver1", pipeline_output["default_pipeline"]["receivers"])
         self.assertIn("receiver1", pipeline_output["default_pipeline2"]["receivers"])
         self.assertIn("receiver2", pipeline_output["default_pipeline2"]["receivers"])
@@ -266,10 +269,11 @@ class TestConfigFunctions(unittest.TestCase):
         args.default_config_file = "default.yaml"
         args.receiver_input_file = "input.yaml"
 
-        receiver_output, pipeline_output = generate_configs(args)
+        receiver_output, pipeline_output, processor_output = generate_configs(args)
 
         self.assertIsNotNone(receiver_output)
         self.assertIsNotNone(pipeline_output)
+        self.assertIsNotNone(processor_output)
         self.assertIn("receiver1", pipeline_output["default_pipeline"]["receivers"])
         self.assertNotIn("default_pipeline2", pipeline_output)
         mock_info.assert_any_call(
@@ -277,6 +281,151 @@ class TestConfigFunctions(unittest.TestCase):
             args.default_config_file,
             args.receiver_input_file,
         )
+
+
+class TestEnvironmentPipelineGeneration(unittest.TestCase):
+
+    def test_generate_processors_config_single_environment(self):
+        default_config = {
+            "bigip_receiver_defaults": {"environment": "production"},
+        }
+        receiver_input_configs = {
+            "bigip/1": {"environment": "production"},
+            "bigip/2": {"environment": "production"},
+        }
+        pipelines = {"metrics/local": {"receivers": ["bigip/1", "bigip/2"]}}
+
+        result = generate_processors_config(
+            default_config, receiver_input_configs, pipelines
+        )
+
+        self.assertIn("batch/local", result)
+        self.assertIn("attributes/env-production", result)
+        self.assertEqual(
+            result["attributes/env-production"]["actions"],
+            [{"key": "environment", "action": "upsert", "value": "production"}],
+        )
+
+    def test_generate_processors_config_multiple_environments(self):
+        default_config = {
+            "bigip_receiver_defaults": {"environment": "production"},
+        }
+        receiver_input_configs = {
+            "bigip/1": {"environment": "production"},
+            "bigip/2": {"environment": "staging"},
+        }
+        pipelines = {"metrics/local": {"receivers": ["bigip/1", "bigip/2"]}}
+
+        result = generate_processors_config(
+            default_config, receiver_input_configs, pipelines
+        )
+
+        self.assertIn("attributes/env-production", result)
+        self.assertIn("attributes/env-staging", result)
+
+    def test_generate_processors_config_default_environment(self):
+        default_config = {
+            "bigip_receiver_defaults": {"environment": "production"},
+        }
+        receiver_input_configs = {
+            "bigip/1": {},  # No environment set, should use default
+        }
+        pipelines = {"metrics/local": {"receivers": ["bigip/1"]}}
+
+        result = generate_processors_config(
+            default_config, receiver_input_configs, pipelines
+        )
+
+        self.assertIn("attributes/env-production", result)
+
+    def test_pipeline_splitting_multiple_environments(self):
+        default_config = {
+            "bigip_receiver_defaults": {"environment": "production"},
+            "pipeline_default": "metrics/local",
+            "pipelines": {
+                "metrics/local": {
+                    "processors": ["batch/local"],
+                    "exporters": ["otlphttp/metrics-local"],
+                },
+            },
+        }
+        receiver_input_configs = {
+            "bigip/1": {"environment": "production"},
+            "bigip/2": {"environment": "staging"},
+        }
+
+        args = MagicMock()
+        args.receiver_input_file = "test.yaml"
+
+        result = generate_pipeline_configs(receiver_input_configs, default_config, args)
+
+        self.assertIsNotNone(result)
+        self.assertIn("metrics/local/production", result)
+        self.assertIn("metrics/local/staging", result)
+        self.assertNotIn("metrics/local", result)
+        self.assertEqual(
+            result["metrics/local/production"]["receivers"], ["bigip/1"]
+        )
+        self.assertEqual(
+            result["metrics/local/staging"]["receivers"], ["bigip/2"]
+        )
+        self.assertIn(
+            "attributes/env-production",
+            result["metrics/local/production"]["processors"],
+        )
+        self.assertIn(
+            "attributes/env-staging",
+            result["metrics/local/staging"]["processors"],
+        )
+
+    def test_pipeline_single_environment_gets_processor(self):
+        default_config = {
+            "bigip_receiver_defaults": {"environment": "production"},
+            "pipeline_default": "metrics/local",
+            "pipelines": {
+                "metrics/local": {
+                    "processors": ["batch/local"],
+                    "exporters": ["otlphttp/metrics-local"],
+                },
+            },
+        }
+        receiver_input_configs = {
+            "bigip/1": {"environment": "production"},
+            "bigip/2": {"environment": "production"},
+        }
+
+        args = MagicMock()
+        args.receiver_input_file = "test.yaml"
+
+        result = generate_pipeline_configs(receiver_input_configs, default_config, args)
+
+        self.assertIsNotNone(result)
+        self.assertIn("metrics/local", result)
+        self.assertNotIn("metrics/local/production", result)
+        self.assertIn(
+            "attributes/env-production",
+            result["metrics/local"]["processors"],
+        )
+
+    def test_environment_in_receiver_config(self):
+        receiver_input_configs = {
+            "bigip/1": {"endpoint": "https://10.0.0.1", "environment": "staging"},
+            "bigip/2": {"endpoint": "https://10.0.0.2"},
+        }
+        default_config = {
+            "bigip_receiver_defaults": {
+                "environment": "production",
+                "collection_interval": "60s",
+            }
+        }
+
+        result = generate_receiver_configs(receiver_input_configs, default_config)
+
+        # environment is stripped from receiver output (not a valid OTel receiver key)
+        # but should still be present in receiver_input_configs for pipeline generation
+        self.assertNotIn("environment", result["bigip/1"])
+        self.assertNotIn("environment", result["bigip/2"])
+        self.assertEqual(receiver_input_configs["bigip/1"]["environment"], "staging")
 
 
 if __name__ == "__main__":

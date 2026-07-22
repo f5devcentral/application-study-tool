@@ -356,8 +356,72 @@ def generate_receiver_configs(receiver_input_configs, default_config):
         this_cfg = deepcopy(v)
         if this_cfg.get("pipeline"):
             del this_cfg["pipeline"]
+        # Strip AST-specific fields that are not valid OTel receiver config keys
+        for ast_key in ("pipeline", "f5_pipeline", "environment"):
+            this_cfg.pop(ast_key, None)
+            defaults.pop(ast_key, None)
         merged_config[k] = deep_merge(defaults, this_cfg)
     return merged_config
+
+
+def generate_processors_config(
+    default_config, receiver_input_configs, pipelines
+):
+    """Generate the full processors configuration file.
+
+    This creates the generated_processors.yaml file containing ALL processor definitions:
+    - Static processors: batch/local, batch/f5-datafabric, interval/f5-datafabric,
+      attributes/f5-datafabric
+    - Environment-specific attributes processors for labeling metrics
+
+    The main OTel config (bigip-scraper-config.yaml) references this file via
+    ${file:/etc/otel-collector-config/generated_processors.yaml} for its processors section.
+
+    Args:
+        default_config (dict): The default configuration containing pipeline definitions.
+        receiver_input_configs (dict): Receiver configurations with environment values.
+        pipelines (dict): The assembled pipeline configurations (after receiver assignment).
+
+    Returns:
+        dict: The generated processors configuration dictionary.
+    """
+    processors = {}
+
+    # Static processors that are always present
+    processors["batch/local"] = {}
+    processors["batch/f5-datafabric"] = {"send_batch_max_size": 8192}
+    processors["interval/f5-datafabric"] = {"interval": "300s"}
+    processors["attributes/f5-datafabric"] = {
+        "actions": [{"key": "dataType", "action": "upsert", "value": "bigip-ast-metric"}]
+    }
+
+    # Collect unique environment values from receiver configs
+    default_environment = default_config.get("bigip_receiver_defaults", {}).get(
+        "environment"
+    )
+    environments = set()
+    for receiver_name, config in receiver_input_configs.items():
+        env = config.get("environment", default_environment)
+        if env:
+            environments.add(env)
+
+    # Generate environment-specific attributes processors
+    for env in sorted(environments):
+        processor_name = f"attributes/env-{env}"
+        processors[processor_name] = {
+            "actions": [{"key": "environment", "action": "upsert", "value": env}]
+        }
+
+    if environments:
+        logging.info(
+            "Generated processors config with %d environment processor(s): %s",
+            len(environments),
+            ", ".join(sorted(environments)),
+        )
+    else:
+        logging.info("No environment processors to generate.")
+
+    return processors
 
 
 def assemble_pipelines(
@@ -403,10 +467,14 @@ def generate_pipeline_configs(receiver_input_configs, default_config, args):
     pipelines based on the provided receiver input configurations and default settings. It validates
     the existence of default pipelines and the pipelines specified in the default configuration.
 
+    When receivers have different 'environment' values, sub-pipelines are created per environment
+    (e.g. metrics/local/production, metrics/local/staging) with an attributes processor that
+    upserts the 'environment' label on metrics.
+
     Args:
         receiver_input_configs (dict): A dictionary where keys are receiver identifiers and values
                                        are their corresponding configurations.
-        default_config (dict): A dictionary containing default configuration values, particularly
+        default_config (dict): A dictionary containing the default configuration settings, particularly
                                under the keys 'pipeline_default' and 'pipelines'.
         args (argparse.Namespace): The parsed command-line arguments, used for logging context.
 
@@ -420,6 +488,7 @@ def generate_pipeline_configs(receiver_input_configs, default_config, args):
     - Iterates over each receiver in the input configurations to determine its associated pipeline.
     - If the specified pipeline does not exist, logs an error and returns None.
     - Appends the receiver to the appropriate pipeline's receivers list, creating the list if it does not exist.
+    - Splits pipelines by receiver environment when multiple environments exist.
     """
     pipelines = default_config.get("pipelines")
     if not pipelines:
@@ -462,30 +531,73 @@ def generate_pipeline_configs(receiver_input_configs, default_config, args):
             args.receiver_input_file,
         )
 
+    default_environment = default_config.get("bigip_receiver_defaults", {}).get(
+        "environment"
+    )
+
     final_pipelines = {}
     for pipeline, settings in pipelines.items():
         receivers = settings.get("receivers", [])
         if len(receivers) == 0:
             continue
-        final_pipelines[pipeline] = settings
+
+        # Group receivers by their environment value
+        env_groups = {}
+        for receiver_name in receivers:
+            env = receiver_input_configs.get(receiver_name, {}).get(
+                "environment", default_environment
+            )
+            if env not in env_groups:
+                env_groups[env] = []
+            env_groups[env].append(receiver_name)
+
+        if len(env_groups) == 1:
+            # All receivers share the same environment — inject the environment processor
+            env = list(env_groups.keys())[0]
+            sub_settings = deepcopy(settings)
+            env_processor = f"attributes/env-{env}"
+            sub_settings["processors"] = [env_processor] + settings.get(
+                "processors", []
+            )
+            final_pipelines[pipeline] = sub_settings
+        elif len(env_groups) > 1:
+            # Multiple environments — create sub-pipelines per environment
+            for env, env_receivers in sorted(env_groups.items()):
+                sub_pipeline_name = f"{pipeline}/{env}"
+                sub_settings = deepcopy(settings)
+                sub_settings["receivers"] = env_receivers
+                # Insert environment attributes processor before existing processors
+                env_processor = f"attributes/env-{env}"
+                sub_settings["processors"] = [env_processor] + settings.get(
+                    "processors", []
+                )
+                final_pipelines[sub_pipeline_name] = sub_settings
+                logging.info(
+                    "Created sub-pipeline '%s' with %d receiver(s) and environment label '%s'",
+                    sub_pipeline_name,
+                    len(env_receivers),
+                    env,
+                )
+
     return final_pipelines
 
 
 def generate_configs(args):
-    """Generate configuration files for receivers and pipelines.
+    """Generate configuration files for receivers, pipelines, and processors.
 
     This function orchestrates the generation of configuration files by loading default settings and
-    receiver-specific configurations. It logs the process of generating both receiver and pipeline
-    configurations based on the provided arguments.
+    receiver-specific configurations. It logs the process of generating receiver, pipeline, and
+    processor configurations based on the provided arguments.
 
     Args:
         args (argparse.Namespace): The parsed command-line arguments containing file paths for
                                    default configurations and receiver inputs.
 
     Returns:
-        tuple: A tuple containing two dictionaries:
+        tuple: A tuple containing three dictionaries:
             - receiver_output_configs (dict): The generated receiver configurations.
             - pipeline_output_configs (dict): The generated pipeline configurations.
+            - processor_output_configs (dict): The generated processor configurations.
     """
     logging.info(
         "Generating configs from  %s and %s...",
@@ -502,7 +614,13 @@ def generate_configs(args):
     pipeline_output_configs = generate_pipeline_configs(
         receiver_input_configs, default_config, args
     )
-    return receiver_output_configs, pipeline_output_configs
+    logging.info("Generating processor configs...")
+    processor_output_configs = generate_processors_config(
+        default_config,
+        receiver_input_configs,
+        pipeline_output_configs or {},
+    )
+    return receiver_output_configs, pipeline_output_configs, processor_output_configs
 
 
 def get_args():
@@ -565,6 +683,13 @@ def get_args():
         default="./services/otel_collector/pipelines.yaml",
         help="Path to the pipeline settings otel config file (default: ./services/otel_collector/pipelines.yaml).",
     )
+
+    parser.add_argument(
+        "--processors-output-file",
+        type=str,
+        default="./services/otel_collector/generated_processors.yaml",
+        help="Path to the generated processors config file (default: ./services/otel_collector/generated_processors.yaml).",
+    )
     return parser
 
 
@@ -603,7 +728,7 @@ def main():
         return
 
     if args.generate_configs:
-        receiver_config, pipeline_config = generate_configs(args)
+        receiver_config, pipeline_config, processor_config = generate_configs(args)
         if not receiver_config or not pipeline_config:
             return
         logging.info(
@@ -614,9 +739,14 @@ def main():
             "Built the following receiver file:\n\n%s",
             yaml.dump(receiver_config, default_flow_style=False),
         )
+        logging.info(
+            "Built the following processors file:\n\n%s",
+            yaml.dump(processor_config, default_flow_style=False),
+        )
         if not args.dry_run:
             write_yaml_to_file(pipeline_config, args.pipelines_output_file)
             write_yaml_to_file(receiver_config, args.receiver_output_file)
+            write_yaml_to_file(processor_config, args.processors_output_file)
         return
 
     logging.info(

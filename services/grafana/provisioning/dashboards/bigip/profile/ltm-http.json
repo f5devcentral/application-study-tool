@@ -138,7 +138,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_profile_http_info{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}",
+          "expr": "f5_profile_http_info{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -156,7 +156,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "changes(f5_profile_http_generation{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[24h])",
+          "expr": "changes(f5_profile_http_generation{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[24h])",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -347,7 +347,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_profile_http_requests_total{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[$__rate_interval])",
+          "expr": "rate(f5_profile_http_requests_total{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -448,7 +448,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_profile_http_responses_by_status_total{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[$__rate_interval])",
+          "expr": "rate(f5_profile_http_responses_by_status_total{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -518,7 +518,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "increase(f5_profile_http_requests_by_version_total{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
+          "expr": "increase(f5_profile_http_requests_by_version_total{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -589,7 +589,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "increase(f5_profile_http_requests_by_method_total{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
+          "expr": "increase(f5_profile_http_requests_by_method_total{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -661,7 +661,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "increase(f5_profile_http_responses_by_version_total{job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
+          "expr": "increase(f5_profile_http_responses_by_version_total{environment=~\"$environment\", job=\"$device_name\", f5_profile_http_name=~\"$profile_name\"}[1h])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -777,7 +777,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_virtual_server_profile_http_requests_by_method_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
+          "expr": "rate(f5_virtual_server_profile_http_requests_by_method_total{environment=~\"$environment\", f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -879,7 +879,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_virtual_server_profile_http_responses_by_status_total{f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
+          "expr": "rate(f5_virtual_server_profile_http_responses_by_status_total{environment=~\"$environment\", f5_profile_http_name=~\"$profile_name\", job=\"$device_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -897,6 +897,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,
@@ -917,7 +944,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(f5_system_state_up_ratio,job)",
+        "definition": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -925,7 +952,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_system_state_up_ratio,job)",
+          "query": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

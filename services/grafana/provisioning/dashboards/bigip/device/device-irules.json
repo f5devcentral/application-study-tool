@@ -165,7 +165,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(10, max by(f5_rule_name) (f5_rule_average_cycles{job=\"$device_name\"}) * max by(f5_rule_name) (increase(f5_rule_executions_total{job=\"$device_name\"}[24h])))",
+          "expr": "topk(10, max by(f5_rule_name) (f5_rule_average_cycles{environment=~\"$environment\", job=\"$device_name\"}) * max by(f5_rule_name) (increase(f5_rule_executions_total{environment=~\"$environment\", job=\"$device_name\"}[24h])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -269,7 +269,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(10, max by(f5_rule_name) (f5_rule_average_cycles{job=\"$device_name\"}))",
+          "expr": "topk(10, max by(f5_rule_name) (f5_rule_average_cycles{environment=~\"$environment\", job=\"$device_name\"}))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -368,7 +368,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "topk(10, max by(f5_rule_name) (f5_rule_executions_total{job=\"$device_name\"}))",
+          "expr": "topk(10, max by(f5_rule_name) (f5_rule_executions_total{environment=~\"$environment\", job=\"$device_name\"}))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -470,7 +470,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(f5_rule_name) (rate(f5_rule_executions_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
+          "expr": "max by(f5_rule_name) (rate(f5_rule_executions_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -573,7 +573,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(f5_rule_name) (rate(f5_rule_failures_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
+          "expr": "max by(f5_rule_name) (rate(f5_rule_failures_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -676,7 +676,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(f5_rule_name) (rate(f5_rule_aborts_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
+          "expr": "max by(f5_rule_name) (rate(f5_rule_aborts_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -759,7 +759,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_rule_executions_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}",
+          "expr": "f5_rule_executions_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -829,7 +829,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_rule_failures_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}",
+          "expr": "f5_rule_failures_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -899,7 +899,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_rule_aborts_total{job=\"$device_name\", f5_rule_name=~\"$rule\"}",
+          "expr": "f5_rule_aborts_total{environment=~\"$environment\", job=\"$device_name\", f5_rule_name=~\"$rule\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -917,6 +917,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,
@@ -937,7 +964,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(f5_system_state_up_ratio,job)",
+        "definition": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -945,7 +972,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_system_state_up_ratio,job)",
+          "query": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

@@ -1,6 +1,10 @@
 # These configs are applied to each entry in the bigip_receivers file
 # where they don't contain an equivalent / overriding entry.
 bigip_receiver_defaults:
+  # Label to group devices by environment (e.g. production, staging, lab).
+  # This label is added to all metrics and can be used to filter dashboards.
+  # Can be overridden per-device in bigip_receivers.yaml.
+  environment: default
   # The time to wait between metric collection runs
   collection_interval: 60s
   # The username to login to the device with

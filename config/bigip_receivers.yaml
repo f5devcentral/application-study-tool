@@ -8,6 +8,8 @@ bigip/1:
   # Set this to the management IP for the device. This must be
   # reachable from the Application Study Tool host (port 443).
   endpoint: https://10.0.0.1
+  # Optional: group devices by environment for dashboard filtering.
+  # environment: prod
   ## Uncommenting any of the following lines will override the defaults in
   ## ast_defaults.yaml bigip_receiver_defaults section.
   # username: SOME_OVERRIDE_ACCOUNT_NAME

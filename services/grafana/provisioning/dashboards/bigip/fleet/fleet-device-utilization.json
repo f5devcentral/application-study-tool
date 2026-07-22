@@ -155,7 +155,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "avg by(job) (f5_system_cpu_utilization_ratio{job=~\"$device_name\"})",
+          "expr": "avg by(job) (f5_system_cpu_utilization_ratio{environment=~\"$environment\", job=~\"$device_name\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -260,7 +260,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "avg by(job) (f5_system_memory_used_bytes{job=~\"$device_name\", state=\"used\"}) / avg by(job) (f5_system_memory_total_bytes{job=~\"$device_name\"})",
+          "expr": "avg by(job) (f5_system_memory_used_bytes{environment=~\"$environment\", job=~\"$device_name\", state=\"used\"}) / avg by(job) (f5_system_memory_total_bytes{environment=~\"$environment\", job=~\"$device_name\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -363,7 +363,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_logical_disk_usage_bytes{job=~\"$device_name\", state=~\"free\"} * 1000000) by (job, f5_system_logical_disk_name) /sum(f5_system_logical_disk_limit_bytes{job=~\"$device_name\"}) by(job, f5_system_logical_disk_name)",
+          "expr": "sum(f5_system_logical_disk_usage_bytes{environment=~\"$environment\", job=~\"$device_name\", state=~\"free\"} * 1000000) by (job, f5_system_logical_disk_name) /sum(f5_system_logical_disk_limit_bytes{environment=~\"$environment\", job=~\"$device_name\"}) by(job, f5_system_logical_disk_name)",
           "instant": false,
           "legendFormat": "{{job}} ({{f5_system_logical_disk_name}})",
           "range": true,
@@ -475,7 +475,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "count by(job) (f5_virtual_server_info{job=~\"$device_name\"})",
+          "expr": "count by(job) (f5_virtual_server_info{environment=~\"$environment\", job=~\"$device_name\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -578,7 +578,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "count by(job) (f5_pool_info{job=~\"$device_name\"})",
+          "expr": "count by(job) (f5_pool_info{environment=~\"$environment\", job=~\"$device_name\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -680,7 +680,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "count by(job) (sum by(job, f5_pool_member_name) (f5_pool_member_enabled_ratio{job=~\"$device_name\"}))",
+          "expr": "count by(job) (sum by(job, f5_pool_member_name) (f5_pool_member_enabled_ratio{environment=~\"$environment\", job=~\"$device_name\"}))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -794,7 +794,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum by(job) (f5_virtual_server_clientside_connection_count{job=~\"$device_name\"})",
+          "expr": "sum by(job) (f5_virtual_server_clientside_connection_count{environment=~\"$environment\", job=~\"$device_name\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -897,7 +897,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "8*sum by(job) (rate(f5_virtual_server_clientside_bytes_in_total{job=~\"$device_name\"}[$__rate_interval]))",
+          "expr": "8*sum by(job) (rate(f5_virtual_server_clientside_bytes_in_total{environment=~\"$environment\", job=~\"$device_name\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -913,7 +913,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "-8*sum by(job) (rate(f5_virtual_server_clientside_bytes_out_total{job=~\"$device_name\"}[$__rate_interval]))",
+          "expr": "-8*sum by(job) (rate(f5_virtual_server_clientside_bytes_out_total{environment=~\"$environment\", job=~\"$device_name\"}[$__rate_interval]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -932,6 +932,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,
@@ -953,7 +980,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(f5_system_state_up_ratio,job)",
+        "definition": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
         "hide": 0,
         "includeAll": true,
         "label": "Device",
@@ -962,7 +989,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_system_state_up_ratio,job)",
+          "query": "label_values(f5_system_state_up_ratio{environment=~\"$environment\"},job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

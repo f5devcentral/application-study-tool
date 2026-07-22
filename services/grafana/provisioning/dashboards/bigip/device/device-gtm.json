@@ -154,7 +154,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_wideip_enabled_count{job=\"$device_name\"}",
+          "expr": "f5_gtm_wideip_enabled_count{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -172,7 +172,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_distributed_app_count{job=\"$device_name\"}",
+          "expr": "f5_gtm_distributed_app_count{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -191,7 +191,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_listener_count{job=\"$device_name\"}",
+          "expr": "f5_gtm_listener_count{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -210,7 +210,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_rule_count{job=\"$device_name\"}",
+          "expr": "f5_gtm_rule_count{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -229,7 +229,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_server_count{job=\"$device_name\"}",
+          "expr": "f5_gtm_server_count{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -248,7 +248,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_ldnses{job=\"$device_name\"}",
+          "expr": "f5_gtm_ldnses{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -267,7 +267,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "f5_gtm_paths{job=\"$device_name\"}",
+          "expr": "f5_gtm_paths{environment=~\"$environment\", job=\"$device_name\"}",
           "format": "table",
           "fullMetaSearch": false,
           "hide": false,
@@ -469,7 +469,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(f5_gtm_requests_total{job=\"$device_name\"}[$__rate_interval])",
+          "expr": "rate(f5_gtm_requests_total{environment=~\"$environment\", job=\"$device_name\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -487,6 +487,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,
@@ -507,7 +534,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(f5_gtm_wideip_enabled_count,job)",
+        "definition": "label_values(f5_gtm_wideip_enabled_count{environment=~\"$environment\"},job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
@@ -515,7 +542,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(f5_gtm_wideip_enabled_count,job)",
+          "query": "label_values(f5_gtm_wideip_enabled_count{environment=~\"$environment\"},job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

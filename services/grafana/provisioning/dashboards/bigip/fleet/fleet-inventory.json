@@ -121,7 +121,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_info) by (system_version)",
+          "expr": "sum(f5_system_info{environment=~\"$environment\"}) by (system_version)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -188,7 +188,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_info) by (system_product_name)",
+          "expr": "sum(f5_system_info{environment=~\"$environment\"}) by (system_product_name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -255,7 +255,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_info) by (f5_system_marketing_name)",
+          "expr": "sum(f5_system_info{environment=~\"$environment\"}) by (f5_system_marketing_name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -354,7 +354,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(f5_system_info)  by (system_version)",
+          "expr": "sum(f5_system_info{environment=~\"$environment\"})  by (system_version)",
           "instant": false,
           "legendFormat": "{{version}}",
           "range": true,
@@ -447,7 +447,7 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f5_module_provision_generation{level!=\"none\"}",
+          "expr": "f5_module_provision_generation{environment=~\"$environment\", level!=\"none\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -554,7 +554,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f5_system_info",
+          "expr": "f5_system_info{environment=~\"$environment\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -568,7 +568,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "f5_system_failover_peer_active_state_ratio",
+          "expr": "f5_system_failover_peer_active_state_ratio{environment=~\"$environment\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -663,6 +663,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,

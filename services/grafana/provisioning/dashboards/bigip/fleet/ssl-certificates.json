@@ -162,7 +162,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(f5_ssl_certificate_expires_at) by (key_type)",
+          "expr": "sum(f5_ssl_certificate_expires_at{environment=~\"$environment\"}) by (key_type)",
           "instant": true,
           "legendFormat": "{{key_type}}",
           "range": false,
@@ -233,7 +233,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(f5_ssl_certificate_expires_at - time() < 86400 * 30)",
+          "expr": "count(f5_ssl_certificate_expires_at{environment=~\"$environment\"} - time() < 86400 * 30)",
           "instant": true,
           "legendFormat": "{{key_type}}",
           "range": false,
@@ -304,7 +304,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(f5_ssl_certificate_expires_at - time() < 86400 * 90)",
+          "expr": "count(f5_ssl_certificate_expires_at{environment=~\"$environment\"} - time() < 86400 * 90)",
           "instant": true,
           "legendFormat": "{{key_type}}",
           "range": false,
@@ -375,7 +375,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(f5_ssl_certificate_expires_at -time() < 86400 * 180)",
+          "expr": "count(f5_ssl_certificate_expires_at{environment=~\"$environment\"} -time() < 86400 * 180)",
           "instant": true,
           "legendFormat": "{{key_type}}",
           "range": false,
@@ -481,7 +481,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sort(f5_ssl_certificate_expires_at) - time()",
+          "expr": "sort(f5_ssl_certificate_expires_at{environment=~\"$environment\"}) - time()",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -529,6 +529,33 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(f5_system_info, environment)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Environment",
+        "multi": false,
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(f5_system_info, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
       {
         "current": {},
         "hide": 0,
