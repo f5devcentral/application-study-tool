@@ -380,7 +380,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "",
+      "description": "**Availability (isAvailable)** reflects the *runtime health* of the virtual server, determined by the state of its pool members. A virtual server is available when at least one pool member is up. A virtual server can be **enabled but unavailable** (all pool members down, or no default pool configured).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -485,7 +485,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "",
+      "description": "**Enabled state (isEnabled)** reflects the *administrative configuration*: whether the virtual server has been enabled or disabled by an administrator. A disabled virtual server does not accept traffic, regardless of the health of its pool members.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -821,6 +821,7 @@
           "refId": "D"
         }
       ],
+      "description": "Percentage of time each virtual server spent in each state over the last 24 hours. **Available / Offline / Unknown** reflect the *runtime availability* (pool member health), while **Enabled** reflects the *administrative state*. A virtual server can be enabled but offline (all pool members down), or disabled and therefore show no availability.",
       "title": "Virtual Server Availability [24h]",
       "transformations": [
         {
